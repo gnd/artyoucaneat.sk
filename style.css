@@ -158,7 +158,7 @@ a.menu_entry {
     font-size: 0.8em;
     margin-bottom: 0.4em;
     text-decoration: none;
-    display: block;
+    display: none;
 }
 
 a.menu_entry:hover {
@@ -181,6 +181,16 @@ a.menu_entry:hover {
     margin-bottom: 0.2em;
     visibility: hidden;
     display: none;
+}
+
+.menu_entry_top_sk {
+    visibility: hidden;
+    margin-bottom: 0.2em;
+}
+
+.menu_entry_top_en {
+    visibility: hidden;
+    margin-bottom: 0.2em;
 }
 
 #menu_entry_video {

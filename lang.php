@@ -12,4 +12,9 @@ if ( isset($_POST["lang"]) ) {
         $_SESSION["lang"] = 'en';
     }
 }
+
+// Set default lang as SK
+if (!isset($_SESSION["lang"])) {
+    $_SESSION["lang"] = 'sk';
+}
 ?>

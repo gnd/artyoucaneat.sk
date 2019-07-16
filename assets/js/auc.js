@@ -1,7 +1,9 @@
 var menu = false;
+var unrolled = Array();
 var video_menu = false;
 var hide_time = 50;
-var site_lang = 'sk';
+var active_lang;
+var inactive_lang;
 var site_location = 'index';
 var content_fade = false;
 var device_type = "desktop";
@@ -41,6 +43,25 @@ function detect_client() {
 };
 
 function profile_setup(lang) {
+
+    /*
+    if (video_menu) {
+        if (site_location == 'profile') {
+            document.getElementById("menu_entry_profile_sk").style.textDecoration = 'underline';
+        }
+        if (site_location == 'report') {
+            document.getElementById("menu_entry_report_sk").style.textDecoration = 'underline';
+        }
+    }
+    */
+    /*
+    if (document.getElementById("video_info_container_sk")) {
+        document.getElementById("video_info_container_sk").style.display = 'inline';
+    }
+    if (document.getElementById("video_info_container_en")) {
+        document.getElementById("video_info_container_en").style.display = 'none';
+    }
+    */
 
     menu = true;
     video_menu = true;
@@ -346,7 +367,45 @@ function send_lang(lang) {
 
 function switch_lang(lang, send) {
     if (lang == 'sk') {
-        site_lang = 'sk';
+        active_lang = 'sk';
+        inactive_lang = 'en';
+    } else {
+        active_lang = 'en';
+        inactive_lang = 'sk';
+    }
+
+    if (device_type == 'desktop') {
+        if (menu) {
+            // Show / hide top categories in menu first
+            var shown = document.getElementsByClassName('menu_entry_top_' + active_lang);
+            var hidden = document.getElementsByClassName('menu_entry_top_' + inactive_lang);
+            for (var i = 0; i < shown.length; ++i) {
+                shown[i].style.display = "block";
+                shown[i].style.visibility = "visible";
+            }
+            for (var i = 0; i < hidden.length; ++i) {
+                hidden[i].style.display = "none";
+            }
+            // Show all children
+            for (var i=0; i < unrolled.length; i++) {
+                var child_class = 'childof_' + String(unrolled[i]) + '_' + active_lang;
+                var children = document.getElementsByClassName(child_class);
+                for (var j = 0; i < children.length; ++i) {
+                    children[i].style.visibility = "visible";
+                    children[i].style.display = "block";
+                }
+            }
+            // Hide the rest
+            var hidden = document.getElementsByClassName('menu_entry_' + inactive_lang);
+            for (var i = 0; i < hidden.length; ++i) {
+                hidden[i].style.display = "none";
+            }
+            // Indicate language
+            document.getElementById('lang_' + active_lang + '_switch').style.fontWeight = 'bold';
+            document.getElementById('lang_' + inactive_lang + '_switch').style.fontWeight = 'normal';
+        }
+    }
+    if (lang == 'sk') {
         if (device_type == 'phone') {
             if (video_menu) {
                 document.getElementById("mobile_menu_entry_profile_sk").style.visibility = 'visible';
@@ -371,30 +430,7 @@ function switch_lang(lang, send) {
                 document.getElementById("video_info_container_mobile_en").style.display = 'none';
             }
         }
-        if (device_type == 'desktop') {
-            if (video_menu) {
-                document.getElementById("menu_entry_profile_sk").style.display = 'block';
-                document.getElementById("menu_entry_profile_en").style.display = 'none';
-                document.getElementById("menu_entry_report_sk").style.display = 'block';
-                document.getElementById("menu_entry_report_en").style.display = 'none';
-                document.getElementById("menu_entry_profile_sk").style.visibility = 'visible';
-                document.getElementById("menu_entry_report_sk").style.visibility = 'visible';
-                if (site_location == 'profile') {
-                    document.getElementById("menu_entry_profile_sk").style.textDecoration = 'underline';
-                }
-                if (site_location == 'report') {
-                    document.getElementById("menu_entry_report_sk").style.textDecoration = 'underline';
-                }
-            }
-            document.getElementById("lang_sk_switch").style.fontWeight = 'bold';
-            document.getElementById("lang_en_switch").style.fontWeight = 'normal';
-            if (document.getElementById("video_info_container_sk")) {
-                document.getElementById("video_info_container_sk").style.display = 'inline';
-            }
-            if (document.getElementById("video_info_container_en")) {
-                document.getElementById("video_info_container_en").style.display = 'none';
-            }
-        }
+
         if (document.getElementById("landing_overlay_text_sk")) {
             document.getElementById("landing_overlay_text_sk").style.display = 'block';
         }
@@ -486,7 +522,6 @@ function switch_lang(lang, send) {
         }
     }
     if (lang == 'en') {
-        site_lang = 'en';
         if (device_type == 'phone') {
             if (video_menu) {
                 document.getElementById("mobile_menu_entry_profile_en").style.visibility = 'visible';
@@ -511,30 +546,7 @@ function switch_lang(lang, send) {
                 document.getElementById("video_info_container_mobile_en").style.display = 'block';
             }
         }
-        if (device_type == 'desktop') {
-            if (video_menu) {
-                document.getElementById("menu_entry_profile_en").style.display = 'block';
-                document.getElementById("menu_entry_profile_sk").style.display = 'none';
-                document.getElementById("menu_entry_report_en").style.display = 'block';
-                document.getElementById("menu_entry_report_sk").style.display = 'none';
-                document.getElementById("menu_entry_profile_en").style.visibility = 'visible';
-                document.getElementById("menu_entry_report_en").style.visibility = 'visible';
-                if (site_location == 'profile') {
-                    document.getElementById("menu_entry_profile_en").style.textDecoration = 'underline';
-                }
-                if (site_location == 'report') {
-                    document.getElementById("menu_entry_report_en").style.textDecoration = 'underline';
-                }
-            }
-            document.getElementById("lang_sk_switch").style.fontWeight = 'normal';
-            document.getElementById("lang_en_switch").style.fontWeight = 'bold';
-            if (document.getElementById("video_info_container_sk")) {
-                document.getElementById("video_info_container_sk").style.display = 'none';
-            }
-            if (document.getElementById("video_info_container_en")) {
-                document.getElementById("video_info_container_en").style.display = 'inline';
-            }
-        }
+
         if (document.getElementById("landing_overlay_text_en")) {
             document.getElementById("landing_overlay_text_en").style.display = 'block';
         }
@@ -631,39 +643,28 @@ function switch_lang(lang, send) {
 function menuroll() {
     if (menu) {
         if (device_type == 'phone') {
-            $('#mobile_video_menu').fadeOut(hide_time);
-            $('#mobile_menu_entry_video').fadeOut(hide_time);
-            if (site_lang == 'sk') {
-                $('#mobile_menu_entry_profile_sk').fadeOut(hide_time);
-                $('#mobile_menu_entry_report_sk').fadeOut(hide_time);
+            alert('phone');
+            $('.mobile_menu_entry_top').fadeOut(hide_time);
+            $('.mobile_menu_entry_top_' + active_lang).fadeOut(hide_time);
+            $('.mobile_menu_entry_top_' + inactive_lang).fadeOut(hide_time);
+            for (var i = 0; i < unrolled.length; i++) {
+                var child_class = 'mobile_childof_' + String(unrolled[i]) + '_' + active_lang;
+                $('.' + child_class).fadeout(hide_time);
             }
-            if (site_lang == 'en') {
-                $('#mobile_menu_entry_profile_en').fadeOut(hide_time);
-                $('#mobile_menu_entry_report_en').fadeOut(hide_time);
-            }
-            $('#mobile_menu_entry_text').fadeOut(hide_time);
-            $('#mobile_menu_entry_search').fadeOut(hide_time);
-            $('#mobile_lang_sk_switch').fadeOut(hide_time);
-            $('#mobile_lang_en_switch').fadeOut(hide_time);
         }
         if (device_type == 'desktop') {
-            $('#menu_entry_video').hide( "clip", {direction: "horizontal"}, hide_time );
-            if (site_lang == 'sk') {
-                $('#menu_entry_profile_sk').hide( "clip", {direction: "horizontal"}, hide_time );
-                $('#menu_entry_report_sk').hide( "clip", {direction: "horizontal"}, hide_time );
+            $('.menu_entry_top').hide( "clip", {direction: "horizontal"}, hide_time );
+            $('.menu_entry_top_' + active_lang).hide( "clip", {direction: "horizontal"}, hide_time );
+            $('.menu_entry_top_' + inactive_lang).hide( "clip", {direction: "horizontal"}, hide_time );
+            for (var i = 0; i < unrolled.length; i++) {
+                var child_class = 'childof_' + String(unrolled[i]) + '_' + active_lang;
+                $('.' + child_class).hide( "clip", {direction: "horizontal"}, hide_time);
             }
-            if (site_lang == 'en') {
-                $('#menu_entry_profile_en').hide( "clip", {direction: "horizontal"}, hide_time );
-                $('#menu_entry_report_en').hide( "clip", {direction: "horizontal"}, hide_time );
-            }
-            $('#menu_entry_text').hide( "clip", {direction: "horizontal"}, hide_time );
-            $('#menu_entry_search').hide( "clip", {direction: "horizontal"}, hide_time );
-            $('#lang_sk_switch').hide( "clip", {direction: "horizontal"}, hide_time );
-            $('#lang_en_switch').hide( "clip", {direction: "horizontal"}, hide_time );
         }
         menu = false;
     } else {
         if (device_type == 'phone') {
+            alert('phone');
             document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
             document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
             document.getElementById("mobile_menu_entry_search").style.visibility = "visible";
@@ -691,43 +692,40 @@ function menuroll() {
             }
         }
         if (device_type == 'desktop') {
-            document.getElementById("menu_entry_video").style.visibility = "visible";
-            document.getElementById("menu_entry_text").style.visibility = "visible";
-            document.getElementById("menu_entry_search").style.visibility = "visible";
-            document.getElementById("lang_sk_switch").style.visibility = "visible";
-            document.getElementById("lang_en_switch").style.visibility = "visible";
-            $('#menu_entry_video').show( "clip", {direction: "horizontal"}, hide_time );
-            $('#menu_entry_text').show( "clip", {direction: "horizontal"}, hide_time );
-            $('#menu_entry_search').show( "clip", {direction: "horizontal"}, hide_time );
-            $('#lang_sk_switch').show( "clip", {direction: "horizontal"}, hide_time );
-            $('#lang_en_switch').show( "clip", {direction: "horizontal"}, hide_time );
-            if (video_menu) {
-                if (site_lang == 'sk') {
-                    document.getElementById("menu_entry_profile_sk").style.visibility = "visible";
-                    document.getElementById("menu_entry_report_sk").style.visibility = "visible";
-                    $('#menu_entry_profile_sk').show( "clip", {direction: "horizontal"}, hide_time );
-                    $('#menu_entry_report_sk').show( "clip", {direction: "horizontal"}, hide_time );
+            // TODO - make simpler and maybe remove simple menu_entry_top
+            $('.menu_entry_top').show( "clip", {direction: "horizontal"}, hide_time, function() {
+                var menu_top_items = document.getElementsByClassName('menu_entry_top');
+                for (var i = 0; i < menu_top_items.length; ++i) {
+                    menu_top_items[i].style.visibility = "visible";
                 }
-                if (site_lang == 'en') {
-                    document.getElementById("menu_entry_profile_en").style.visibility = "visible";
-                    document.getElementById("menu_entry_report_en").style.visibility = "visible";
-                    $('#menu_entry_profile_en').show( "clip", {direction: "horizontal"}, hide_time );
-                    $('#menu_entry_report_en').show( "clip", {direction: "horizontal"}, hide_time );
+            });
+            $('.menu_entry_top_' + active_lang).show( "clip", {direction: "horizontal"}, hide_time, function() {
+                var menu_top_items = document.getElementsByClassName('menu_entry_top_' + active_lang);
+                for (var i = 0; i < menu_top_items.length; ++i) {
+                    menu_top_items[i].style.visibility = "visible";
+                    menu_top_items[i].style.display = "block";
                 }
+            });
+            for (var i = 0; i < unrolled.length; i++) {
+                var child_class = 'childof_' + String(unrolled[i]) + '_' + active_lang;
+                $('.' + child_class).show( "clip", {direction: "horizontal"}, hide_time, function() {
+                    var children = document.getElementsByClassName(child_class);
+                    for (var j = 0; j < children.length; ++j) {
+                        children[j].style.visibility = "visible";
+                        children[i].style.display = "block";
+                    }
+                } );
             }
         }
         menu = true;
     }
 };
 
+// show / hide subcategories according to device_type
+function cat_unroll(id) {
+    var child_class = 'childof_' + String(id) + '_' + active_lang;
 
-
-// show / hide video subcategories according to device_type
-function videoroll() {
-    //if ((site_location == 'profile') || (site_location == 'report')) {
-    //    window.location.href = "/";
-    //}
-    if (video_menu) {
+    if (unrolled.indexOf(id) > -1) {
         if (device_type == 'phone') {
             if (site_location == 'index') {
                 if (document.getElementById("landing_container")) {
@@ -745,27 +743,15 @@ function videoroll() {
                 }
             }
             $('#mobile_video_menu').fadeOut(hide_time);
-            if (site_lang == 'sk') {
-                $('#mobile_menu_entry_profile_sk').fadeOut(hide_time);
-                $('#mobile_menu_entry_report_sk').fadeOut(hide_time);
-            }
-            if (site_lang == 'en') {
-                $('#mobile_menu_entry_profile_en').fadeOut(hide_time);
-                $('#mobile_menu_entry_report_en').fadeOut(hide_time);
-            }
+            $('#mobile_menu_entry_profile_' + active_lang).fadeOut(hide_time);
+            $('#mobile_menu_entry_report_' + active_lang).fadeOut(hide_time);
             document.getElementById("mobile_menu_entry_video").style.fontWeight = "normal";
         }
         if (device_type == 'desktop') {
-            if (site_lang == 'sk') {
-                $('#menu_entry_profile_sk').hide( "clip", {direction: "horizontal"}, hide_time );
-                $('#menu_entry_report_sk').hide( "clip", {direction: "horizontal"}, hide_time );
-            }
-            if (site_lang == 'en') {
-                $('#menu_entry_profile_en').hide( "clip", {direction: "horizontal"}, hide_time );
-                $('#menu_entry_report_en').hide( "clip", {direction: "horizontal"}, hide_time );
-            }
+            $('.' + child_class).hide( "clip", {direction: "horizontal"}, hide_time );
         }
-        video_menu = false;
+        // remove the category from the unrolled array
+        unrolled.splice(unrolled.indexOf(id), 1);
     } else {
         if (device_type == 'phone') {
             if (site_location == 'index') {
@@ -799,19 +785,15 @@ function videoroll() {
             document.getElementById("mobile_menu_entry_video").style.fontWeight = "bold";
         }
         if (device_type == 'desktop') {
-            if (site_lang == 'sk') {
-                document.getElementById("menu_entry_profile_sk").style.visibility = "visible";
-                document.getElementById("menu_entry_report_sk").style.visibility = "visible";
-                $('#menu_entry_profile_sk').show( "clip", {direction: "horizontal"}, hide_time*2, function() {document.getElementById("menu_entry_profile_sk").style.display = "block";} );
-                $('#menu_entry_report_sk').show( "clip", {direction: "horizontal"}, hide_time*2, function() {document.getElementById("menu_entry_report_sk").style.display = "block";});
-            }
-            if (site_lang == 'en') {
-                document.getElementById("menu_entry_profile_en").style.visibility = "visible";
-                document.getElementById("menu_entry_report_en").style.visibility = "visible";
-                $('#menu_entry_profile_en').show( "clip", {direction: "horizontal"}, hide_time*2, function() {document.getElementById("menu_entry_profile_en").style.display = "block";} );
-                $('#menu_entry_report_en').show( "clip", {direction: "horizontal"}, hide_time*2, function() {document.getElementById("menu_entry_report_en").style.display = "block";});
-            }
+            $('.' + child_class).show( "clip", {direction: "horizontal"}, hide_time*2, function() {
+                var children = document.getElementsByClassName(child_class);
+                for (var i = 0; i < children.length; ++i) {
+                    children[i].style.visibility = "visible";
+                    children[i].style.display = "block";
+                }
+            } );
         }
-        video_menu = true;
+        // add the category to the unrolled array
+        unrolled.push(id);
     }
 };

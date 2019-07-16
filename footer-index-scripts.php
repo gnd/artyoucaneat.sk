@@ -52,7 +52,7 @@
     // nastav js podla typu klienta
     detect_client();
 
-    // jazykova persistencia (docasny hack)
+    // jazykova persistencia
     window.onload = allyoucan_setup("<?php echo $_SESSION["lang"]; ?>");
 
     // fejdi to

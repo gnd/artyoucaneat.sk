@@ -15,12 +15,14 @@ session_start();
 require_once 'lang.php';
 
 // Get category data
+$query = new WP_Query( array( 'cat' => the_category_ID(false) ) );
 $category = get_the_category()[0];
-$category_id = $category->cat_ID;
+$category_id = the_category_ID(false);
 $category_parent_id = $cat->parent;
-$page_title = 'Art You Can Eat / ' . $category->name;
-if ($_SESSION["lang"] == "en") {
-    $page_title = 'Art You Can Eat / ' .$category->description;
+if ($_SESSION["lang"] == "sk") {
+    $page_title = 'Art You Can Eat / ' . $category->name;
+} else {
+    $page_title = 'Art You Can Eat / ' . $category->description;
 }
 ?>
 
@@ -42,7 +44,7 @@ if ($_SESSION["lang"] == "en") {
             -->
             <?php
             // start showing past videos
-            if ($category_id != NULL) {
+            if (($category_id != NULL) && ($category_name != 'Text')) {
                 $query = new WP_Query( array( 'cat' => $category_id ) );
                 $lid = 0;
                 if ( $query->have_posts() ) {
