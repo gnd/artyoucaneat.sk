@@ -15,10 +15,9 @@ session_start();
 require_once 'lang.php';
 
 // Get category data
-$query = new WP_Query( array( 'cat' => the_category_ID(false) ) );
-$category = get_the_category()[0];
-$category_id = the_category_ID(false);
-$category_parent_id = $cat->parent;
+$category = get_category( get_query_var( 'cat' ) );
+$category_id = $category->cat_ID;
+$category_parent_id = $category->parent;
 if ($_SESSION["lang"] == "sk") {
     $page_title = 'Art You Can Eat / ' . $category->name;
 } else {
@@ -43,11 +42,16 @@ if ($_SESSION["lang"] == "sk") {
             TODO: add paging in the future
             -->
             <?php
-            // start showing past videos
-            if (($category_id != NULL) && ($category_name != 'Text')) {
-                $query = new WP_Query( array( 'cat' => $category_id ) );
-                $lid = 0;
+                // retrieve posts in category
+                $args = array(
+                    'cat' => $category_id,
+                    'orderby' => 'title',
+                    'order'   => 'DESC',
+                );
+                $query = new WP_Query($args);
+                // if category has some posts
                 if ( $query->have_posts() ) {
+                    $lid = 0;
                     while ( $query->have_posts() ) {
                         $query->the_post();
                         $link = wp_make_link_relative(get_permalink($query->theID(), false));
@@ -63,9 +67,7 @@ if ($_SESSION["lang"] == "sk") {
                     }
                     /* Restore original Post Data */
                     wp_reset_postdata();
-                }
-            } else {
-                ?>
+                } else { ?>
                     <br/>
                     <div id="title_container_sk">
                         <div class="ordinary_text">Táto sekcia je mo/mentálne prázdna.</div>
@@ -74,15 +76,15 @@ if ($_SESSION["lang"] == "sk") {
                         <div class="ordinary_text">This section is mo-menta/r/ly empty.</div>
                     </div>
                 <?php
-            }
-            ?>
+                }
+                ?>
         </div>
 
    <!-- START FOOTER -->
    <?php require_once 'footer.php'; ?>
 
    <!-- START ADDITIONAL JS SCRIPTS -->
-   <?php require_once 'footer-scripts.php'; ?>
+   <?php require_once 'footer-category-scripts.php'; ?>
 
 </body>
 </html>

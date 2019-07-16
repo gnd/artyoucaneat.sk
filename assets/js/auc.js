@@ -42,296 +42,6 @@ function detect_client() {
     }
 };
 
-function profile_setup(lang) {
-
-    /*
-    if (video_menu) {
-        if (site_location == 'profile') {
-            document.getElementById("menu_entry_profile_sk").style.textDecoration = 'underline';
-        }
-        if (site_location == 'report') {
-            document.getElementById("menu_entry_report_sk").style.textDecoration = 'underline';
-        }
-    }
-    */
-    /*
-    if (document.getElementById("video_info_container_sk")) {
-        document.getElementById("video_info_container_sk").style.display = 'inline';
-    }
-    if (document.getElementById("video_info_container_en")) {
-        document.getElementById("video_info_container_en").style.display = 'none';
-    }
-    */
-
-    menu = true;
-    video_menu = true;
-    site_location = 'profile';
-    if (device_type == 'phone') {
-        document.getElementById("mobile_video_menu").style.display = "block";
-        document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("mobile_menu_entry_profile_sk").style.textDecoration = "underline";
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("mobile_menu_entry_profile_en").style.textDecoration = "underline";
-        }
-        document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
-        document.getElementById("mobile_menu_entry_search").style.visibility = "visible";
-        document.getElementById("mobile_lang_sk_switch").style.visibility = "visible";
-        document.getElementById("mobile_lang_en_switch").style.visibility = "visible";
-    }
-    if (device_type == 'desktop') {
-        document.getElementById("menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("menu_entry_profile_sk").style.textDecoration = "underline";
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("menu_entry_profile_en").style.textDecoration = "underline";
-        }
-        document.getElementById("menu_entry_text").style.visibility = "visible";
-        document.getElementById("menu_entry_search").style.visibility = "visible";
-        document.getElementById("lang_sk_switch").style.visibility = "visible";
-        document.getElementById("lang_en_switch").style.visibility = "visible";
-    }
-
-    // switch lang
-    switch_lang(lang, false);
-
-    // setup image sources
-    switch_pics();
-};
-
-function report_setup(lang) {
-
-    menu = true;
-    video_menu = true;
-    site_location = 'report';
-    if (device_type == 'phone') {
-        document.getElementById("mobile_video_menu").style.display = "block";
-        document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("mobile_menu_entryreport_sk").style.textDecoration = "underline";
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("mobile_menu_entry_report_en").style.textDecoration = "underline";
-        }
-        document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
-        document.getElementById("mobile_menu_entry_search").style.visibility = "visible";
-        document.getElementById("mobile_lang_sk_switch").style.visibility = "visible";
-        document.getElementById("mobile_lang_en_switch").style.visibility = "visible";
-    }
-    if (device_type == 'desktop') {
-        document.getElementById("menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("menu_entry_report_sk").style.textDecoration = "underline";
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-            document.getElementById("menu_entry_report_en").style.textDecoration = "underline";
-        }
-        document.getElementById("menu_entry_text").style.visibility = "visible";
-        document.getElementById("menu_entry_search").style.visibility = "visible";
-        document.getElementById("lang_sk_switch").style.visibility = "visible";
-        document.getElementById("lang_en_switch").style.visibility = "visible";
-    }
-
-    // switch lang
-    switch_lang(lang, false);
-
-    // setup image sources
-    switch_pics();
-};
-
-function video_setup(lang) {
-
-    menu = true;
-    video_menu = true;
-    site_location = 'video';
-    if (device_type == 'phone') {
-        document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
-        document.getElementById("mobile_menu_entry_video").style.textDecoration = "underline";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
-        document.getElementById("mobile_menu_entry_search").style.visibility = "visible";
-        document.getElementById("mobile_lang_sk_switch").style.visibility = "visible";
-        document.getElementById("mobile_lang_en_switch").style.visibility = "visible";
-    }
-    if (device_type == 'desktop') {
-        document.getElementById("menu_entry_video").style.visibility = "visible";
-        document.getElementById("menu_entry_video").style.textDecoration = "underline";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        document.getElementById("menu_entry_text").style.visibility = "visible";
-        document.getElementById("menu_entry_search").style.visibility = "visible";
-        document.getElementById("lang_sk_switch").style.visibility = "visible";
-        document.getElementById("lang_en_switch").style.visibility = "visible";
-    }
-
-    // switch lang
-    switch_lang(lang, false);
-
-    // setup image sources
-    switch_pics();
-};
-
-function text_setup(lang) {
-
-    menu = false;
-    site_location = 'text';
-    if (device_type == 'phone') {
-        document.getElementById("mobile_menu_entry_text").style.textDecoration = "underline";
-    }
-    if (device_type == 'desktop') {
-        document.getElementById("menu_entry_text").style.textDecoration = "underline";
-    }
-
-    // switch lang
-    switch_lang(lang, true);
-
-    // setup image sources
-    switch_pics();
-};
-
-function info_setup(lang) {
-
-    menu = true;
-    site_location = 'info';
-    if (device_type == 'phone') {
-        document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('mobile_menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'inline';
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
-        document.getElementById("mobile_menu_entry_search").style.visibility = "visible";
-        document.getElementById("mobile_lang_sk_switch").style.visibility = "visible";
-        document.getElementById("mobile_lang_en_switch").style.visibility = "visible";
-    }
-    if (device_type == 'desktop') {
-        document.getElementById("menu_entry_video").style.visibility = "visible";
-        if (site_lang == 'sk') {
-            var menu_entries = document.getElementsByClassName('menu_entry_sk');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        if (site_lang == 'en') {
-            var menu_entries = document.getElementsByClassName('menu_entry_en');
-            for (var i = 0; i < menu_entries.length; ++i) {
-                menu_entries[i].style.display = 'block';
-                menu_entries[i].style.visibility = 'visible';
-            }
-        }
-        document.getElementById("menu_entry_text").style.visibility = "visible";
-        document.getElementById("menu_entry_search").style.visibility = "visible";
-        document.getElementById("lang_sk_switch").style.visibility = "visible";
-        document.getElementById("lang_en_switch").style.visibility = "visible";
-    }
-
-    // switch lang
-    switch_lang(lang, true);
-
-};
-
-function allyoucan_setup(lang) {
-
-    // hide video controls
-    document.getElementById("landing_video").removeAttribute("controls");
-
-    // switch lang
-    switch_lang(lang, false);
-
-    // setup image sources
-    switch_pics();
-};
-
-function switch_pics() {
-    if (device_type == 'desktop') {
-        if (document.getElementById("landing_video")) {
-            //document.getElementById("landing_video").poster = document.getElementById("landing_video").poster.replace('_p0','');
-            var poster = player.poster();
-            poster = poster.replace('_p0','');
-            player.poster(poster);
-        }
-        for (var i=0; i<10; i++) {
-            if (document.getElementById("video_"+i)) {
-                document.getElementById("video_"+i).src = document.getElementById("video_"+i).src.replace('_p0','');
-            }
-        }
-    }
-};
-
 function nav(src) {
     window.location.href = src;
 };
@@ -365,7 +75,23 @@ function send_lang(lang) {
 
 };
 
-function switch_lang(lang, send) {
+function switch_pics() {
+    if (device_type == 'desktop') {
+        if (document.getElementById("landing_video")) {
+            //document.getElementById("landing_video").poster = document.getElementById("landing_video").poster.replace('_p0','');
+            var poster = player.poster();
+            poster = poster.replace('_p0','');
+            player.poster(poster);
+        }
+        for (var i=0; i<10; i++) {
+            if (document.getElementById("video_"+i)) {
+                document.getElementById("video_"+i).src = document.getElementById("video_"+i).src.replace('_p0','');
+            }
+        }
+    }
+};
+
+function switch_lang(lang, send, id) {
     if (lang == 'sk') {
         active_lang = 'sk';
         inactive_lang = 'en';
@@ -376,33 +102,38 @@ function switch_lang(lang, send) {
 
     if (device_type == 'desktop') {
         if (menu) {
-            // Show / hide top categories in menu first
+            // Show menu top entries in active language
             var shown = document.getElementsByClassName('menu_entry_top_' + active_lang);
-            var hidden = document.getElementsByClassName('menu_entry_top_' + inactive_lang);
             for (var i = 0; i < shown.length; ++i) {
                 shown[i].style.display = "block";
                 shown[i].style.visibility = "visible";
             }
-            for (var i = 0; i < hidden.length; ++i) {
-                hidden[i].style.display = "none";
-            }
-            // Show all children
+            // Show all children in active language
             for (var i=0; i < unrolled.length; i++) {
                 var child_class = 'childof_' + String(unrolled[i]) + '_' + active_lang;
                 var children = document.getElementsByClassName(child_class);
-                for (var j = 0; i < children.length; ++i) {
-                    children[i].style.visibility = "visible";
-                    children[i].style.display = "block";
+                for (var j = 0; j < children.length; j++) {
+                    children[j].style.visibility = "visible";
+                    children[j].style.display = "block";
                 }
-            }
-            // Hide the rest
-            var hidden = document.getElementsByClassName('menu_entry_' + inactive_lang);
-            for (var i = 0; i < hidden.length; ++i) {
-                hidden[i].style.display = "none";
             }
             // Indicate language
             document.getElementById('lang_' + active_lang + '_switch').style.fontWeight = 'bold';
             document.getElementById('lang_' + inactive_lang + '_switch').style.fontWeight = 'normal';
+            // Underline active category
+            if (id > 0) {
+                document.getElementById(id + "_" + lang).style.textDecoration = 'underline';
+            }
+            // Hide menu top entries in inactiva language
+            var hidden = document.getElementsByClassName('menu_entry_top_' + inactive_lang);
+            for (var i = 0; i < hidden.length; ++i) {
+                hidden[i].style.display = "none";
+            }
+            // Hide the rest of menu entries in inactive language
+            hidden = document.getElementsByClassName('menu_entry_' + inactive_lang);
+            for (var i = 0; i < hidden.length; ++i) {
+                hidden[i].style.display = "none";
+            }
         }
     }
     if (lang == 'sk') {
@@ -639,11 +370,46 @@ function switch_lang(lang, send) {
     }
 };
 
+function allyoucan_setup(lang) {
+
+    // hide video controls
+    document.getElementById("landing_video").removeAttribute("controls");
+
+    // switch lang
+    switch_lang(lang, false, 0);
+
+    // setup image sources
+    switch_pics();
+};
+
+function category_setup(lang, parent_id, category_id) {
+    // unroll menu
+    menuroll();
+
+    // unroll category
+    cat_unroll(parent_id);
+
+    // switch lang
+    switch_lang(lang, false, category_id);
+
+    // setup image sources
+    switch_pics();
+};
+
+
+/* TODO: move this into single
+if (document.getElementById("video_info_container_sk")) {
+    document.getElementById("video_info_container_sk").style.display = 'inline';
+}
+if (document.getElementById("video_info_container_en")) {
+    document.getElementById("video_info_container_en").style.display = 'none';
+}
+*/
+
 // show / hide the menu according to device_type
 function menuroll() {
     if (menu) {
         if (device_type == 'phone') {
-            alert('phone');
             $('.mobile_menu_entry_top').fadeOut(hide_time);
             $('.mobile_menu_entry_top_' + active_lang).fadeOut(hide_time);
             $('.mobile_menu_entry_top_' + inactive_lang).fadeOut(hide_time);
@@ -664,7 +430,6 @@ function menuroll() {
         menu = false;
     } else {
         if (device_type == 'phone') {
-            alert('phone');
             document.getElementById("mobile_menu_entry_video").style.visibility = "visible";
             document.getElementById("mobile_menu_entry_text").style.visibility = "visible";
             document.getElementById("mobile_menu_entry_search").style.visibility = "visible";

@@ -168,29 +168,29 @@ a.menu_entry:hover {
 }
 
 .menu_entry_sk {
-    font-size: 0.7em;
-    margin-left: 0.6em;
-    margin-bottom: 0.2em;
+    font-size: 0.7em !important;
+    margin-left: 0.6em !important;
+    margin-bottom: 0.2em !important;
     visibility: hidden;
     display: none;
 }
 
 .menu_entry_en {
-    font-size: 0.7em;
-    margin-left: 0.6em;
-    margin-bottom: 0.2em;
+    font-size: 0.7em !important;
+    margin-left: 0.6em !important;
+    margin-bottom: 0.2em !important;
     visibility: hidden;
     display: none;
 }
 
 .menu_entry_top_sk {
     visibility: hidden;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.2em !important;
 }
 
 .menu_entry_top_en {
     visibility: hidden;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.2em !important;
 }
 
 #menu_entry_video {

@@ -29,16 +29,15 @@
                 // Get and output all top-level categories
                 $top_categories = get_categories(array('orderby' => 'id','parent'  => 0));
                 foreach ($top_categories as $top_cat) {
-                    echo '<a class="menu_entry menu_entry_top_sk" id="menu_entry_' . strtolower($top_cat->name). '_sk" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->name . '</a>' . "\n";
-                    echo '<a class="menu_entry menu_entry_top_en" id="menu_entry_' . strtolower($top_cat->description). '_en" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->description . '</a>' . "\n";
+                    echo "\t\t\t" . '<a class="menu_entry menu_entry_top_sk" id="' . $top_cat->cat_ID . '_sk" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->name . '</a>' . "\n";
+                    echo "\t\t\t" . '<a class="menu_entry menu_entry_top_en" id="' . $top_cat->cat_ID . '_en" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->description . '</a>' . "\n";
                     $shown[] = $top_cat->cat_ID;
 
                     // Get and output all children
                     $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID));
                     foreach ($child_categories as $child_cat) {
-                        // TODO are ids needed ?
-                        echo "\t\t\t" . '<a class="menu_entry menu_entry_sk childof_'.$top_cat->cat_ID.'_sk" id="menu_entry_' . strtolower($child_cat->name) . '_sk" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->name . '</a>' . "\n";
-                        echo "\t\t\t" . '<a class="menu_entry menu_entry_en childof_'.$top_cat->cat_ID.'_en" id="menu_entry_' . strtolower($child_cat->description) . '_en" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->description . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="menu_entry_sk menu_entry childof_'.$top_cat->cat_ID.'_sk" id="' . $child_cat->cat_ID . '_sk" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->name . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="menu_entry_en menu_entry childof_'.$top_cat->cat_ID.'_en" id="' . $child_cat->cat_ID . '_en" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->description . '</a>' . "\n";
                         $shown[] = $child_cat->cat_ID;
                     }
                 }
@@ -47,8 +46,8 @@
                 $categories = get_categories(array('hide_empty' => false));
                 foreach ($categories as $cat) {
                     if (!in_array($cat->cat_ID, $shown) && ($cat->name != "Uncategorized")) {
-                        echo "\t\t\t" . '<a class="menu_entry menu_entry_top_sk" id="menu_entry_' . strtolower($cat->name) . '_sk" href="' . get_category_link($cat->cat_ID) . '">' . $cat->name . '</a>' . "\n";
-                        echo "\t\t\t" . '<a class="menu_entry menu_entry_top_en" id="menu_entry_' . strtolower($cat->description) . '_en" href="' . get_category_link($cat->cat_ID) . '">' . $cat->description . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="menu_entry menu_entry_top_sk" id="' . $cat->cat_ID . '_sk" href="' . get_category_link($cat->cat_ID) . '">' . $cat->name . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="menu_entry menu_entry_top_en" id="' . $cat->cat_ID . '_en" href="' . get_category_link($cat->cat_ID) . '">' . $cat->description . '</a>' . "\n";
                         $shown[] = $cat->cat_ID;
                     }
                 }
@@ -57,8 +56,8 @@
              <!-- no such functionality
              <img id="menu_entry_search" src="assets/images/lupa_icon_bk.png">
              -->
-             <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true);">SK</a>
-             <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true);">EN</a>
+             <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
+             <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
          </div>
      </div>
  </div>

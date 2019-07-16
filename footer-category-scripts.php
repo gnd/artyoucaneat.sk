@@ -12,21 +12,16 @@
  */
 
  session_start();
-
  ?>
 
 <script>
     // setup some globals
-    menu = true;
-    site_location = '<?php echo strtolower($category->name); ?>';
-    <?php
-        if ($category_parent_id = $video_id) {
-            echo "video_menu = true;";
-        }
-    ?>
+    site_location = '<?php echo ($_SESSION["lang"] == 'sk') ? strtolower($category->name) : strtolower($category->description); ?>';
+    <?php echo ($category_parent_id == $video_id) ? "video_menu = true;" : ""; ?>
 
     // nastav js podla typu klienta
     detect_client();
 
-    window.onload = category_setup("<?php echo $_SESSION["lang"]; ?>");
+    // setup menu
+    window.onload = category_setup(<?php echo '"' . $_SESSION["lang"] . '", ' . $category_parent_id . ', ' . $category_id; ?>);
 </script>
