@@ -1,6 +1,26 @@
 <?php
 
 /*
+    This checks if a given category ID has any children
+    From: https://wordpress.stackexchange.com/questions/176317/check-if-current-category-has-subcategories
+*/
+function term_has_children( $term_id = '', $taxonomy = 'category' )
+{
+    // Check if we have a term value, if not, return false
+    if ( !$term_id )
+        return false;
+
+    // Get term children
+    $term_children = get_term_children( filter_var( $term_id, FILTER_VALIDATE_INT ), filter_var( $taxonomy, FILTER_SANITIZE_STRING ) );
+
+    // Return false if we have an empty array or WP_Error object
+    if ( empty( $term_children ) || is_wp_error( $term_children ) )
+    return false;
+
+    return true;
+}
+
+/*
     This shows the individual post in the section "New videos" on the index page
 */
 function show_index_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {

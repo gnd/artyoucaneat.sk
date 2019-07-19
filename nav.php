@@ -15,7 +15,7 @@
 
  ?>
 
- <!-- nav panels desktop & mobile -->
+ <!-- nav panel desktop -->
  <div id="left_container">
      <div id="menu_container">
          <div id="menu_icon_container">
@@ -27,6 +27,7 @@
                 $shown = array();
 
                 // Get and output all top-level categories
+                // TODO - remove shown and make this in one loop
                 $top_categories = get_categories(array('orderby' => 'id','parent'  => 0));
                 foreach ($top_categories as $top_cat) {
                     echo "\t\t\t" . '<a class="menu_entry menu_entry_top_sk" id="' . $top_cat->cat_ID . '_sk" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->name . '</a>' . "\n";
@@ -67,36 +68,25 @@
      </div>
  </div>
 
-
+ <!-- nav panel mobile -->
  <div id="mobile_nav_container">
      <div id="mobile_icon_container">
          <img id="mobile_menu_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/menu_icon_bk.png" onclick="menuroll();">
      </div>
      <div id="mobile_main_menu">
          <?php
-            // Array of already shown $categories
-            $shown = array();
-
-            /*  Output Video
-                Output looks like:
-                    <a class="mobile_menu_entry" id="mobile_menu_entry_video" onclick="videoroll();">Video</a>
-            */
-            foreach ($categories as $cat) {
-                if ($cat->name == "Video") {
-                    $video_id = $cat->cat_ID;
-                    echo '<a class="mobile_menu_entry" id="mobile_menu_entry_video" onclick="videoroll();">Video</a>' . "\n";
-                    $shown[] = $cat->cat_ID;
-                }
-            }
-            /*  Output the rest of the categories
-                Output looks like:
-                    <a class="mobile_menu_entry" id="mobile_menu_entry_text" href="text">Text</a>
-            */
-            foreach ($categories as $cat) {
-                if (!in_array($cat->cat_ID, $shown) && ($cat->name != "Uncategorized") && ($cat->parent != $video_id)) {
-                    echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_sk" id="mobile_menu_entry_' . strtolower($cat->name) . '_sk" href="' . get_category_link($cat->cat_ID) . '">' . $cat->name . '</a>' . "\n";
-                    echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_en" id="mobile_menu_entry_' . strtolower($cat->description) . '_en" href="' . get_category_link($cat->cat_ID) . '">' . $cat->description . '</a>' . "\n";
-                    $shown[] = $cat->cat_ID;
+            // Get and output all top-level categories
+            // This might turn out as a problem if there are more categories in the future
+            $top_categories = get_categories(array('orderby' => 'id','parent'  => 0, 'hide_empty' => false));
+            foreach ($top_categories as $top_cat) {
+                if ($top_cat->name != "Uncategorized") {
+                    if (term_has_children($top_cat->cat_ID)) {
+                        echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_top_sk" id="mobile_' . $top_cat->cat_ID . '_sk" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->name . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_top_en" id="mobile_' . $top_cat->cat_ID . '_en" onclick="cat_unroll('.$top_cat->cat_ID.');">' . $top_cat->description . '</a>' . "\n";
+                    } else {
+                        echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_top_sk" id="mobile_' . $top_cat->cat_ID . '_sk" href="' . get_category_link($top_cat->cat_ID) . '">' . $top_cat->name . '</a>' . "\n";
+                        echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_top_en" id="mobile_' . $top_cat->cat_ID . '_en" href="' . get_category_link($top_cat->cat_ID) . '">' . $top_cat->description . '</a>' . "\n";
+                    }
                 }
             }
          ?>
@@ -104,28 +94,27 @@
          <!-- no such functionality
          <img id="menu_entry_search" src="assets/images/lupa_icon_bk.png">
          -->
-         <a class="mobile_menu_entry" id="mobile_lang_sk_switch" onclick="switch_lang('sk', true);">SK</a>
-         <a class="mobile_menu_entry" id="mobile_lang_en_switch" onclick="switch_lang('en', true);">EN</a>
+         <a class="mobile_menu_entry_top" id="mobile_lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
+         <a class="mobile_menu_entry_top" id="mobile_lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
      </div>
      <div id="mobile_logo_container">
          <a href="/"><img id="mobile_logo_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/logo/5.png"></a>
      </div>
-     <div id="mobile_video_menu">
-         <?php
-             /* Output children of Video
-                Output looks like:
-                 <a class="mobile_menu_entry" id="mobile_menu_entry_profile_sk" href="profile">Profily</a>
-                 <a class="mobile_menu_entry" id="mobile_menu_entry_profile_en" href="profile">Profiles</a>
-                 <a class="mobile_menu_entry" id="mobile_menu_entry_report_sk" href="report">Reporty</a>
-                 <a class="mobile_menu_entry" id="mobile_menu_entry_report_en" href="report">Reports</a>
-             */
-             foreach ($categories as $cat) {
-                 if ($cat->parent == $video_id) {
-                     echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_sk" id="mobile_menu_entry_' . strtolower($cat->name) . '_sk" href="' . get_category_link($cat->cat_ID) . '">' . $cat->name . '</a>' . "\n";
-                     echo "\t\t\t" . '<a class="mobile_menu_entry mobile_menu_entry_en" id="mobile_menu_entry_' . strtolower($cat->description) . '_en" href="' . get_category_link($cat->cat_ID) . '">' . $cat->description . '</a>' . "\n";
-                 }
+
+     <?php
+     // Get and output all children
+     foreach ($top_categories as $top_cat) {
+         if (term_has_children($top_cat->cat_ID)) {
+             echo '<div class="mobile_top_cat_menu" id="mobile_menu_' . $top_cat->cat_ID . '">';
+             $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID));
+             foreach ($child_categories as $child_cat) {
+                 echo "\t\t\t" . '<a class="mobile_menu_entry_sk mobile_menu_entry mobile_childof_'.$top_cat->cat_ID.'_sk" id="mobile_' . $child_cat->cat_ID . '_sk" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->name . '</a>' . "\n";
+                 echo "\t\t\t" . '<a class="mobile_menu_entry_en mobile_menu_entry mobile_childof_'.$top_cat->cat_ID.'_en" id="mobile_' . $child_cat->cat_ID . '_en" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->description . '</a>' . "\n";
              }
-         ?>
-     </div>
+             echo "</div>";
+         }
+     }
+     ?>
+
  </div>
  <!-- nav panels end -->

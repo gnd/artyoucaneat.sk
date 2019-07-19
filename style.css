@@ -167,6 +167,10 @@ a.menu_entry:hover {
     cursor: hand;
 }
 
+.underline {
+    text-decoration: underline !important;
+}
+
 .menu_entry_sk {
     font-size: 0.7em !important;
     margin-left: 0.6em !important;
