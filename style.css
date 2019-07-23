@@ -690,15 +690,17 @@ img.play_landing_single {
     margin-top: 1em;
     max-width: 20%;
     float: left;
-    text-indent: 1em;
 }
 
 #video_info_container_en {
     margin-top: 1em;
     max-width: 20%;
     float: left;
-    text-indent: 1em;
     display: none;
+}
+
+div.video_info_container_data {
+    margin-left: 1em;
 }
 
 #video_info_container_mobile_sk {

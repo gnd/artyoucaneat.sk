@@ -20,16 +20,12 @@
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $link_txt; ?>";
-    var related_videos = [
-            <?php echo $related_videos_sk; ?>
-        ];
-    var video_name = "<?php echo $name_sk; ?>";
+    var related_videos = <?php echo json_encode($related_videos_sk); ?>;
+    var video_name = "<?php echo $current_title_sk; ?>";
 
     if ("<?php echo $_SESSION["lang"]; ?>" == "en") {
-        var related_videos = [
-            <?php echo $related_videos_en; ?>
-        ];
-        var video_name = "<?php echo $name_en; ?>";
+        var related_videos = <?php echo json_encode($related_videos_en); ?>;
+        var video_name = "<?php echo $current_title_en; ?>";
     }
 
     // video.js start
