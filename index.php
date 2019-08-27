@@ -45,6 +45,7 @@ require_once 'lang.php';
                 $poster = types_render_field("poster-image", array("output" => "raw"));
                 $video_link_txt = substr(types_render_field("video-mp4", array("output" => "raw")),0,-4);
                 $link_txt = wp_make_link_relative(get_permalink($query->theID(), false));
+                $video_share_link = get_permalink($query->theID(), false);
                 $category_link = get_category_link(get_the_category()[0]->cat_ID);
                 $category_name_sk = get_the_category()[0]->name;
                 $category_name_en = get_the_category()[0]->description;
@@ -54,6 +55,7 @@ require_once 'lang.php';
                 $current_title_en = types_render_field("en-title",  array("output" => "raw"));
                 $statement_en = types_render_field("en-default-desc",  array("output" => "raw"));
                 $short_statement_en = types_render_field("en-short-desc",  array("output" => "raw"));
+                $video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/embed.php?vid=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
                 show_landing_post($poster, $video_link_txt, $category_link, $link_txt, $category_name_sk, $current_title_sk, $statement_sk, $short_statement_sk, $category_name_en, $current_title_en, $statement_en, $short_statement_en);
                 break;
             }

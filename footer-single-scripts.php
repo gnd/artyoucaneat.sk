@@ -20,6 +20,7 @@
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $link_txt; ?>";
+    var video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/embed.php?vid=<?php echo $current_id; ?>" frameborder="0" allowfullscreen></iframe>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $current_title_sk; ?>";
 
@@ -42,9 +43,9 @@
         slideType: 'vertical',
         shareTitle: video_name,
         shareUrl: video_link,
-        shareEmbed: 'not implemented yet',
-        logo: '//artyoucaneat.sk/assets/images/logo_transparent_50.png',
-        logourl: '//artyoucaneat.sk',
+        shareEmbed: video_share_embed,
+        logo: '//paleo.artyoucaneat.sk/assets/images/logo_transparent_50.png',
+        logourl: '//paleo.artyoucaneat.sk',
         logoposition: 'RT'
     });
 
