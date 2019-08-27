@@ -14,12 +14,30 @@
  session_start();
 
  ?>
-    <meta charset="UTF-8">
- 	<meta name="description" content="Art You Can Eat is a new video portal maping the Slovak contemporary art scene. Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie." />
- 	<meta name="keywords" content="slovak contemporary art visual art slovenske sucasne umenie vytvarne umenie" />
- 	<meta name="revisit-after" content="7 days" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title><?php echo $page_title; ?></title>
+ <title>
+         <?php
+             if ($_SESSION["lang"] == "en") {
+                 echo $page_title . "\n";
+             }
+             if ($_SESSION["lang"] == "sk") {
+                 echo $page_title . "\n";
+             }
+         ?>
+     </title>
+
+     <meta charset="UTF-8">
+     <meta name="description" content="Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie. Art You Can Eat is a new video portal maping the Slovak contemporary art scene." />
+     <meta name="keywords" content="slovak contemporary art visual art slovenske sucasne umenie vytvarne umenie" />
+     <meta name="revisit-after" content="7 days" />
+     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+     <!-- OPEN GRAPH -->
+     <meta property="og:locale" content="sk_SK" />
+     <meta property="og:type" content="article" />
+     <meta property="og:title" content="<?php echo $page_title; ?>" />
+     <meta property="og:description" content="<?php echo $og_desc; ?>" />
+     <meta property="og:url" content="<?php echo $og_url; ?>" />
+     <meta property="og:image" content="<?php echo $og_poster; ?>" />
 
      <!--- ICONS -->
      <link rel="apple-touch-icon" sizes="180x180" href="<?php bloginfo('template_directory'); ?>/assets/images/favicon/apple-touch-icon.png">

@@ -18,8 +18,13 @@ require_once 'lang.php';
 <html>
 <head>
     <!-- START HEADER -->
-    <?php $page_title = "Art You Can Eat"; ?>
-    <?php require_once 'header.php'; ?>
+    <?php
+        $page_title = "Art You Can Eat";
+        $og_desc = "Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie.";
+        $og_url = "https://paleo.artyoucaneat.sk";
+        $og_poster = "https://paleo.artyoucaneat.sk/assets/images/logo_big.jpg";
+        require_once 'header.php';
+    ?>
 </head>
 <body>
     <!-- START LANDING VIDEO -->

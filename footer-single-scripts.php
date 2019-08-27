@@ -42,7 +42,10 @@
         slideType: 'vertical',
         shareTitle: video_name,
         shareUrl: video_link,
-        shareEmbed: 'not implemented yet'
+        shareEmbed: 'not implemented yet',
+        logo: '//artyoucaneat.sk/assets/images/logo_transparent_50.png',
+        logourl: '//artyoucaneat.sk',
+        logoposition: 'RT'
     });
 
     // set site location as single_video

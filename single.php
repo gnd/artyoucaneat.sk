@@ -75,7 +75,12 @@ $translation_links = process_video_links($translation);
  <html>
  <head>
      <!-- START HEADER -->
-     <?php require_once 'header.php'; ?>
+     <?php
+         $og_desc = types_render_field("short-desc",  array("output" => "raw"));
+         $og_url = get_permalink();
+         $og_poster = $poster;
+         require_once 'header.php';
+     ?>
  </head>
  <body>
 
