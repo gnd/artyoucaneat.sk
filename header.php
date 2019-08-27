@@ -27,7 +27,7 @@
 
      <meta charset="UTF-8">
      <meta name="description" content="Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie. Art You Can Eat is a new video portal maping the Slovak contemporary art scene." />
-     <meta name="keywords" content="slovak contemporary art visual art slovenske sucasne umenie vytvarne umenie" />
+	 <meta name="keywords" content="slovak contemporary art visual art slovenské súčasné umenie výtvarné umenie" />
      <meta name="revisit-after" content="7 days" />
      <meta name="viewport" content="width=device-width,initial-scale=1" />
 

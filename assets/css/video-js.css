@@ -526,7 +526,7 @@ body.vjs-full-window {
 		background-position: 23px center!important;
 		height:66px!important;
 		width:66px!important;
-		margin:-33px 0 0 -33px!important;
+		//margin:-33px 0 0 -33px!important;
 	}
 	.vjs-loading-spinner{
 		width:66px!important;

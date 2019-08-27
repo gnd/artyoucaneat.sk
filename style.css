@@ -803,3 +803,8 @@ a.text_link {
     background-color: white;
     //background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1) 70%);
 }
+
+
+.video-js-embed .vjs-big-play-button {
+    top: 30% !important;
+}

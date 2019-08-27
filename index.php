@@ -55,7 +55,7 @@ require_once 'lang.php';
                 $current_title_en = types_render_field("en-title",  array("output" => "raw"));
                 $statement_en = types_render_field("en-default-desc",  array("output" => "raw"));
                 $short_statement_en = types_render_field("en-short-desc",  array("output" => "raw"));
-                $video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/embed.php?vid=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
+                $video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/index.php/v/?id=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
                 show_landing_post($poster, $video_link_txt, $category_link, $link_txt, $category_name_sk, $current_title_sk, $statement_sk, $short_statement_sk, $category_name_en, $current_title_en, $statement_en, $short_statement_en);
                 break;
             }
