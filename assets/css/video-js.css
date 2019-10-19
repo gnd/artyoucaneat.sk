@@ -560,6 +560,7 @@ body.vjs-full-window {
 	-ms-transition: visibility 0.1s, opacity 0.1s;
     transition: visibility 0.1s, opacity 0.1s;
 }
+
 .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
     visibility: hidden;
     opacity: 0;
@@ -569,7 +570,6 @@ body.vjs-full-window {
 	-ms-transition: visibility 0.3s, opacity 0.3s;
     transition: visibility 0.3s, opacity 0.3s;
 }
-
 
 .video-js .vjs-big-play-button {
 	background-image: url("../images/play.png");
@@ -585,6 +585,7 @@ body.vjs-full-window {
 	z-index:5;
 	display:block;
 }
+
 .vjs-seeking .vjs-big-play-button, .vjs-playing .vjs-big-play-button {
     display: none;
 }

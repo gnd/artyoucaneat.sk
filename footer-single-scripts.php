@@ -20,7 +20,7 @@
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $link_txt; ?>";
-    var video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/index.php/v/?id=<?php echo $current_id; ?>" frameborder="0" allowfullscreen></iframe>';
+    var video_share_embed ="<?php echo $video_share_embed; ?>";
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $current_title_sk; ?>";
 

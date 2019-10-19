@@ -49,20 +49,6 @@ body {
     width: 100%;
 }
 
-img.play_landing {
-    width: 10%;
-    position: absolute;
-    z-index: 666;
-    top: 40%;
-    left: 45%;
-    opacity: 0.7;
-    cursor: hand;
-}
-
-img.play_landing:hover {
-    opacity: 0.9;
-}
-
 #landing_overlay {
     z-index: 665;
     position: absolute;
@@ -375,7 +361,7 @@ img.play {
     width: 10%;
     position: absolute;
     z-index: 666;
-    top: 35%;
+    top: 30%;
     left: 45%;
     opacity: 0.7;
     cursor: hand;
@@ -804,7 +790,90 @@ a.text_link {
     //background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1) 70%);
 }
 
-
 .video-js-embed .vjs-big-play-button {
     top: 30% !important;
+}
+
+/********************************************************
+                                    videos - embed poppu
+********************************************************/
+
+#embed_container_bg {
+    z-index: 9;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    display: none;
+}
+
+#embed_container {
+    z-index: 10;
+    position: fixed;
+    left: 25%;
+    top: 25%;
+    height: 40vh;
+    background-color: white;
+    display: none;
+}
+
+#embed_container_left {
+    width: 71.1vh;
+    float: left;
+    overflow-y: hidden;
+}
+
+#embed_container_right {
+    width: 30.4vh;
+    float: left;
+}
+
+#embed_container_right_header {
+    height: 10%;
+    padding: 0.5em;
+}
+
+#embed_container_mobile_header {
+    height: 10%;
+    padding: 0.5em;
+    display: none;
+}
+
+img.embed_icon {
+    height: 100%;
+    float: right;
+}
+
+#embed_container_right_content {
+    padding: 0.5em;
+    padding-right: 1em;
+    word-wrap: break-word;
+}
+
+#embed_sk {
+    display: none;
+    font-size: 1vw;
+}
+
+#embed_en {
+    display: none;
+    font-size: 1vw;
+}
+
+#embed_code {
+     font-size: 0.8vw;
+}
+
+#embed_sk_close {
+    display: none;
+    font-size: 5vw;
+}
+
+#embed_en_close {
+    display: none;
+    font-size: 5vw;
 }

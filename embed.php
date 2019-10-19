@@ -76,6 +76,10 @@
     <meta name="msapplication-config" content="<?php bloginfo('template_directory'); ?>/assets/images/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- VIDEOJS (using a nuevo version of video-js.css )-->
+    <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
+    <link href="<?php bloginfo('template_directory'); ?>/assets/css/video-js.css" rel="stylesheet">
+
     <!-- MOBILE & DESKTOP STYLES -->
     <link rel="stylesheet" media='screen and (min-width: 300px) and (max-width: 340px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css"/>
     <link rel="stylesheet" media='screen and (min-width: 341px) and (max-width: 365px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css"/>
@@ -84,10 +88,6 @@
     <link rel="stylesheet" media='screen and (min-width: 1001px) and (max-width: 1300px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
     <link rel="stylesheet" media='screen and (min-width: 1301px) and (max-width: 1599px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
     <link rel="stylesheet" media='screen and (min-width: 1600px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
-
-    <!-- VIDEOJS (using a nuevo version of video-js.css )-->
-    <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
-    <link href="<?php bloginfo('template_directory'); ?>/assets/css/video-js.css" rel="stylesheet">
 
     <!-- MATOMO
     <script type="text/javascript">
@@ -108,7 +108,7 @@
     <!-- TODO: make poster small everywhere -->
     <!-- TODO: how will poster replacing work ? -->
     <div id="landing_container" style="width: 100%; margin: 0; padding: 0;">
-        <video id="landing_video" class="initial video-js video-js-embed vjs-16-9" controls poster="<?php echo $poster; ?>" onplay="startlanding()">
+        <video id="landing_video" class="video-js-embed initial video-js vjs-16-9" controls poster="<?php echo $poster; ?>" onplay="startlanding()">
         <source src="<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
         <source src="<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
         <source src="<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>

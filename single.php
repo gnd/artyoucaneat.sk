@@ -69,6 +69,7 @@ $translation_links = process_video_links($translation);
  // Process video data
  $poster = types_render_field("poster-image", array("output" => "raw"));
  $video_link = substr(types_render_field("video-mp4", array("output" => "raw")),0,-4);
+ $video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
  ?>
 
@@ -85,6 +86,7 @@ $translation_links = process_video_links($translation);
  <body>
 
 <?php include "nav.php"; ?>
+<?php include "embed_popup.php"; ?>
 
 <!-- POST DATA START -->
 <div id="main_container">
@@ -124,7 +126,16 @@ $translation_links = process_video_links($translation);
                 <span class="video_info">strih: <?php echo "\n" . $editing_links; ?></span>
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
                 <span class="video_info outstanding">preklad: <?php echo "\n" . $translation_links; ?></span>
-                <span class="video_info">publikované: <?php echo $date; ?></span>
+                <span class="video_info outstanding">publikované: <?php echo $date; ?></span>
+                <span class="video_info">
+                    <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
+                        Zdieľať
+                    </a>
+                    <br/>
+                    <a class="video_info" style="text-decoration: underline;" onclick="show_embed();"  href="javascript: void(0)">
+                        Embed
+                    </a>
+                </span>
             </div>
         </div>
         <div id="video_info_container_en">
@@ -137,7 +148,16 @@ $translation_links = process_video_links($translation);
                 <span class="video_info">editing: <?php echo "\n" . $editing_links; ?></span>
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
                 <span class="video_info outstanding">translation: <?php echo "\n" . $curator_links; ?></span>
-                <span class="video_info">published: <?php echo $date; ?></span>
+                <span class="video_info outstanding">published: <?php echo $date; ?></span>
+                <span class="video_info">
+                    <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
+                        Share
+                    </a>
+                    <br/>
+                    <a class="video_info" style="text-decoration: underline;" onclick="show_embed();"  href="javascript: void(0)">
+                        Embed
+                    </a>
+                </span>
             </div>
         </div>
 
@@ -161,8 +181,17 @@ $translation_links = process_video_links($translation);
                 <span class="video_info">zvuk: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
                 <span class="video_info">strih: <?php echo "\n\t" . $editing_links . "\t"; ?></span>
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
-                <span class="video_info">preklad: <?php echo "\n\t" . $translation_links . "\t"; ?></span>
-                <span class="video_info">publikované: <?php echo $date; ?></span>
+                <span class="video_info outstanding">preklad: <?php echo "\n\t" . $translation_links . "\t"; ?></span>
+                <span class="video_info outstanding">publikované: <?php echo $date; ?></span>
+                <span class="video_info">
+                    <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
+                        Zdieľať
+                    </a>
+                    &nbsp;
+                    <a class="video_info" style="text-decoration: underline;" onclick="show_embed();"  href="javascript: void(0)">
+                        Embed
+                    </a>
+                </span>
             </div>
             <div id="video_info_container_mobile_en">
                 <span class="video_info">category: <?php echo "\n\t" . $category_en . "\t"; ?></span>
@@ -172,8 +201,17 @@ $translation_links = process_video_links($translation);
                 <span class="video_info">sound: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
                 <span class="video_info">editing: <?php echo "\n\t" . $editing_links . "\t"; ?></span>
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
-                <span class="video_info">translation: <?php echo "\n\t" . $curator_links . "\t"; ?></span>
-                <span class="video_info">published: <?php echo $date; ?></span>
+                <span class="video_info outstanding">translation: <?php echo "\n\t" . $curator_links . "\t"; ?></span>
+                <span class="video_info outstanding">published: <?php echo $date; ?></span>
+                <span class="video_info">
+                    <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
+                        Share
+                    </a>
+                    &nbsp;
+                    <a class="video_info" style="text-decoration: underline;" onclick="show_embed();"  href="javascript: void(0)">
+                        Embed
+                    </a>
+                </span>
             </div>
 
             <div id="title_container_sk" class="single_video">
