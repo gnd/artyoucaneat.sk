@@ -20,7 +20,7 @@
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $link_txt; ?>";
-    var video_share_embed ="<?php echo $video_share_embed; ?>";
+    var video_share_embed ='<?php echo $video_share_embed; ?>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $current_title_sk; ?>";
 
@@ -61,6 +61,6 @@
     // nastav js podla typu klienta
     detect_client();
 
-    // jazykova persistencia
+    // jazykova perzistencia
     window.onload = allyoucan_setup("<?php echo $_SESSION["lang"]; ?>");
 </script>

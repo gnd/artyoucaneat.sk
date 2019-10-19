@@ -88,6 +88,7 @@
     <link rel="stylesheet" media='screen and (min-width: 1001px) and (max-width: 1300px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
     <link rel="stylesheet" media='screen and (min-width: 1301px) and (max-width: 1599px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
     <link rel="stylesheet" media='screen and (min-width: 1600px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
+    <style>#landing_video { border-radius: 0 !important; }</style> <!-- Embed popup fix -->
 
     <!-- MATOMO
     <script type="text/javascript">

@@ -568,26 +568,15 @@ function cat_unroll(id) {
 
 // Show video embed popup
 function show_embed() {
+    console.log('active_lang');
     document.getElementById("embed_container").style.display = "block";
     document.getElementById("embed_container_bg").style.display = "block";
-    if (site_lang == 'sk') {
-        document.getElementById("embed_sk").style.display = "block";
-        document.getElementById("embed_en").style.display = "none";
-    }
-    if (site_lang == 'en') {
-        document.getElementById("embed_sk").style.display = "none";
-        document.getElementById("embed_en").style.display = "block";
-    }
+    document.getElementById('embed_' + active_lang).style.display = "block";
+    document.getElementById('embed_' + inactive_lang).style.display = "none";
     // Add a Close option for mobile
     if (device_type == 'phone') {
-        if (site_lang == 'sk') {
-            document.getElementById("embed_sk_close").style.display = "block";
-            document.getElementById("embed_en_close").style.display = "none";
-        }
-        if (site_lang == 'en') {
-            document.getElementById("embed_sk_close").style.display = "none";
-            document.getElementById("embed_en_close").style.display = "block";
-        }
+        document.getElementById("embed_" + active_lang + "_close").style.display = "block";
+        document.getElementById("embed_" + inactive_lang + "_close").style.display = "none";
     }
 };
 

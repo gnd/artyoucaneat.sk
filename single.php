@@ -69,7 +69,7 @@ $translation_links = process_video_links($translation);
  // Process video data
  $poster = types_render_field("poster-image", array("output" => "raw"));
  $video_link = substr(types_render_field("video-mp4", array("output" => "raw")),0,-4);
- $video_share_embed = '<iframe width="100%" height="100%" src="https://paleo.artyoucaneat.sk/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
+ $video_share_embed = '<iframe width="100%" height="100%" src="http://paleo.artyoucaneat.local/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
  ?>
 
