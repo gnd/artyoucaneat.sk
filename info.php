@@ -50,7 +50,6 @@
     <div id="center_container" class="single_video">
         <div id="content_container" class="cf single_video">
             <img id="info_logo" src="<?php bloginfo('template_directory'); ?>/assets/images/logo/3_big.jpg" />
-
             <div id="ordinary_text_info_sk">
                 <p>
                     Art You Can Eat je nová platforma, ktorá chce formou videa mapovať a informovať o slovenskej výtvarnej scéne,
@@ -77,8 +76,6 @@
                     <img id="logo_fpu_sk" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_fpu_sk.svg" />
                 </div>
             </div>
-
-
             <div id="ordinary_text_info_en">
                 <p>
                     Art You Can Eat is a new platform which aims to map and inform about the Slovak contemporary art scene,
