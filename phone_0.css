@@ -779,6 +779,9 @@ button.vjs-big-play-button {
     left: 42.5% !important;
 }
 
+.vjs-logo {
+    z-index: 5 !important;
+}
 /********************************************************
                                     videos - embed poppu
 ********************************************************/
