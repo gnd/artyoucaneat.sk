@@ -778,6 +778,30 @@ a.text_link {
     display: none;
 }
 
+#logo_bsk_sk {
+    float: left;
+    margin-top: 1.5vw;
+}
+
+#logo_fpu_sk {
+    float:left;
+    height: 15vw;
+    margin-top: -4vw;
+    margin-bottom: -5vw;
+}
+
+#logo_bsk_en {
+    float: left;
+    margin-top: 1.5vw;
+}
+
+#logo_fpu_en {
+    float:left;
+    height: 4.8vw;
+    margin-top: 1.3vw;
+    margin-left: 1.4vw;
+}
+
 #footer.info {
     z-index: 2;
     position: absolute;

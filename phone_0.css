@@ -737,8 +737,27 @@ a.video_info:hover {
     font-size: 3em;
 }
 
-img.info_logo {
-    width: 40%;
+#logo_bsk_sk {
+    margin-top: 1.5vw;
+    margin-left: 1vw;
+}
+
+#logo_fpu_sk {
+    height: 50vw;
+    margin-top: -8vw;
+    margin-bottom: -5vw;
+    margin-left: -8vw;
+}
+
+#logo_bsk_en {
+    margin-top: 1.5vw;
+    margin-left: 1vw;
+}
+
+#logo_fpu_en {
+    height: 16vw;
+    margin-top: 8vw;
+    margin-left: -4vw;
 }
 
 #footer.info {

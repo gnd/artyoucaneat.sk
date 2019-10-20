@@ -71,8 +71,10 @@
                 </span><br/>
 
                 <p style="margin-bottom: 0.5em;"><b>Podporili nás</b></p>
+                <p>Z verejných zdrojov podporil Fond na podporu umenia.</p>
                 <div style="width: 100%;">
-                    <img src="<?php bloginfo('template_directory'); ?>/assets/images/logo_bsk.jpg" class="info_logo" />
+                    <img id="logo_bsk_sk" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_bsk.jpg" />
+                    <img id="logo_fpu_sk" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_fpu_sk.svg" />
                 </div>
             </div>
 
@@ -97,8 +99,10 @@
                 </span><br/>
 
                 <p style="margin-bottom: 0.5em;"><b>We are supported by</b></p>
+                <p>Supported using public funding by Slovak Arts Council</p>
                 <div style="width: 100%;">
-                    <img src="assets/images/logo_bsk.jpg" class="info_logo" />
+                    <img id="logo_bsk_en" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_bsk.jpg" />
+                    <img id="logo_fpu_en" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_fpu_en.jpg" />
                 </div>
             </div>
         </div>
