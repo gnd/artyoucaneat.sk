@@ -35,7 +35,7 @@
                     $shown[] = $top_cat->cat_ID;
 
                     // Get and output all children
-                    $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID));
+                    $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID, 'hide_empty' => false));
                     foreach ($child_categories as $child_cat) {
                         echo "\t\t\t" . '<a class="menu_entry_sk menu_entry childof_'.$top_cat->cat_ID.'_sk" id="' . $child_cat->cat_ID . '_sk" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->name . '</a>' . "\n";
                         echo "\t\t\t" . '<a class="menu_entry_en menu_entry childof_'.$top_cat->cat_ID.'_en" id="' . $child_cat->cat_ID . '_en" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->description . '</a>' . "\n";
@@ -69,6 +69,8 @@
  </div>
 
  <!-- nav panel mobile -->
+ <!-- TODO deal with new top categories -->
+ <!-- TODO deal with new child categories -->
  <div id="mobile_nav_container">
      <div id="mobile_icon_container">
          <img id="mobile_menu_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/menu_icon_bk.png" onclick="menuroll();">
@@ -106,7 +108,7 @@
      foreach ($top_categories as $top_cat) {
          if (term_has_children($top_cat->cat_ID)) {
              echo '<div class="mobile_top_cat_menu" id="mobile_menu_' . $top_cat->cat_ID . '">';
-             $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID));
+             $child_categories = get_categories(array('orderby' => 'name','parent'  => $top_cat->cat_ID, 'hide_empty' => false));
              foreach ($child_categories as $child_cat) {
                  echo "\t\t\t" . '<a class="mobile_menu_entry_sk mobile_menu_entry mobile_childof_'.$top_cat->cat_ID.'_sk" id="mobile_' . $child_cat->cat_ID . '_sk" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->name . '</a>' . "\n";
                  echo "\t\t\t" . '<a class="mobile_menu_entry_en mobile_menu_entry mobile_childof_'.$top_cat->cat_ID.'_en" id="mobile_' . $child_cat->cat_ID . '_en" href="' . get_category_link($child_cat->cat_ID) . '">' . $child_cat->description . '</a>' . "\n";
