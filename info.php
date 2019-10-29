@@ -109,7 +109,16 @@
 <?php include "footer.php"; ?>
 
 <!-- ADDITIONAL SCRIPTS -->
-<?php include "footer-single-scripts.php"; ?>
+<script>
+    // set site location as single_video
+    site_location = 'single';
+
+    // nastav js podla typu klienta
+    detect_client();
+
+    // jazykova perzistencia
+    window.onload = switch_lang('<?php echo $_SESSION["lang"]; ?>', false, 0);
+</script>
 
 </body>
 </html>
