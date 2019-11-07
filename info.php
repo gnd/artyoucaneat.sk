@@ -60,8 +60,12 @@
                 <br/><p style="margin-bottom: 0.5em;"><b>Redakcia</b></p>
                 <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
                     Peter Barényi (peter &#9965; artyoucaneat.sk)<br/>
-                    Kata Mach (kata &#9965; artyoucaneat.sk)</br/>
-                    Tomáš Storkie Kmeť (tomas &#9965; artyoucaneat.sk)
+                    <!--- RIP Kata Mach, nezabudame --->
+                    Tomáš Storkie Kmeť (tomas &#9965; artyoucaneat.sk)<br/>
+                    Nikolas Bernáth<br/>
+                    Matúš Pisarčík<br/>
+                    Peter Bednár<br/>
+                    Peter Važan
                 </span><br/>
 
                 <p style="margin-bottom: 0.5em;"><b>Kontakt</b></p>
@@ -86,8 +90,12 @@
                 <br/><p style="margin-bottom: 0.5em;"><b>Staff</b></p>
                 <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
                     Peter Barényi (peter &#9965; artyoucaneat.sk)<br/>
-                    Kata Mach (kata &#9965; artyoucaneat.sk)</br/>
-                    Tomáš Storkie Kmeť (tomas &#9965; artyoucaneat.sk)
+                    <!--- RIP Kata Mach, nezabudame --->
+                    Tomáš Storkie Kmeť (tomas &#9965; artyoucaneat.sk)<br/>
+                    Nikolas Bernáth<br/>
+                    Matúš Pisarčík<br/>
+                    Peter Bednár<br/>
+                    Peter Važan
                 </span><br/>
 
                 <p style="margin-bottom: 0.5em;"><b>Contact</b></p>
