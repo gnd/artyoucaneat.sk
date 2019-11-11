@@ -26,7 +26,7 @@ do
 	echo $RAWNAME".mp4" >> $WEB_ROOT/wp-content/uploads/converted
 	echo $RAWNAME".ogg" >> $WEB_ROOT/wp-content/uploads/converted
 	cd $DIR
-	$WEB_ROOT/wp-content/uploads/convert.sh $FILE
+	$WEB_ROOT/wp-content/themes/allyoucan/convert.sh $FILE
 done
 
 # Report conversion
