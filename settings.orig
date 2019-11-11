@@ -1,0 +1,10 @@
+### Directory settings
+WEB_ROOT=''                                           # root dir of the web
+
+### Sendemail settings
+SERVER=""
+PORT=""
+USER=""
+PASS=""
+FROM=""
+TO=""
