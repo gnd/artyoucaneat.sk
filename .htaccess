@@ -1,0 +1,5 @@
+# Deny access to the scripts and to settings
+<Files ~ "(.sh|.orig|settings)">
+    Order allow,deny
+    Deny from all
+</Files>
