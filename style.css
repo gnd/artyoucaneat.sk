@@ -261,6 +261,14 @@ a.menu_entry:hover {
     cursor: hand;
 }
 
+#fb_link {
+    font-size: 0.6em;
+    visibility: hidden;
+    display: inline-block;
+    font-weight: normal;
+    cursor: hand;
+}
+
 #right_container {
     font-size: 1.5vw;
     width: 9%;
@@ -721,6 +729,10 @@ a.video_info:hover {
 #content_container.single_video {
     width: 80%;
     margin-bottom: 5%;
+}
+
+p {
+    margin-block-start: 0 !important;
 }
 
 #video_info_text_sk {

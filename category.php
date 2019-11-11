@@ -60,14 +60,15 @@ if ($_SESSION["lang"] == "sk") {
                     while ( $query->have_posts() ) {
                         $query->the_post();
                         $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                        $poster = types_render_field("poster-image", array("class"=>"index_video_thumb", "alt" => $title, "width" => "400", "proportional" => "true" ));
+                        $poster = get_post_meta(get_the_ID(), 'poster');
+                        $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], '400px' )[0];  //FIXME - 400px custom size
                         $category_link = get_category_link(get_the_category()[0]->cat_ID);
                         $category_name_sk = get_the_category()[0]->name;
                         $category_name_en = get_the_category()[0]->description;
                         $title_sk = get_the_title();
-                        $title_en = types_render_field("en-title",  array("output" => "raw"));
-                        $artists = types_render_field("artists", array());
-                        show_category_post($lid, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                        $title_en = get_post_meta(get_the_ID(), 'title_en', true);
+                        $artists = get_post_meta(get_the_ID(), 'artists');
+                        show_category_post($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
                         $lid += 1;
                     }
                     /* Restore original Post Data */

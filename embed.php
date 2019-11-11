@@ -17,12 +17,16 @@
  $current_id = filter_var($_REQUEST["id"], FILTER_SANITIZE_NUMBER_INT);
  $post = get_post($current_id);
  $current_title_sk = $post->post_title;
- $current_title_en = types_render_field("en-title",  array("output" => "raw"));
+ $current_title_en = get_post_meta($current_id, 'title_en', true);
 
  // Process video data
- $poster = types_render_field("poster-image", array("output" => "raw"));
- $video_link = substr(types_render_field("video-mp4", array("output" => "raw")),0,-4);
- $slide_image = site_url() . '/assets/video/' . $video_link_txt . '.jpg';
+ $poster = get_post_meta($current_id, 'poster');
+ $poster_small = wp_get_attachment_image( $poster[0]["ID"], 'medium' );
+ $poster_big = $poster[0]["guid"];
+ $slide_image = site_url() . '/assets/video/' . $video_link_txt . '.jpg'; //FIXME
+ $matches = array();
+ preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
+ $video_link = $matches[1];
  $video_share_link = get_permalink($current_id);
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
@@ -40,14 +44,15 @@
          */
          if ($current_id != get_the_ID() && $lid < 7) {
              $link = wp_make_link_relative(get_permalink($query->theID(), false));
-             $poster_nuevo = types_render_field("poster-image", array("output" => "raw"));
+             $poster = get_post_meta(get_the_ID(), 'poster');
+             $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'thumb' )[0];
              $title_sk = get_the_title();
-             $title_en = types_render_field("en-title",  array("output" => "raw"));
+             $title_en = get_post_meta(get_the_ID(), 'title_en', true);
 
              // prepare related videos for Nuevo
              // TODO need to know video duration smh
-             $related_videos_sk[] = array('thumb' => $poster_nuevo, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
-             $related_videos_en[] = array('thumb' => $poster_nuevo, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
+             $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
+             $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
              $lid += 1;
          }
      }
@@ -109,12 +114,12 @@
     <!-- TODO: make poster small everywhere -->
     <!-- TODO: how will poster replacing work ? -->
     <div id="landing_container" style="width: 100%; margin: 0; padding: 0;">
-        <video id="landing_video" class="video-js-embed initial video-js vjs-16-9" controls poster="<?php echo $poster; ?>" onplay="startlanding()">
-        <source src="<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
-        <source src="<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
-        <source src="<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
-        <source src="<?php echo $video_link; ?>_240p.mp4" type="video/mp4" res="240" label="240p "/>
-        <source src="<?php echo $video_link; ?>.ogg" type="video/ogg"/>
+        <video id="landing_video" class="video-js-embed initial video-js vjs-16-9" controls poster="<?php echo $poster_big; ?>" onplay="startlanding()">
+        <source src="/<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
+        <source src="/<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
+        <source src="/<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
+        <source src="/<?php echo $video_link; ?>_240p.mp4" type="video/mp4" res="240" label="240p "/>
+        <source src="/<?php echo $video_link; ?>.ogg" type="video/ogg"/>
         <p class="vjs-no-js">
             To view this video please enable JavaScript, and consider upgrading to a
             web browser that supports HTML5 video.
@@ -150,9 +155,9 @@
         shareTitle: video_name,
         shareUrl: video_share_link,
         shareEmbed: video_share_embed,
-        logo: '//paleo.artyoucaneat.local/wp-content/themes/allyoucan/assets/images/logo_transparent_50.png',
-        logourl: '//paleo.artyoucaneat.local',
-        logoposition: 'RT',
+        logo: '//artyoucaneat.sk/assets/images/logo_transparent_50.png',
+        logourl: '//artyoucaneat.sk',
+        logoposition: 'RT'
     });
 </script>
 </body>

@@ -44,8 +44,8 @@
         shareTitle: video_name,
         shareUrl: video_link,
         shareEmbed: video_share_embed,
-        logo: '//paleo.artyoucaneat.sk/assets/images/logo_transparent_50.png',
-        logourl: '//paleo.artyoucaneat.sk',
+        logo: '//artyoucaneat.sk/assets/images/logo_transparent_50.png',
+        logourl: '//artyoucaneat.sk',
         logoposition: 'RT'
     });
 

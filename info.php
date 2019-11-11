@@ -21,7 +21,7 @@
  $date = date("d.m.Y",strtotime($post->post_date));
  $current_title_sk = $post->post_title;
  $content_sk = $post->post_content;
- $current_title_en = types_render_field("en-title",  array("output" => "raw"));
+ $current_title_en = get_post_meta(get_the_ID(), 'title_en', true);
 
  // Proces page title
  if ($_SESSION["lang"] == "sk") {

@@ -18,14 +18,14 @@
  $post = get_post();
  $current_id = $post->ID;
  $date = date("d.m.Y",strtotime($post->post_date));
- $artists = types_render_field("artists", array());
+ $artists = get_post_meta($current_id, 'artists');
  $category_link = get_category_link(get_the_category()[0]->cat_ID);
  $category_name_sk = get_the_category()[0]->name;
  $category_name_en = get_the_category()[0]->description;
  $current_title_sk = $post->post_title;
  $content_sk = $post->post_content;
- $current_title_en = types_render_field("en-title",  array("output" => "raw"));
- $content_en = types_render_field("en-text");
+ $current_title_en = get_post_meta($current_id, 'title_en', true);
+ $content_en = get_post_meta($current_id, 'content_en', true);
 
  // Proces page title
  if ($_SESSION["lang"] == "sk") {
@@ -35,40 +35,44 @@
  }
 
  // Process $artists
- $tmp = explode(",", $artists);
- $tmp_links = array();
- foreach ($tmp as $entry) {
-     $tmp_links[] = '<a class="video_artist_name" href="#">' . trim($entry) . '</a>';
+ foreach ($artists as $artist) {
+     // activate this once we have a template for persons
+     //$links[] = '<a class="video_artist_name" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
+     $links[] = '<a class="video_artist_name" href="#">' . $artist["name"] . '</a>';
  }
- $artist_links = implode(", ", $tmp_links);
+ $artist_links = implode(", ", $links);
 
-// Process content
+// Process content - add a CSS class to <a href
 $content_sk = str_replace("<a href=", "<a class='text_link' href=", $content_sk);
 $content_en = str_replace("<a href=", "<a class='text_link' href=", $content_en);
 
-// Process the post's field group
-$curators = types_render_field("curators",  array("output" => "raw"));
-$curator_links = process_video_links($curators);
-$performers = types_render_field("performers",  array("output" => "raw"));
-$performer_links = process_video_links($performers);
-$camera = types_render_field("camera",  array("output" => "raw"));
-$camera_links = process_video_links($camera);
-$sound = types_render_field("sound",  array("output" => "raw"));
-$sound_links = process_video_links($sound);
-$editing = types_render_field("editing",  array("output" => "raw"));
-$editing_links = process_video_links($editing);
-$interviewer = types_render_field("interviewer",  array("output" => "raw"));
-$interviewer_links = process_video_links($interviewer);
-$translation = types_render_field("translation",  array("output" => "raw"));
-$translation_links = process_video_links($translation);
+// Process the post's additional fields
+$curators = get_post_meta($current_id, 'curators');
+$curator_links = process_persons($curators);
+$performers = get_post_meta($current_id, 'performers');
+$performer_links = process_persons($performers);
+$camera = get_post_meta($current_id, 'camera');
+$camera_links = process_persons($camera);
+$sound = get_post_meta($current_id, 'sound');
+$sound_links = process_persons($sound);
+$editing = get_post_meta($current_id, 'edit');
+$editing_links = process_persons($editing);
+$interviewer = get_post_meta($current_id, 'interviewer');
+$interviewer_links = process_persons($interviewer);
+$translation = get_post_meta($current_id, 'translation');
+$translation_links = process_persons($translation);
 
  // Proces category links
  $category_sk = "\t\t\t\t" . '<a class="video_info" href="' . $category_link . '">' . $category_name_sk . '</a>' . "\n\t\t\t";
  $category_en = "\t\t\t\t" . '<a class="video_info" href="' . $category_link . '">' . $category_name_en . '</a>' . "\n\t\t\t";
 
  // Process video data
- $poster = types_render_field("poster-image", array("output" => "raw"));
- $video_link = substr(types_render_field("video-mp4", array("output" => "raw")),0,-4);
+ $poster = get_post_meta($current_id, 'poster');
+ $poster_small = wp_get_attachment_image( $poster[0]["ID"], 'medium' );
+ $poster_big = $poster[0]["guid"];
+ $matches = array();
+ preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
+ $video_link = $matches[1];
  $video_share_embed = '<iframe width="100%" height="100%" src="http://paleo.artyoucaneat.local/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
  ?>
@@ -77,9 +81,9 @@ $translation_links = process_video_links($translation);
  <head>
      <!-- START HEADER -->
      <?php
-         $og_desc = types_render_field("short-desc",  array("output" => "raw"));
+         $og_desc = get_post_meta($current_id, 'short_statement_sk');
          $og_url = get_permalink();
-         $og_poster = $poster;
+         $og_poster = $poster_big;
          require_once 'header.php';
      ?>
  </head>
@@ -103,12 +107,12 @@ $translation_links = process_video_links($translation);
         </div>
 
         <div id="landing_container" class="single_video">
-            <video id="landing_video" class="video-js vjs-16-9 vjs-default-skin" controls poster="<?php echo $poster; ?>">
-                <source src="<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
-                <source src="<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
-                <source src="<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
-                <source src="<?php echo $video_link; ?>_240p.mp4" type="video/mp4" res="240" label="240p "/>
-                <source src="<?php echo $video_link; ?>.ogg" type="video/ogg"/>
+            <video id="landing_video" class="video-js vjs-16-9 vjs-default-skin" controls poster="<?php echo $poster_big; ?>">
+                <source src="/<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
+                <source src="/<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
+                <source src="/<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
+                <source src="/<?php echo $video_link; ?>_240p.mp4" type="video/mp4" res="240" label="240p "/>
+                <source src="/<?php echo $video_link; ?>.ogg" type="video/ogg"/>
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that supports HTML5 video.
@@ -119,8 +123,28 @@ $translation_links = process_video_links($translation);
         <div id="video_info_container_sk">
             <div class="video_info_container_data">
                 <span class="video_info">kategória: <?php echo "\n" . $category_sk; ?></span>
-                <span class="video_info">kurátori: <?php echo "\n" . $curator_links; ?></span>
-                <span class="video_info">účinkuje: <?php echo "\n" . $performer_links; ?></span>
+                <span class="video_info">
+                    <?php
+                        if ($curators[0]) {
+                            if (sizeof($curators) > 1) {
+                                echo "kurátori: \n" . $curator_links;
+                            } else {
+                                echo "kurátor(ka): \n" . $curator_links;
+                            }
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
+                        if ($performers[0]) {
+                            if (sizeof($performers) > 1) {
+                                echo "účinkujú: \n" . $performer_links;
+                            } else {
+                                echo "účinkuje: \n" . $performer_links;
+                            }
+                        }
+                    ?>
+                </span>
                 <span class="video_info">kamera: <?php echo "\n" . $camera_links; ?></span>
                 <span class="video_info">zvuk: <?php echo "\n" . $sound_links; ?></span>
                 <span class="video_info">strih: <?php echo "\n" . $editing_links; ?></span>
@@ -141,7 +165,17 @@ $translation_links = process_video_links($translation);
         <div id="video_info_container_en">
             <div class="video_info_container_data">
                 <span class="video_info">category: <?php echo "\n" . $category_en; ?></span>
-                <span class="video_info">curators: <?php echo "\n" . $curator_links; ?></span>
+                <span class="video_info">
+                    <?php
+                        if ($curators[0]) {
+                            if (sizeof($curators) > 1) {
+                                echo "curators: \n" . $curator_links;
+                            } else {
+                                echo "curator: \n" . $curator_links;
+                            }
+                        }
+                    ?>
+                </span>
                 <span class="video_info">with: <?php echo "\n" . $performer_links; ?></span>
                 <span class="video_info">camera: <?php echo "\n" . $camera_links; ?></span>
                 <span class="video_info">sound: <?php echo "\n" . $sound_links; ?></span>
@@ -163,9 +197,9 @@ $translation_links = process_video_links($translation);
 
         <div id="content_container" class="cf single_video">
             <div id="video_info_text_sk">
-                <p class="video_info">
+                <!--<p class="video_info"> -->
                     <?php echo $content_sk; ?>
-                </p>
+                <!--</p>-->
             </div>
             <div id="video_info_text_en">
                 <p class="video_info">
@@ -175,8 +209,28 @@ $translation_links = process_video_links($translation);
 
             <div id="video_info_container_mobile_sk">
                 <span class="video_info">kategória: <?php echo "\n\t" . $category_sk . "\t"; ?></span>
-                <span class="video_info">kurátori: <?php echo "\n\t" . $curator_links . "\t"; ?></span>
-                <span class="video_info">účinkuje: <?php echo "\n\t" . $performer_links . "\t"; ?></span>
+                <span class="video_info">
+                    <?php
+                        if ($curators[0]) {
+                            if (sizeof($curators) > 1) {
+                                echo "kurátori: \n" . $curator_links;
+                            } else {
+                                echo "kurátor(ka): \n" . $curator_links;
+                            }
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
+                        if ($performers[0]) {
+                            if (sizeof($performers) > 1) {
+                                echo "účinkujú: \n" . $performer_links;
+                            } else {
+                                echo "účinkuje: \n" . $performer_links;
+                            }
+                        }
+                    ?>
+                </span>
                 <span class="video_info">kamera: <?php echo "\n\t" . $camera_links . "\t"; ?></span>
                 <span class="video_info">zvuk: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
                 <span class="video_info">strih: <?php echo "\n\t" . $editing_links . "\t"; ?></span>
@@ -195,7 +249,17 @@ $translation_links = process_video_links($translation);
             </div>
             <div id="video_info_container_mobile_en">
                 <span class="video_info">category: <?php echo "\n\t" . $category_en . "\t"; ?></span>
-                <span class="video_info">curators: <?php echo "\n\t" . $curator_links . "\t"; ?></span>
+                <span class="video_info">
+                    <?php
+                        if ($curators[0]) {
+                            if (sizeof($curators) > 1) {
+                                echo "curators: \n" . $curator_links;
+                            } else {
+                                echo "curator: \n" . $curator_links;
+                            }
+                        }
+                    ?>
+                </span>
                 <span class="video_info">with: <?php echo "\n\t" . $performer_links . "\t"; ?></span>
                 <span class="video_info">camera: <?php echo "\n\t" . $camera_links . "\t"; ?></span>
                 <span class="video_info">sound: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
@@ -239,22 +303,22 @@ $translation_links = process_video_links($translation);
                     */
                     if ($current_id != get_the_ID() && $lid < 7) {
                         $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                        $poster = types_render_field("poster-image", array("class"=>"index_video_thumb", "alt" => $title, "width" => "400", "proportional" => "true" ));
-                        $poster_nuevo = types_render_field("poster-image", array("output" => "raw"));
+                        $poster = get_post_meta(get_the_ID(), 'poster');
+                        $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
                         $category_link = get_category_link(get_the_category()[0]->cat_ID);
                         $category_name_sk = get_the_category()[0]->name;
                         $category_name_en = get_the_category()[0]->description;
                         $title_sk = get_the_title();
-                        $title_en = types_render_field("en-title",  array("output" => "raw"));
-                        $artists = types_render_field("artists", array());
+                        $title_en = get_post_meta(get_the_ID(), 'title_en', true);
+                        $artists = get_post_meta(get_the_ID(), 'artists');
 
                         // show past video
-                        show_single_post($lid, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                        show_single_post($lid, $link, $poster_small, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                         // prepare related videos for Nuevo
                         // TODO need to know video duration smh
-                        $related_videos_sk[] = array('thumb' => $poster_nuevo, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
-                        $related_videos_en[] = array('thumb' => $poster_nuevo, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
+                        $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
+                        $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
                         $lid += 1;
                     }
                 }
