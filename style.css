@@ -301,8 +301,11 @@ a.menu_entry:hover {
 
 /*video-zmena* display added */
 #content_container {
-    //display: inline-block;
-    min-height: 67%;
+    min-height: 90%;
+}
+
+#content_container.index {
+    margin-bottom: 15%;
 }
 
 /*video-zmena* display added */
@@ -560,9 +563,7 @@ a.index_link:hover {
 #footer_container {
     position: relative;
     width: 100%;
-//    height: 20%;
     z-index: 666;
-    //background-color: red;
 }
 
 #footer {
@@ -571,7 +572,7 @@ a.index_link:hover {
     bottom: 0;
     width: 94%;
     font-size: 0.8vw;
-    padding: 0%;
+    padding-bottom: 1%;
 }
 
 #footer.index {

@@ -73,7 +73,7 @@ require_once 'lang.php';
     <!-- START MAIN CONTENT -->
     <div id="main_container">
         <div id="center_container">
-            <div id="content_container" class="cf">
+            <div id="content_container" class="cf index">
                 <div id="title_container_sk">
                     <span id="index_title_sk">NOVÉ VIDEÁ</span>
                 </div>
@@ -115,12 +115,9 @@ require_once 'lang.php';
                     }
                 ?>
              </div>
-             <div id="logo_big">
-                 <img id="img_logo_big" src="<?php bloginfo('template_directory'); ?>/assets/images/logo_big.jpg">
-             </div>
 
     <!-- START FOOTER -->
-    <?php require_once 'footer-index.php'; ?>
+    <?php require_once 'footer.php'; ?>
 
     <!-- START ADDITIONAL JS SCRIPTS -->
     <?php require_once 'footer-index-scripts.php'; ?>
