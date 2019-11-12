@@ -43,7 +43,7 @@ require_once 'lang.php';
             $query->the_post();
             if ($i == $rnd) {
                 $poster = get_post_meta(get_the_ID(), 'poster');
-                $poster_big = $poster[0]["guid"];
+                $poster_big = str_replace("http://", "https://", $poster[0]["guid"]);
                 $matches = array();
                 preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta(get_the_ID(), 'video')[0]["ID"]), $matches);
                 $video_link_txt = $matches[1];
