@@ -12,7 +12,8 @@ usage() {
 }
 
 # Define globals
-source settings
+SCRIPT_ROOT=`dirname "$0"`
+source $SCRIPT_ROOT/settings
 
 # Find and convert videos
 for k in `find $WEB_ROOT/wp-content/uploads/20* -type f -name "*.mp4" | grep -vFf $WEB_ROOT/wp-content/uploads/converted`
