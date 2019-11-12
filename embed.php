@@ -22,7 +22,7 @@
  // Process video data
  $poster = get_post_meta($current_id, 'poster');
  $poster_small = wp_get_attachment_image( $poster[0]["ID"], 'medium' );
- $poster_big = $poster[0]["guid"];
+ $poster_big = wp_get_attachment_image( $poster[0]["ID"], 'full' );
  $slide_image = site_url() . '/assets/video/' . $video_link_txt . '.jpg'; //FIXME
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
