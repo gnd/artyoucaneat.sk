@@ -37,7 +37,9 @@ function term_has_children( $term_id = '', $taxonomy = 'category' )
 */
 function process_persons($persons) {
     foreach ($persons as $person) {
-        $links[] = '<a class="video_info" href="/' . $person["slug"] . '">' . $person["name"] . '</a>';
+        // activate this once persons pages up
+        //$links[] = '<a class="video_info" href="/' . $person["slug"] . '">' . $person["name"] . '</a>';
+        $links[] = '<a class="video_info" href="#">' . $person["name"] . '</a>';
     }
     return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
 }
