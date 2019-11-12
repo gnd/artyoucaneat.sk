@@ -32,7 +32,7 @@ require_once 'lang.php';
     $args = array(
         'category_name' => 'video',
     	'orderby' => 'date',
-    	'order'   => 'ASC',
+    	'order'   => 'DESC',
         'posts_per_page' => -1,
     );
     $query = new WP_Query($args);
