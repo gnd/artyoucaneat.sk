@@ -68,8 +68,8 @@ $translation_links = process_persons($translation);
 
  // Process video data
  $poster = get_post_meta($current_id, 'poster');
- $poster_small = wp_get_attachment_image( $poster[0]["ID"], 'medium' );
- $poster_big = str_replace("http://", "https://", $poster[0]["guid"]);
+ $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+ $poster_full = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
  $video_link = $matches[1];
@@ -83,7 +83,7 @@ $translation_links = process_persons($translation);
      <?php
          $og_desc = get_post_meta($current_id, 'short_statement_sk');
          $og_url = get_permalink();
-         $og_poster = $poster_big;
+         $og_poster = $poster_full;
          require_once 'header.php';
      ?>
  </head>
@@ -107,7 +107,7 @@ $translation_links = process_persons($translation);
         </div>
 
         <div id="landing_container" class="single_video">
-            <video id="landing_video" class="video-js vjs-16-9 vjs-default-skin" controls poster="<?php echo $poster_big; ?>">
+            <video id="landing_video" class="video-js vjs-16-9 vjs-default-skin" controls poster="<?php echo $poster_medium; ?>">
                 <source src="/<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
                 <source src="/<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
                 <source src="/<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>

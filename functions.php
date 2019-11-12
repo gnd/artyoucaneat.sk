@@ -52,7 +52,7 @@ function show_index_post($id, $link, $poster, $category_link, $category_name_sk,
     } else {
         echo "\t\t\t" .'<div class="index_video_right" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     }
-    echo "\t\t\t\t" . '<img class="index_video_thumb" src="' . $poster . '">' . "\n";
+    echo "\t\t\t\t" . '<img id="thumb_' . $id . '" class="index_video_thumb" src="' . $poster . '">' . "\n";
     echo "\t\t\t\t" . '<img class="play" src="' . get_stylesheet_directory_uri() . '/assets/images/play.png">' . "\n";
     echo "\t\t\t\t" . '<div class="index_video_overlay">' . "\n";
     echo "\t\t\t\t\t" . '<div class="index_video_desc">' . "\n";
@@ -115,7 +115,7 @@ function show_category_post($id, $link, $poster, $category_link, $category_name_
     } else {
         echo "\t\t\t" .'<div class="index_video_small_left" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     }
-    echo "\t\t\t\t" . '<img class="index_video_thumb" src="' . $poster . '">' . "\n";
+    echo "\t\t\t\t" . '<img class="index_video_thumb" id="thumb_' . $id . '" src="' . $poster . '">' . "\n";
     echo "\t\t\t\t" . '<img class="play" src="' . get_stylesheet_directory_uri() . '/assets/images/play.png">' . "\n";
     echo "\t\t\t\t" . '<div class="index_video_overlay">' . "\n";
     echo "\t\t\t\t\t" . '<div class="index_video_desc_small">' . "\n";

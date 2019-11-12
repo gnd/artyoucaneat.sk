@@ -43,7 +43,7 @@ require_once 'lang.php';
             $query->the_post();
             if ($i == $rnd) {
                 $poster = get_post_meta(get_the_ID(), 'poster');
-                $poster_big = str_replace("http://", "https://", $poster[0]["guid"]);
+                $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
                 $matches = array();
                 preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta(get_the_ID(), 'video')[0]["ID"]), $matches);
                 $video_link_txt = $matches[1];
@@ -59,7 +59,7 @@ require_once 'lang.php';
                 $statement_en = get_post_meta(get_the_ID(), 'statement_en', true);
                 $short_statement_en = get_post_meta(get_the_ID(), 'short_statement_en', true);
                 $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/index.php/v/?id=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
-                show_landing_post($poster_big, $video_link_txt, $category_link, $link_txt, $category_name_sk, $current_title_sk, $statement_sk, $short_statement_sk, $category_name_en, $current_title_en, $statement_en, $short_statement_en);
+                show_landing_post($poster_medium, $video_link_txt, $category_link, $link_txt, $category_name_sk, $current_title_sk, $statement_sk, $short_statement_sk, $category_name_en, $current_title_en, $statement_en, $short_statement_en);
                 break;
             }
             $i++;
@@ -92,7 +92,7 @@ require_once 'lang.php';
                             $query->the_post();
                             $link = wp_make_link_relative(get_permalink($query->theID(), false));
                             $poster = get_post_meta(get_the_ID(), 'poster');
-                            $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];  //FIXME - 400px custom size
+                            $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
                             $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'thumb' )[0];
                             $category_link = get_category_link(get_the_category()[0]->cat_ID);
                             $category_name_sk = get_the_category()[0]->name;

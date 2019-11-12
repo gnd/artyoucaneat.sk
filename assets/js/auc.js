@@ -80,12 +80,13 @@ function switch_pics() {
         if (document.getElementById("landing_video")) {
             //document.getElementById("landing_video").poster = document.getElementById("landing_video").poster.replace('_p0','');
             var poster = player.poster();
-            poster = poster.replace('_p0','');
+            poster = poster.replace('-300x169','');
             player.poster(poster);
         }
         for (var i=0; i<10; i++) {
-            if (document.getElementById("video_"+i)) {
-                document.getElementById("video_"+i).src = document.getElementById("video_"+i).src.replace('_p0','');
+            if (document.getElementById("thumb_"+i)) {
+                console.log("replacing " + "thumb_"+i);
+                document.getElementById("thumb_"+i).src = document.getElementById("thumb_"+i).src.replace('300x169','768x432');
             }
         }
     }
