@@ -72,10 +72,10 @@
              2018 | Art You Can Eat | <a class="footer_link" href="index.php/info">About us</a> | <a class="footer_link" href="mailto:info@artyoucaneat.sk">Contact us</a> | Hosting <a class="footer_link" href="https://multiplace.org">Sanchez / Multiplace.org</a> | Web gnd & mrgt
          </p>
          <p id="footer_license_sk">
-             Pokiaľ nieje uvedené inak, príspevky sú licencované pod licenciou <a class="footer_link" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 International License</a>.
+             Pokiaľ nieje uvedené inak, príspevky sú licencované pod licenciou <a class="footer_link" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 International License</a>.
          </p>
          <p id="footer_license_en">
-             Unless stated otherwise, all submissions are licensed under <a class="footer_link" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 International License</a>.
+             Unless stated otherwise, all submissions are licensed under <a class="footer_link" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 International License</a>.
          </p>
      </div>
  </div>
