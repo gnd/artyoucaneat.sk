@@ -69,7 +69,7 @@ $translation_links = process_persons($translation);
  // Process video data
  $poster = get_post_meta($current_id, 'poster');
  $poster_small = wp_get_attachment_image( $poster[0]["ID"], 'medium' );
- $poster_big = $poster[0]["guid"];
+ $poster_big = str_replace("http://", "https://", $poster[0]["guid"]);
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
  $video_link = $matches[1];
