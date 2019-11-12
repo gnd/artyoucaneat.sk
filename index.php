@@ -22,7 +22,7 @@ require_once 'lang.php';
         $page_title = "Art You Can Eat";
         $og_desc = "Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie.";
         $og_url = site_url();
-        $og_poster = site_url() . "/" . get_bloginfo('template_directory') . "/assets/images/logo_big.jpg";
+        $og_poster = get_bloginfo('template_directory') . "/assets/images/logo_big.jpg";
         require_once 'header.php';
     ?>
 </head>
