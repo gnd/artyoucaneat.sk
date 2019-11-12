@@ -17,7 +17,7 @@ source $SCRIPT_ROOT/settings
 
 # Check if script running already
 RUNNING=`ps -ef|grep find_and_convert|grep -v grep|wc -l`
-if [[ $RUNNING -gt 1 ]]; then
+if [[ $RUNNING -gt 2 ]]; then
 	echo "Script already running. Will exit."
 	exit
 else
