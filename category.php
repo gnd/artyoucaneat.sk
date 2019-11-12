@@ -31,7 +31,7 @@ if ($_SESSION["lang"] == "sk") {
     <?php
         $og_desc = "Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie.";
         $og_url = get_permalink();
-        $og_poster = "https://paleo.artyoucaneat.sk/assets/images/logo_big.jpg";
+        $og_poster = site_url() . "/" . bloginfo('template_directory') . "/assets/images/logo_big.jpg";
         require_once 'header.php';
     ?>
 </head>
