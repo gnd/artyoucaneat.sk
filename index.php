@@ -58,7 +58,7 @@ require_once 'lang.php';
                 $current_title_en = get_post_meta(get_the_ID(), 'title_en', true);
                 $statement_en = get_post_meta(get_the_ID(), 'statement_en', true);
                 $short_statement_en = get_post_meta(get_the_ID(), 'short_statement_en', true);
-                $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/index.php/v/?id=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
+                $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/v/?id=' . get_the_ID() . '" frameborder="0" allowfullscreen></iframe>';
                 show_landing_post($poster_medium, $video_link_txt, $category_link, $link_txt, $category_name_sk, $current_title_sk, $statement_sk, $short_statement_sk, $category_name_en, $current_title_en, $statement_en, $short_statement_en);
                 break;
             }
