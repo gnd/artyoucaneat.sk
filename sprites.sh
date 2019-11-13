@@ -12,19 +12,18 @@
 
 function usage() {
 cat << EOM
-    Video Sprite Generator
-    Version 1
-    Copyright (C) 2018 Nuevolab.com
-    Usage: spritevideo -i [inputfile] -o [outputdir] -p [outputfile]
-        -i      Input video file
-        -o      Output directory
-        -p      Output jpg file
+Video Sprite Generator
+Version 1
+Copyright (C) 2018 Nuevolab.com
+Usage: spritevideo -i [inputfile] -p [outputfile]
+    -i      Input video file
+    -p      Output jpg file
 EOM
-    exit
+exit
 }
 
 # Print usage if not enough params
-if [ -z $6 ]; then
+if [ -z $4 ]; then
     usage
 fi
 
@@ -39,19 +38,15 @@ command -v convert >/dev/null 2>&1 || { echo >&2 "Imagemagick not installed.  Ab
 
 # Set some params
 INPUTFILE=""
-OUTPUT_DIRECTORY=""
 OUTPUT_FILENAME=""
 SPRITE_WIDTH=192
 SPRITE_HEIGHT=108
 
 # Get params from the command line
-while getopts ":i:o:p:w:h:" optname; do
+while getopts ":i:p:w:h:" optname; do
   case "$optname" in
     "i")
       INPUTFILE=$OPTARG
-    ;;
-    "o")
-      OUTPUT_DIRECTORY=$OPTARG
     ;;
     "p")
       OUTPUTFILE=$OPTARG
@@ -68,10 +63,6 @@ done
 # Check if all params correct
 if [ ! -f "$INPUTFILE" ]; then
       echo "Input video file does not exist. Exiting ..."
-      exit 1
-fi
-if [ ! -d "$OUTPUT_DIRECTORY" ]; then
-      echo "Output directory does not exist. Exiting ..."
       exit 1
 fi
 if [ $OUTPUTFILE == "" ]; then
@@ -95,7 +86,7 @@ if [ $duration -gt 0 ]; then
         fi
         i=0;
         RND=`openssl rand -hex 2`
-        TMPDIR="$OUTPUT_DIRECTORY""/tmp_"$RND
+        TMPDIR="/tmp/sprites_"$RND
         mkdir "$TMPDIR"
         chmod 777 "$TMPDIR"
         while [ $i -lt $duration ]; do
