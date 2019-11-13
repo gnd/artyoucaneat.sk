@@ -58,6 +58,8 @@
 
     // set site location as single_video
     site_location = 'single';
+    page_title_sk = '<?php echo 'Art You Can Eat / ' . $current_title_sk; ?>';
+    page_title_en = '<?php echo 'Art You Can Eat / ' . $current_title_en; ?>';
 
     // set big play button position
     var bpb = document.getElementsByClassName('vjs-big-play-button');

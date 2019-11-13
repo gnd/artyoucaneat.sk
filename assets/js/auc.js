@@ -7,6 +7,8 @@ var inactive_lang;
 var site_location = 'index';
 var content_fade = false;
 var device_type = "desktop";
+var page_title_en = "Art You Can Eat";
+var page_title_sk = "Art You Can Eat";
 
 function detect_client() {
     const mq = window.matchMedia('screen and (min-width: 300px) and (max-width: 340px)');
@@ -81,13 +83,19 @@ function switch_lang(lang, send, id) {
     if (lang == 'sk') {
         active_lang = 'sk';
         inactive_lang = 'en';
+        document.title = page_title_sk;
     } else {
         active_lang = 'en';
         inactive_lang = 'sk';
+        document.title = page_title_en;
     }
 
     // TODO - once everything works make desktop / mobile into one
     if (device_type == 'desktop') {
+        // Indicate language regardless of menu rolled or unrolled
+        document.getElementById('lang_' + active_lang + '_switch').style.fontWeight = 'bold';
+        document.getElementById('lang_' + inactive_lang + '_switch').style.fontWeight = 'normal';
+
         if (menu) {
             // Show menu top entries in active language
             var shown = document.getElementsByClassName('menu_entry_top_' + active_lang);
@@ -104,9 +112,6 @@ function switch_lang(lang, send, id) {
                     children[j].style.display = "block";
                 }
             }
-            // Indicate language
-            document.getElementById('lang_' + active_lang + '_switch').style.fontWeight = 'bold';
-            document.getElementById('lang_' + inactive_lang + '_switch').style.fontWeight = 'normal';
             // Underline active child category
             if (id > 0) {
                 console.log('adding class to ' + id + "_" + active_lang);
@@ -498,7 +503,7 @@ function cat_unroll(id) {
                     document.getElementById("center_container").style.paddingTop = "10em";
                 }
             }
-            if ((site_location == 'profile') || (site_location == 'report')) {
+            if ((site_location == 'profiles') || (site_location == 'reports')) {
                 if (document.getElementById("content_container")) {
                     document.getElementById("content_container").style.marginTop = "6em";
                 }
@@ -525,7 +530,7 @@ function cat_unroll(id) {
                     document.getElementById("center_container").style.paddingTop = "13.5em";
                 }
             }
-            if ((site_location == 'profile') || (site_location == 'report')) {
+            if ((site_location == 'profiles') || (site_location == 'reports')) {
                 if (document.getElementById("content_container")) {
                     document.getElementById("content_container").style.marginTop = "9.5em";
                 }

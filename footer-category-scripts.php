@@ -16,7 +16,9 @@
 
 <script>
     // setup some globals
-    site_location = '<?php echo ($_SESSION["lang"] == 'sk') ? strtolower($category->name) : strtolower($category->description); ?>';
+    page_title_sk = '<?php echo 'Art You Can Eat / ' . $category->name; ?>';
+    page_title_en = '<?php echo 'Art You Can Eat / ' . $category->description; ?>';
+    site_location = '<?php echo strtolower($category->description); ?>';
     <?php echo ($category_parent_id == $video_id) ? "video_menu = true;" : ""; ?>
 
     // nastav js podla typu klienta
