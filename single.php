@@ -214,9 +214,9 @@ $translation_links = process_persons($translation);
                 <!--</p>-->
             </div>
             <div id="video_info_text_en">
-                <p class="video_info">
+                <!--<p class="video_info"> -->
                      <?php echo $content_en; ?> 
-                </p>
+                <!--</p>-->
             </div>
 
             <div id="video_info_container_mobile_sk">

@@ -17,12 +17,19 @@
 
 <script src="<?php bloginfo('template_directory'); ?>/assets/js/nuevo.min.js"></script>
 <script>
+    // nastav js podla typu klienta
+    detect_client();
+
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $video_share_link; ?>";
     var video_share_embed = '<?php echo $video_share_embed; ?>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $current_title_sk; ?>";
+    var logo = "";
+    if (device_type == 'desktop') {
+        var logo = '<?php bloginfo('template_directory'); ?>/assets/images/logo_transparent_50.png';
+    }
 
     if ("<?php echo $_SESSION["lang"]; ?>" == "en") {
         var related_videos = <?php echo json_encode($related_videos_en); ?>;
@@ -44,65 +51,11 @@
         shareTitle: video_name,
         shareUrl: video_link,
         shareEmbed: video_share_embed,
-        logo: '<?php bloginfo('template_directory'); ?>/assets/images/logo_transparent_50.png',
+        logo: logo,
         logourl: '//artyoucaneat.sk',
         logoposition: 'RT'
     });
 
-    // nastav js podla typu klienta
-    detect_client();
-
     // jazykova persistencia
     window.onload = allyoucan_setup("<?php echo $_SESSION["lang"]; ?>");
-
-    // fejdi to
-    var target = $('#newsletter');
-    $(document).scroll(function(e){
-        var rect = document.getElementById("newsletter").getBoundingClientRect();
-        var opacity = 0;
-        switch(footer_recalc) {
-            case "bigphone":
-                opacity = (1800 - rect.top) / 1000;
-                break;
-            case "smalldesk":
-                opacity = (800 - rect.top) / 500;
-                break;
-            case "bigdesk":
-                opacity = (1200 - rect.top) / 800;
-                break;
-            default:
-                opacity = (700 - rect.top) / 600;
-        }
-        if (opacity >= 0){
-            document.getElementById("newsletter").style.opacity = opacity;
-        }
-        // testing only
-        //var span = document.getElementById("opa");
-        //span.textContent = "top: " + rect.top + ", opacity: " + opacity;
-        if ((opacity < 0.6) && (content_fade)) {
-            $("#logo_big").fadeOut(200);
-            $("#content_container").fadeIn(1000);
-            if (device_type == 'phone') {
-                $("#mobile_nav_container").fadeIn(1000);
-            }
-            if (device_type == 'desktop') {
-                $("#left_container").fadeIn(1000);
-                $("#right_container").fadeIn(1000);
-            }
-            content_fade = false;
-        }
-        if ((opacity > 0.6) && (!content_fade)) {
-            document.getElementById("logo_big").style.opacity = 1;
-            $("#logo_big").fadeIn(1000);
-            $("#content_container").fadeOut(1000);
-            if (device_type == 'phone') {
-                $("#mobile_nav_container").fadeOut(1000);
-            }
-            if (device_type == 'desktop') {
-                $("#left_container").fadeOut(1000);
-                $("#right_container").fadeOut(1000);
-            }
-            content_fade = true;
-        }
-    });
 </script>

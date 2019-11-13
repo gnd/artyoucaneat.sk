@@ -7,7 +7,6 @@ var inactive_lang;
 var site_location = 'index';
 var content_fade = false;
 var device_type = "desktop";
-var footer_recalc = "default";
 
 function detect_client() {
     const mq = window.matchMedia('screen and (min-width: 300px) and (max-width: 340px)');
@@ -25,20 +24,6 @@ function detect_client() {
     const mq4 = window.matchMedia('screen and (min-width: 400px) and (max-width: 1000px)');
     if (mq4.matches) {
         device_type = 'phone';
-    }
-
-    /* this is to detect when we should start with the newletter fadein */
-    const mq5 = window.matchMedia('screen and (min-width: 700px) and (min-height: 1200px)');
-    if (mq5.matches) {
-        footer_recalc = "bigphone";
-    }
-    const mq6 = window.matchMedia('screen and (min-width: 1010px) and (max-height: 850px)');
-    if (mq6.matches) {
-        footer_recalc = "smalldesk";
-    }
-    const mq7 = window.matchMedia('screen and (min-width: 1400px) and (min-height: 750px)');
-    if (mq7.matches) {
-        footer_recalc = "bigdesk";
     }
 };
 
@@ -69,7 +54,7 @@ function send_lang(lang) {
        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
     // post client resolution
-    xhttp.open("POST", "index.php", false);
+    xhttp.open("POST", "/index.php", false);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("lang=" + lang);
 

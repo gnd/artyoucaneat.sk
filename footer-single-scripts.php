@@ -17,12 +17,19 @@
 
 <script src="<?php bloginfo('template_directory'); ?>/assets/js/nuevo.min.js"></script>
 <script>
+    // nastav js podla typu klienta
+    detect_client();
+
     // nuevo & video.js setup
     var slide_image = "<?php echo $slide_image; ?>";
     var video_link = "<?php echo $link_txt; ?>";
     var video_share_embed ='<?php echo $video_share_embed; ?>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $current_title_sk; ?>";
+    var logo = "";
+    if (device_type == 'desktop') {
+        var logo = '<?php bloginfo('template_directory'); ?>/assets/images/logo_transparent_50.png';
+    }
 
     if ("<?php echo $_SESSION["lang"]; ?>" == "en") {
         var related_videos = <?php echo json_encode($related_videos_en); ?>;
@@ -44,7 +51,7 @@
         shareTitle: video_name,
         shareUrl: video_link,
         shareEmbed: video_share_embed,
-        logo: '<?php bloginfo('template_directory'); ?>/assets/images/logo_transparent_50.png',
+        logo: logo,
         logourl: '//artyoucaneat.sk',
         logoposition: 'RT'
     });
@@ -57,9 +64,6 @@
     for (var i = 0; i < bpb.length; ++i) {
         bpb[i].style.top = '30%';
     }
-
-    // nastav js podla typu klienta
-    detect_client();
 
     // jazykova perzistencia
     window.onload = allyoucan_setup("<?php echo $_SESSION["lang"]; ?>");
