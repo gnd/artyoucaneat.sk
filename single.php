@@ -49,6 +49,8 @@ $content_en = str_replace("<a href=", "<a class='text_link' href=", $content_en)
 // Process the post's additional fields
 $curators = get_post_meta($current_id, 'curators');
 $curator_links = process_persons($curators);
+$gallery = get_post_meta($current_id, 'gallery');
+$gallery_links = process_places($gallery);
 $performers = get_post_meta($current_id, 'performers');
 $performer_links = process_persons($performers);
 $camera = get_post_meta($current_id, 'camera');
@@ -136,6 +138,13 @@ $translation_links = process_persons($translation);
                 </span>
                 <span class="video_info">
                     <?php
+                        if ($gallery[0]) {
+                            echo "galéria: \n" . $gallery_links;
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
                         if ($performers[0]) {
                             if (sizeof($performers) > 1) {
                                 echo "účinkujú: \n" . $performer_links;
@@ -179,6 +188,13 @@ $translation_links = process_persons($translation);
                             } else {
                                 echo "curator: \n" . $curator_links;
                             }
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
+                        if ($gallery[0]) {
+                            echo "gallery: \n" . $gallery_links;
                         }
                     ?>
                 </span>
@@ -234,6 +250,13 @@ $translation_links = process_persons($translation);
                 </span>
                 <span class="video_info">
                     <?php
+                        if ($gallery[0]) {
+                            echo "galéria: \n" . $gallery_links;
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
                         if ($performers[0]) {
                             if (sizeof($performers) > 1) {
                                 echo "účinkujú: \n" . $performer_links;
@@ -275,6 +298,13 @@ $translation_links = process_persons($translation);
                             } else {
                                 echo "curator: \n" . $curator_links;
                             }
+                        }
+                    ?>
+                </span>
+                <span class="video_info">
+                    <?php
+                        if ($gallery[0]) {
+                            echo "gallery: \n" . $gallery_links;
                         }
                     ?>
                 </span>
@@ -335,14 +365,15 @@ $translation_links = process_persons($translation);
                         $title_sk = get_the_title();
                         $title_en = get_post_meta(get_the_ID(), 'title_en', true);
                         $artists = get_post_meta(get_the_ID(), 'artists');
+                        $duration = get_post_meta(get_the_ID(), 'duration', true);
 
                         // show past videos
                         show_related_in_single($lid, $link, $poster_small, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                         // prepare related videos for Nuevo
                         // TODO need to know video duration smh
-                        $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
-                        $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
+                        $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
+                        $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
                         $lid += 1;
                     }
                 }

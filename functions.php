@@ -47,6 +47,19 @@ function process_persons($persons) {
 
 
 /*
+    This takes raw input from additional post fields for galleries (via PODS) and returns formated links
+*/
+function process_places($places) {
+    foreach ($places as $place) {
+        // activate this once persons pages up
+        //$links[] = '<a class="video_info" href="/' . $place["slug"] . '">' . $place["name"] . '</a>';
+        $links[] = '<a class="video_info" href="#">' . $place["name"] . '</a>';
+    }
+    return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
+}
+
+
+/*
     This takes raw input from additional post field "artists" and returns formated links
     Due to design limits we must limit the "shown" names to 50 chars
 */
@@ -165,15 +178,15 @@ function show_landing_post($poster, $video_link_txt, $category_link, $link_txt, 
     echo "\t\t\t" . '<a class="landing_category" href="' . $category_link . '">' . $category_name_sk . '</a>' . "\n";
     echo "\t\t\t" . '/' . "\n";
     echo "\t\t\t" . '<a class="landing_title" href="' . $link_txt. '">' . $title_sk. '</a>' . "\n";
-    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_desktop">' . $statement_sk. '</p>' . "\n";
-    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_phone">' . $short_statement_sk. '</p>' . "\n";
+    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_desktop_sk">' . $statement_sk. '</p>' . "\n";
+    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_phone_sk">' . $short_statement_sk. '</p>' . "\n";
     echo "\t\t" . '</div>' . "\n";
     echo "\t\t" . '<div id="landing_overlay_text_en">' . "\n";
     echo "\t\t\t" . '<a class="landing_category" href="' . $category_link . '">' . $category_name_en . '</a>' . "\n";
     echo "\t\t\t" . '/' . "\n";
     echo "\t\t\t" . '<a class="landing_title" href="' . $link_txt. '">' . $title_en. '</a>' . "\n";
-    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_desktop">' . $statement_en. '</p>' . "\n";
-    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_phone">' . $short_statement_en. '</p>' . "\n";
+    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_desktop_en">' . $statement_en. '</p>' . "\n";
+    echo "\t\t\t" . '<p class="landing_video_desc" id="landing_phone_en">' . $short_statement_en. '</p>' . "\n";
     echo "\t\t" . '</div>' . "\n";
     echo "\t" . '</div>' . "\n";
     echo '</div>' . "\n";

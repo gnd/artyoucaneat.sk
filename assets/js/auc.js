@@ -40,8 +40,8 @@ function startlanding() {
         }
     }
     if (device_type == 'phone') {
-        $('#landing_phone').fadeOut(2000);
-        $('#landing_desktop').fadeIn(2000);
+        $('#landing_phone_' + active_lang).fadeOut(2000);
+        $('#landing_desktop_' + active_lang).fadeIn(2000);
     }
 };
 

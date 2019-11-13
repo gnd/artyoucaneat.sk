@@ -48,11 +48,12 @@
              $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'thumb' )[0];
              $title_sk = get_the_title();
              $title_en = get_post_meta(get_the_ID(), 'title_en', true);
+             $duration = get_post_meta(get_the_ID(), 'duration', true);
 
              // prepare related videos for Nuevo
              // TODO need to know video duration smh
-             $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00');
-             $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => '15:00');
+             $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
+             $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
              $lid += 1;
          }
      }

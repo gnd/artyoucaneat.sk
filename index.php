@@ -100,14 +100,15 @@ require_once 'lang.php';
                             $title_sk = get_the_title();
                             $title_en = get_post_meta(get_the_ID(), 'title_en', true);
                             $artists = get_post_meta(get_the_ID(), 'artists');
+                            $duration = get_post_meta(get_the_ID(), 'duration', true);
 
                             // show past video
                             show_index_post($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                             // prepare related videos for Nuevo
                             // TODO need to know video duration smh
-                            $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => '15:00'); //FIXME - real duration
-                            $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => '15:00'); //FIXME - real duration
+                            $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
+                            $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
                             $lid += 1;
                         }
                         /* Restore original Post Data */

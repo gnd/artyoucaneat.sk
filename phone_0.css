@@ -48,8 +48,6 @@ body {
 
 #landing_overlay {
     z-index: 1;
-    //position: absolute;
-    //bottom: -30%;
 }
 
 #landing_overlay_text_sk {
@@ -67,7 +65,11 @@ body {
     font-size: 3em;
 }
 
-#landing_desktop {
+#landing_desktop_sk {
+    display: none;
+}
+
+#landing_desktop_en {
     display: none;
 }
 
