@@ -68,7 +68,11 @@ body {
     display: none;
 }
 
-#landing_phone {
+#landing_phone_sk {
+    display: none;
+}
+
+#landing_phone_en {
     display: none;
 }
 
