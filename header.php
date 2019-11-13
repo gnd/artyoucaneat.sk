@@ -18,16 +18,9 @@
 
  ?>
 
- <title>
-         <?php
-             if ($_SESSION["lang"] == "en") {
-                 echo $page_title . "\n";
-             }
-             if ($_SESSION["lang"] == "sk") {
-                 echo $page_title . "\n";
-             }
-         ?>
-     </title>
+    <title>
+         <?php echo $page_title . "\n"; ?>
+    </title>
 
      <meta charset="UTF-8">
      <meta name="description" content="Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie. Art You Can Eat is a new video portal maping the Slovak contemporary art scene." />

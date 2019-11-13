@@ -361,7 +361,9 @@ function switch_lang(lang, send, id) {
 function allyoucan_setup(lang) {
 
     // hide video controls
-    document.getElementById("landing_video").removeAttribute("controls");
+    if (document.getElementById("landing_video")) {
+        document.getElementById("landing_video").removeAttribute("controls");
+    }
 
     // switch lang
     switch_lang(lang, false, 0);
