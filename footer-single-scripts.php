@@ -44,7 +44,7 @@
         shareTitle: video_name,
         shareUrl: video_link,
         shareEmbed: video_share_embed,
-        logo: '//artyoucaneat.sk/assets/images/logo_transparent_50.png',
+        logo: '<?php bloginfo('template_directory'); ?>/assets/images/logo_transparent_50.png',
         logourl: '//artyoucaneat.sk',
         logoposition: 'RT'
     });

@@ -129,7 +129,7 @@ $translation_links = process_persons($translation);
                             if (sizeof($curators) > 1) {
                                 echo "kurátori/ky: \n" . $curator_links;
                             } else {
-                                echo "kurátor(ka): \n" . $curator_links;
+                                echo "kurátor/ka: \n" . $curator_links;
                             }
                         }
                     ?>
@@ -227,7 +227,7 @@ $translation_links = process_persons($translation);
                             if (sizeof($curators) > 1) {
                                 echo "kurátori/ky: \n" . $curator_links;
                             } else {
-                                echo "kurátor(ka): \n" . $curator_links;
+                                echo "kurátor/ka: \n" . $curator_links;
                             }
                         }
                     ?>
