@@ -356,7 +356,7 @@ $translation_links = process_persons($translation);
                        is included in the last 7 posts. If it is, we correctly show 6 posts.
                        If it isnt, we would show 7 posts, so we have to limit this to 6 using lid.
                     */
-                    if ($current_id != get_the_ID() && $lid < 7) {
+                    if ($current_id != get_the_ID() && $lid < 6) {
                         $link = wp_make_link_relative(get_permalink($query->theID(), false));
                         $poster = get_post_meta(get_the_ID(), 'poster');
                         $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
