@@ -82,17 +82,18 @@ duration=`expr 3600 \* $hour + 60 \* $minute + $second`;
 if [ $duration -gt 0 ]; then
         frequency=$((duration / 80))
         if [ $frequency -lt 1 ]; then
-            frequency=1;
+            frequency=1
         fi
-        i=0;
+        i=0
         RND=`openssl rand -hex 2`
         TMPDIR="/tmp/sprites_"$RND
         mkdir "$TMPDIR"
         chmod 777 "$TMPDIR"
         while [ $i -lt $duration ]; do
-                thumb="$TMPDIR/$i.jpg"
+                thumb="$TMPDIR/$index.jpg"
                 ffmpeg -ss "$i" -i "$INPUTFILE" -vframes 1 -f image2 -s "$SPRITE_WIDTH"x"$SPRITE_HEIGHT" "$thumb"
                 i=`expr $i + $frequency`
+                index=$(printf "%05d" $i)
         done
         if [ -f $OUTPUTFILE ]; then
                 rm -f $OUTPUTFILE
