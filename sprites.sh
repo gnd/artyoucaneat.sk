@@ -43,12 +43,12 @@ SPRITE_WIDTH=192
 SPRITE_HEIGHT=108
 
 # Get params from the command line
-while getopts ":i:p:w:h:" optname; do
+while getopts ":i:o:w:h:" optname; do
   case "$optname" in
     "i")
       INPUTFILE=$OPTARG
     ;;
-    "p")
+    "o")
       OUTPUTFILE=$OPTARG
     ;;
     "w")

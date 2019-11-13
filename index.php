@@ -47,6 +47,7 @@ require_once 'lang.php';
                 $matches = array();
                 preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta(get_the_ID(), 'video')[0]["ID"]), $matches);
                 $video_link_txt = $matches[1];
+                $slide_image = "/" . $video_link_txt . ".jpg";
                 $link_txt = wp_make_link_relative(get_permalink($query->theID(), false));
                 $video_share_link = get_permalink(get_the_ID(), false);
                 $category_link = get_category_link(get_the_category()[0]->cat_ID);

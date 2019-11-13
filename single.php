@@ -75,6 +75,7 @@ $translation_links = process_persons($translation);
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
  $video_link = $matches[1];
+ $slide_image = "/" . $video_link . ".jpg";
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
  ?>
