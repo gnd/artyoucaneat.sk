@@ -127,7 +127,7 @@ $translation_links = process_persons($translation);
                     <?php
                         if ($curators[0]) {
                             if (sizeof($curators) > 1) {
-                                echo "kurátori: \n" . $curator_links;
+                                echo "kurátori/ky: \n" . $curator_links;
                             } else {
                                 echo "kurátor(ka): \n" . $curator_links;
                             }
@@ -149,7 +149,13 @@ $translation_links = process_persons($translation);
                 <span class="video_info">zvuk: <?php echo "\n" . $sound_links; ?></span>
                 <span class="video_info">strih: <?php echo "\n" . $editing_links; ?></span>
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
-                <span class="video_info outstanding">preklad: <?php echo "\n" . $translation_links; ?></span>
+                <span class="video_info outstanding">
+                    <?php
+                        if ($translation[0]) {
+                            echo "preklad: \n" . $translation_links;
+                        }
+                    ?>
+                </span>
                 <span class="video_info outstanding">publikované: <?php echo $date; ?></span>
                 <span class="video_info">
                     <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
@@ -181,7 +187,13 @@ $translation_links = process_persons($translation);
                 <span class="video_info">sound: <?php echo "\n" . $sound_links; ?></span>
                 <span class="video_info">editing: <?php echo "\n" . $editing_links; ?></span>
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
-                <span class="video_info outstanding">translation: <?php echo "\n" . $curator_links; ?></span>
+                <span class="video_info outstanding">
+                    <?php
+                        if ($translation[0]) {
+                            echo "translation: \n" . $translation_links;
+                        }
+                    ?>
+                </span>
                 <span class="video_info outstanding">published: <?php echo $date; ?></span>
                 <span class="video_info">
                     <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
@@ -213,7 +225,7 @@ $translation_links = process_persons($translation);
                     <?php
                         if ($curators[0]) {
                             if (sizeof($curators) > 1) {
-                                echo "kurátori: \n" . $curator_links;
+                                echo "kurátori/ky: \n" . $curator_links;
                             } else {
                                 echo "kurátor(ka): \n" . $curator_links;
                             }
@@ -235,7 +247,13 @@ $translation_links = process_persons($translation);
                 <span class="video_info">zvuk: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
                 <span class="video_info">strih: <?php echo "\n\t" . $editing_links . "\t"; ?></span>
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
-                <span class="video_info outstanding">preklad: <?php echo "\n\t" . $translation_links . "\t"; ?></span>
+                <span class="video_info outstanding">
+                    <?php
+                        if ($translation[0]) {
+                            echo "preklad: \n" . $translation_links . "\t";
+                        }
+                    ?>
+                </span>
                 <span class="video_info outstanding">publikované: <?php echo $date; ?></span>
                 <span class="video_info">
                     <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
@@ -265,7 +283,13 @@ $translation_links = process_persons($translation);
                 <span class="video_info">sound: <?php echo "\n\t" . $sound_links . "\t"; ?></span>
                 <span class="video_info">editing: <?php echo "\n\t" . $editing_links . "\t"; ?></span>
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
-                <span class="video_info outstanding">translation: <?php echo "\n\t" . $curator_links . "\t"; ?></span>
+                <span class="video_info outstanding">
+                    <?php
+                        if ($translation[0]) {
+                            echo "translation: \n" . $translation_links . "\t";
+                        }
+                    ?>
+                </span>
                 <span class="video_info outstanding">published: <?php echo $date; ?></span>
                 <span class="video_info">
                     <a class="video_info" style="text-decoration: underline;" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo $og_url; ?>&display=popup', 'sharer', 'top=200,left=400,toolbar=0,status=0,width=600,height=400');" href="javascript: void(0)">
@@ -312,8 +336,8 @@ $translation_links = process_persons($translation);
                         $title_en = get_post_meta(get_the_ID(), 'title_en', true);
                         $artists = get_post_meta(get_the_ID(), 'artists');
 
-                        // show past video
-                        show_single_post($lid, $link, $poster_small, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                        // show past videos
+                        show_related_in_single($lid, $link, $poster_small, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                         // prepare related videos for Nuevo
                         // TODO need to know video duration smh

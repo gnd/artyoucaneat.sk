@@ -50,7 +50,7 @@ if ($_SESSION["lang"] == "sk") {
                 // retrieve posts in category
                 $args = array(
                     'cat' => $category_id,
-                    'orderby' => 'title',
+                    'orderby' => 'date',
                     'order'   => 'DESC',
                 );
                 $query = new WP_Query($args);
@@ -68,7 +68,7 @@ if ($_SESSION["lang"] == "sk") {
                         $title_sk = get_the_title();
                         $title_en = get_post_meta(get_the_ID(), 'title_en', true);
                         $artists = get_post_meta(get_the_ID(), 'artists');
-                        show_category_post($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                        show_related_in_category($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
                         $lid += 1;
                     }
                     /* Restore original Post Data */

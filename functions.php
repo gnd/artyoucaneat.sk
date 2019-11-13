@@ -1,5 +1,6 @@
 <?php
 add_action( 'after_setup_theme', 'theme_setup' );
+remove_filter ('the_content', 'wpautop');
 
 
 
@@ -46,6 +47,27 @@ function process_persons($persons) {
 
 
 /*
+    This takes raw input from additional post field "artists" and returns formated links
+    Due to design limits we must limit the "shown" names to 50 chars
+*/
+function process_artists($artists, $max_length) {
+    $length = 0;
+    foreach ($artists as $artist) {
+        if (($length + strlen($artist["name"])) <= $max_length) {
+            // activate this once we have a template for persons
+            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
+            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
+            $length += strlen($artist["name"]);
+        } else {
+            $links[] = "\n\t\t\t\t\t\t\t" .' ai.';
+            break;
+        }
+    }
+    return implode(", ", $links);
+}
+
+
+/*
     This shows the individual post in the section "New videos" on the index page
 */
 function show_index_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
@@ -63,13 +85,7 @@ function show_index_post($id, $link, $poster, $category_link, $category_name_sk,
     echo "\t\t\t\t\t\t" . '<span class="index_video_title_sk"><a class="index_link" href="' . $link . '">' . $title_sk. '</a></span>' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_title_en"><a class="index_link" href="' . $link . '">' . $title_en. '</a></span>' . "\n";
     echo "\t\t\t\t\t\t" . '<p class="index_video_artist">';
-        foreach ($artists as $artist) {
-            // activate this once we have a template for persons
-            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
-        }
-        $artist_links = implode(", ", $links);
-        echo $artist_links . "\n";
+    echo process_artists($artists, 100) . "\n";
     echo "\t\t\t\t\t\t" . '</p>' . "\n";
     echo "\t\t\t\t\t" . '</div>' . "\n";
     echo "\t\t\t\t" . '</div>' . "\n";
@@ -77,9 +93,9 @@ function show_index_post($id, $link, $poster, $category_link, $category_name_sk,
 }
 
 /*
-    This shows the individual post in the section "New videos" in the single video page
+    This shows related posts in the "See also" section in the single video page
 */
-function show_single_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
+function show_related_in_single($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
     if (($id+1) % 3 == 0) {
         echo '<div class="index_video_small_right" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     } else {
@@ -88,30 +104,24 @@ function show_single_post($id, $link, $poster, $category_link, $category_name_sk
     echo "\t\t\t\t" . '<img class="index_video_thumb" src="' . $poster . '">' . "\n";
     echo "\t\t\t\t" . '<img class="play" src="' . get_stylesheet_directory_uri() . '/assets/images/play.png">' . "\n";
     echo "\t\t\t\t" . '<div class="index_video_overlay">' . "\n";
-    echo "\t\t\t\t\t" . '<div class="index_video_desc_small">' . "\n";
+    echo "\t\t\t\t\t" . '<div class="video_desc_small">' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_category_small_sk"><a class="index_link" href="' . $category_link . '">' . $category_name_sk . '</a> / </span>' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_category_small_en"><a class="index_link" href="' . $category_link . '">' . $category_name_en . '</a> / </span>' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_title_small_sk"><a class="index_link" href="' . $link . '">' . $title_sk. '</a></span>' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_title_small_en"><a class="index_link" href="' . $link . '">' . $title_en. '</a></span>' . "\n";
-    echo "\t\t\t\t\t\t" . '<p class="index_video_artist">';
-        foreach ($artists as $artist) {
-            // activate this once we have a template for persons
-            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
-        }
-        $artist_links = implode(", ", $links);
-        echo $artist_links . "\n";
+    echo "\t\t\t\t\t\t" . '<p class="video_artist">';
+    echo process_artists($artists, 55) . "\n";
     echo "\t\t\t\t\t\t" . '</p>' . "\n";
     echo "\t\t\t\t\t" . '</div>' . "\n";
     echo "\t\t\t\t" . '</div>' . "\n";
     echo "\t\t\t" . '</div>' . "\n\n\t\t\t";
 }
 
+
 /*
-    This shows the individual post in a category page.
-    The difference to show_index_post is almost nil
+    This shows video posts in the category template
 */
-function show_category_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
+function show_related_in_category($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
     if ($id % 3 == 2) {
         echo "\t\t\t" .'<div class="index_video_small_right" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     } else {
@@ -120,19 +130,13 @@ function show_category_post($id, $link, $poster, $category_link, $category_name_
     echo "\t\t\t\t" . '<img class="index_video_thumb" id="thumb_' . $id . '" src="' . $poster . '">' . "\n";
     echo "\t\t\t\t" . '<img class="play" src="' . get_stylesheet_directory_uri() . '/assets/images/play.png">' . "\n";
     echo "\t\t\t\t" . '<div class="index_video_overlay">' . "\n";
-    echo "\t\t\t\t\t" . '<div class="index_video_desc_small">' . "\n";
+    echo "\t\t\t\t\t" . '<div class="video_desc_small">' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_category_sk"><a class="index_link" href="' . $category_link . '">' . $category_name_sk . '</a> / </span>' . "\n";
     echo "\t\t\t\t\t\t" . '<span class="index_video_category_en"><a class="index_link" href="' . $category_link . '">' . $category_name_en . '</a> / </span>' . "\n";
-    echo "\t\t\t\t\t\t" . '<span class="index_video_title_sk"><a class="index_link" href="' . $link . '">' . $title_sk. '</a></span>' . "\n";
-    echo "\t\t\t\t\t\t" . '<span class="index_video_title_en"><a class="index_link" href="' . $link . '">' . $title_en. '</a></span>' . "\n";
+    echo "\t\t\t\t\t\t" . '<span class="category_video_title_sk"><a class="index_link" href="' . $link . '">' . $title_sk. '</a></span>' . "\n";
+    echo "\t\t\t\t\t\t" . '<span class="category_video_title_en"><a class="index_link" href="' . $link . '">' . $title_en. '</a></span>' . "\n";
     echo "\t\t\t\t\t\t" . '<p class="video_artist">';
-        foreach ($artists as $artist) {
-            // activate this once we have a template for persons
-            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
-        }
-        $artist_links = implode(", ", $links);
-        echo $artist_links . "\n";
+    echo process_artists($artists, 70) . "\n";
     echo "\t\t\t\t\t\t" . '</p>' . "\n";
     echo "\t\t\t\t\t" . '</div>' . "\n";
     echo "\t\t\t\t" . '</div>' . "\n";

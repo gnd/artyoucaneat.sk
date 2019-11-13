@@ -85,7 +85,6 @@ a.landing_category:hover {
 a.landing_title {
     display: inline;
     color: #000000;
-    font-weight: bold;
     text-decoration: none;
     padding-bottom: 0.4em;
 }
@@ -324,9 +323,26 @@ div.index_video_overlay {
     width: 100%;
 }
 
+/* related videos info in single page template */
+div.video_overlay {
+    position: absolute;
+    bottom: 0%;
+    z-index:2;
+    width: 100%;
+}
+
 div.index_video_desc {
     font-size: 5em;
     padding: 2%;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+
+/* related videos info in single page template */
+div.video_desc_small {
+    font-size: 4em;
+    padding: 2%;
+    min-height: 1.3em;
     background: rgba(255, 255, 255, 0.9);
 }
 
@@ -384,14 +400,24 @@ span.index_video_category_small_en {
 span.index_video_title_sk {
     display: inline;
     font-size: 0.45em;
-    font-weight: bold;
     margin-bottom: 0.5%;
 }
 
 span.index_video_title_en {
     display: none;
     font-size: 0.45em;
-    font-weight: bold;
+    margin-bottom: 0.5%;
+}
+
+span.category_video_title_sk {
+    display: inline;
+    font-size: 0.45em;
+    margin-bottom: 0.5%;
+}
+
+span.category_video_title_en {
+    display: none;
+    font-size: 0.45em;
     margin-bottom: 0.5%;
 }
 

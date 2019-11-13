@@ -395,6 +395,12 @@ div.index_video_desc_small {
     background: rgba(255, 255, 255, 0.9);
 }
 
+/* related videos in single template */
+div.video_desc_small {
+    padding: 2%;
+    background: rgba(255, 255, 255, 0.9);
+}
+
 div.index_video_small_left {
     width: 32%;
     float: left;
@@ -459,6 +465,18 @@ span.index_video_title_en {
     margin-bottom: 0.5%;
 }
 
+span.category_video_title_sk {
+    display: inline-block;
+    font-size: 0.6em;
+    margin-bottom: 0.5%;
+}
+
+span.category_video_title_en {
+    display: none;
+    font-size: 0.6em;
+    margin-bottom: 0.5%;
+}
+
 span.index_video_title_small_sk {
     display: block;
     font-size: 0.5em;
@@ -478,7 +496,7 @@ p.index_video_artist {
     font-size: 0.5em;
 }
 
-/* artists names visible on subpages */
+/* artists names in the related video section in the single template */
 p.video_artist {
     margin-top: 0;
     margin-bottom: 0;
