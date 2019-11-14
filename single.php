@@ -105,12 +105,24 @@ $translation_links = process_persons($translation);
         <div id="video_name_sk"><?php echo $current_title_sk; ?></div>
         <div id="video_name_en"><?php echo $current_title_en; ?></div>
         <div id="video_artists_sk">
-            umelci:
-            <?php echo $artist_links . "\n"; ?>
+            <?php
+                if (sizeof($artists) > 1) {
+                    echo "umelci: ";
+                } else {
+                    echo "umelec: ";
+                }
+                echo $artist_links . "\n";
+            ?>
         </div>
         <div id="video_artists_en">
-            artists:
-            <?php echo $artist_links . "\n"; ?>
+            <?php
+                if (sizeof($artists) > 1) {
+                    echo "artists: ";
+                } else {
+                    echo "artist: ";
+                }
+                echo $artist_links . "\n";
+            ?>
         </div>
 
         <div id="landing_container" class="single_video">
