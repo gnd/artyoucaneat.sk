@@ -164,9 +164,9 @@ function show_landing_post($poster, $video_link_txt, $subtitles_sk, $subtitles_e
     echo '<div id="landing_container">' . "\n";
     echo "\t" . '<video id="landing_video" class="initial video-js vjs-16-9" controls poster="' . $poster . '" onplay="startlanding()">' . "\n";
     echo "\t\t" . '<source src="/' . $video_link_txt . '.mp4" type="video/mp4" res="1080" default label="1080p " />' . "\n";
-    echo "\t\t" . '<source src="/' . $video_link_txt . '_720p.mp4" type="video/mp4" res="720" default label="720p " />' . "\n";
-    echo "\t\t" . '<source src="/' . $video_link_txt . '_480p.mp4" type="video/mp4" res="480" default label="480p " />' . "\n";
-    echo "\t\t" . '<source src="/' . $video_link_txt . '_240p.mp4" type="video/mp4" res="240" default label="240p " />' . "\n";
+    echo "\t\t" . '<source src="/' . $video_link_txt . '_720p.mp4" type="video/mp4" res="720" label="720p " />' . "\n";
+    echo "\t\t" . '<source src="/' . $video_link_txt . '_480p.mp4" type="video/mp4" res="480" label="480p " />' . "\n";
+    echo "\t\t" . '<source src="/' . $video_link_txt . '_240p.mp4" type="video/mp4" res="240" label="240p " />' . "\n";
     echo "\t\t" . '<source src="/' . $video_link_txt . '.ogg" type="video/ogg" />' . "\n";
     // subtitles
     $default = "default";
