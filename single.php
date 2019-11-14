@@ -75,6 +75,10 @@ $translation_links = process_persons($translation);
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
  $video_link = $matches[1];
+ preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta($current_id, 'subtitles_sk')[0]["ID"]), $matches);
+ $subtitles_sk = $matches[1];
+ preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta($current_id, 'subtitles_en')[0]["ID"]), $matches);
+ $subtitles_en = $matches[1];
  $slide_image = "/" . $video_link . ".jpg";
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
@@ -116,6 +120,16 @@ $translation_links = process_persons($translation);
                 <source src="/<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
                 <source src="/<?php echo $video_link; ?>_240p.mp4" type="video/mp4" res="240" label="240p "/>
                 <source src="/<?php echo $video_link; ?>.ogg" type="video/ogg"/>
+                <?php
+                    $default = "default";
+                    if (isset($subtitles_sk)) {
+                        echo "<track kind='captions' src='/" . $subtitles_sk . ".vtt' srclang='sk' label='Slovak' $default />";
+                        $default = "";
+                    }
+                    if (isset($subtitles_en)) {
+                        echo "<track kind='captions' src='/" . $subtitles_en . ".vtt' srclang='en' label='English' $default />";
+                    }
+                ?>
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that supports HTML5 video.
