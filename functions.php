@@ -160,7 +160,7 @@ function show_related_in_category($id, $link, $poster, $category_link, $category
 /*
     This shows the main, rotated post, the so-called landing video on the index page
 */
-function show_landing_post($poster, $video_link_txt, $category_link, $link_txt, $category_name_sk, $title_sk, $statement_sk, $short_statement_sk, $category_name_en, $title_en, $statement_en, $short_statement_en) {
+function show_landing_post($poster, $video_link_txt, $subtitles_sk, $subtitles_en, $category_link, $link_txt, $category_name_sk, $title_sk, $statement_sk, $short_statement_sk, $category_name_en, $title_en, $statement_en, $short_statement_en) {
     echo '<div id="landing_container">' . "\n";
     echo "\t" . '<video id="landing_video" class="initial video-js vjs-16-9" controls poster="' . $poster . '" onplay="startlanding()">' . "\n";
     echo "\t\t" . '<source src="/' . $video_link_txt . '.mp4" type="video/mp4" res="1080" default label="1080p " />' . "\n";
@@ -168,6 +168,15 @@ function show_landing_post($poster, $video_link_txt, $category_link, $link_txt, 
     echo "\t\t" . '<source src="/' . $video_link_txt . '_480p.mp4" type="video/mp4" res="480" default label="480p " />' . "\n";
     echo "\t\t" . '<source src="/' . $video_link_txt . '_240p.mp4" type="video/mp4" res="240" default label="240p " />' . "\n";
     echo "\t\t" . '<source src="/' . $video_link_txt . '.ogg" type="video/ogg" />' . "\n";
+    // subtitles
+    $default = "default";
+    if (isset($subtitles_sk)) {
+        echo "\t\t" . "<track kind='captions' src='/" . $subtitles_sk . ".vtt' srclang='sk' label='Slovak' $default />" . "\n";
+        $default = "";
+    }
+    if (isset($subtitles_en)) {
+        echo "\t\t" . "<track kind='captions' src='/" . $subtitles_en . ".vtt' srclang='en' label='English' $default />" . "\n";
+    }
     echo "\t\t" . '<p class="vjs-no-js">' . "\n";
     echo "\t\t\t" . 'To view this video please enable JavaScript, and consider upgrading to a' . "\n";
     echo "\t\t\t" . 'web browser that supports HTML5 video.' . "\n";
