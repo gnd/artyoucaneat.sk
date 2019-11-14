@@ -96,7 +96,7 @@
     <link rel="stylesheet" media='screen and (min-width: 1600px)' href="<?php bloginfo('template_directory'); ?>/style.css"/>
     <style>#landing_video { border-radius: 0 !important; }</style> <!-- Embed popup fix -->
 
-    <!-- MATOMO
+    <!-- MATOMO -->
     <script type="text/javascript">
       var _paq = _paq || [];
       _paq.push(['trackPageView']);
@@ -108,7 +108,7 @@
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
       })();
-    </script> -->
+    </script>
 
 </head>
 <body>
