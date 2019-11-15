@@ -44,8 +44,8 @@ $q = sanitize_text_field(get_search_query());
 
 <div id="main_container">
     <div id="center_container" class="single_video">
-        <div id="video_name_sk">Hľadať: <?php get_search_form(); ?></div>
-        <div id="video_name_en">Search: <?php get_search_form(); ?></div>
+        <div id="search_container_sk">Hľadať: <?php get_search_form(); ?></div>
+        <div id="search_container_en">Search: <?php get_search_form(); ?></div>
         <?php
         if (strlen( trim(get_search_query())) != 0) {
             /*
@@ -99,7 +99,7 @@ $q = sanitize_text_field(get_search_query());
             }
         ?>
 
-        <div id="video_artists_sk">
+        <div id="search_results_sk">
             <?php //TODO make these div ids custom for the search template
                 // Display people results
                 if ($people->total() > 0) {
@@ -122,7 +122,7 @@ $q = sanitize_text_field(get_search_query());
                 }
             ?>
         </div>
-        <div id="video_artists_en">
+        <div id="search_results_en">
             <?php //TODO make these div ids custom for the search template
                 // Display people results
                 if ($people->total() > 0) {

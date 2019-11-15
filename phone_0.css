@@ -883,3 +883,79 @@ img.embed_icon {
     display: none;
     font-size: 5vw;
 }
+
+/********************************************************
+                                                search
+********************************************************/
+
+#search_container_sk {
+    font-size: 3em;
+    margin-left: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+}
+
+#search_container_en {
+    font-size: 3em;
+    margin-left: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    display: none;
+}
+
+#searchform {
+    height: 0em;
+    background-color: pink;
+    display: inline-block;
+    margin-block-end: 0em;
+}
+
+#s {
+    font-size: 5vw;
+    position:relative;
+    width: 65vw;
+    border: 0;
+    border-bottom: 1px solid;
+    padding: 0;
+
+}
+
+#s:focus {
+    outline: none;
+}
+
+#searchsubmit {
+    font-size: 1.5vw;
+}
+
+#search_results_sk {
+    padding-left: 1.5vw;
+    font-size: 4vw;
+    width: 100%;
+}
+
+#search_results_en {
+    padding-left: 1.5vw;
+    font-size: 4vw;
+    width: 100%;
+    display: none;
+}
+
+#content_container.search {
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+#people_found {
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+#places_found {
+    margin-bottom: 1em;
+}
+
+span.found_term {
+    display: block;
+    padding-left: 0.4em;
+}
