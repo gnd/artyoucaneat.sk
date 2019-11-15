@@ -1,8 +1,5 @@
 <?php
-/* Template Name: Infopage */
-
-/**
- * The main template file
+/* Template Name: Infopage
  *
  * All You Can template for Artyoucaneat.sk
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file
+ * Single template file
  *
  * All You Can template for Artyoucaneat.sk
  *
@@ -368,9 +368,6 @@ $translation_links = process_persons($translation);
 
             <!-- get most recent videos and display them -->
             <?php
-            // start showing past videos
-            // TODO - dont show current post
-            // TODO: show only last 6 videos
             $query = new WP_Query( array( 'category_name' => 'video', 'posts_per_page' => 7, 'no_found_rows' => true ) );
             $lid = 0;
             $related_videos_sk = Array();
@@ -398,7 +395,6 @@ $translation_links = process_persons($translation);
                         show_related_in_single($lid, $link, $poster_small, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                         // prepare related videos for Nuevo
-                        // TODO need to know video duration smh
                         $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
                         $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
                         $lid += 1;

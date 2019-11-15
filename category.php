@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file
+ * Category template file
  *
  * All You Can template for Artyoucaneat.sk
  *

@@ -401,6 +401,26 @@ function category_setup(lang, parent_id, category_id) {
 };
 
 
+function search_setup(lang) {
+
+    if (lang == 'sk') {
+        active_lang = 'sk';
+        inactive_lang = 'en';
+    } else {
+        active_lang = 'en';
+        inactive_lang = 'sk';
+    }
+
+    // unroll menu
+    menuroll();
+
+    // switch lang
+    switch_lang(lang, true, category_id);
+
+    // setup image sources
+    switch_pics();
+};
+
 /* TODO: move this into single
 if (document.getElementById("video_info_container_sk")) {
     document.getElementById("video_info_container_sk").style.display = 'inline';

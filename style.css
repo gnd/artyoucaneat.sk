@@ -230,15 +230,15 @@ a.menu_entry:hover {
 
 #menu_entry_search {
     visibility: hidden;
-    width: 1em;
+    width: 0.8em;
     position: fixed;
     z-index: 667;
     margin-bottom: 3em;
 }
 
 #menu_entry_search:hover {
-    //cursor: hand;
-    //width: 1.1em;
+    cursor: hand;
+    width: 0.9em;
 }
 
 #lang_sk_switch {
@@ -935,4 +935,52 @@ img.embed_icon {
 #embed_en_close {
     display: none;
     font-size: 5vw;
+}
+
+/********************************************************
+                                                search
+********************************************************/
+
+#searchform {
+    height: 0em;
+    background-color: pink;
+    display: inline-block;
+    margin-block-end: 0em;
+    //margin-bottom: 2em;
+}
+
+#s {
+    position:relative;
+    top: -0.05em;
+    width: 10em;
+    border: 0;
+    border-bottom: 1px solid;
+    padding: 0;
+    font-size: 1.5vw;
+}
+
+#s:focus {
+    outline: none;
+}
+
+#searchsubmit {
+    font-size: 1.5vw;
+}
+
+#content_container.search {
+    padding-top: 1em;
+}
+
+#people_found {
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+#places_found {
+    margin-bottom: 1em;
+}
+
+span.found_term {
+    font-size: 0.8vw;
+    padding-left: 0.4em;
 }

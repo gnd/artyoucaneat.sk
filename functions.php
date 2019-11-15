@@ -1,8 +1,15 @@
 <?php
 add_action( 'after_setup_theme', 'theme_setup' );
-remove_filter ('the_content', 'wpautop');
 
 
+/*
+    Add a wpfts filter hook to search also metafields
+*/
+add_filter('wpfts_index_post', function($index, $post) {
+    global $wpdb;
+    $index['pods_fields'] = get_post_meta($post->ID, '_product_content', true);
+    return $index;
+}, 3, 2);
 
 /*
     This registers custom sizes of thumbnails

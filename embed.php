@@ -1,9 +1,6 @@
 <?php
-/* Template Name: Video Embed */
-
-/**
- * The main template file
- *
+/* Template Name: Video Embed
+ * 
  * All You Can template for Artyoucaneat.sk
  *
  * Learn more: {@link https://comms.gnd.sk}

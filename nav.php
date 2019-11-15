@@ -53,10 +53,7 @@
                     }
                 }
              ?>
-             <img class="menu_entry menu_entry_top" id="menu_entry_search" src="<?php bloginfo('template_directory'); ?>/assets/images/white.png">
-             <!-- no such functionality
-             <img id="menu_entry_search" src="assets/images/lupa_icon_bk.png">
-             -->
+             <img class="menu_entry menu_entry_top" id="menu_entry_search" onclick="nav(/search/)" src="<?php bloginfo('template_directory'); ?>/assets/images/lupa_icon_bk.png">
              <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
              <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
              <br/>
@@ -94,10 +91,7 @@
                 }
             }
          ?>
-         <img id="mobile_menu_entry_search" src="<?php bloginfo('template_directory'); ?>/assets/images/white.png">
-         <!-- no such functionality
-         <img id="menu_entry_search" src="assets/images/lupa_icon_bk.png">
-         -->
+         <img id="mobile_menu_entry_search" onclick="nav(/search/)" src="<?php bloginfo('template_directory'); ?>/assets/images/lupa_icon_bk.png">
          <a class="mobile_menu_entry_top" id="mobile_lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
          <a class="mobile_menu_entry_top" id="mobile_lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
      </div>
