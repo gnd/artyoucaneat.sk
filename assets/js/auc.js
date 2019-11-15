@@ -415,7 +415,28 @@ function search_setup(lang) {
     menuroll();
 
     // switch lang
-    switch_lang(lang, true, category_id);
+    switch_lang(lang, true, 0);
+
+    // setup image sources
+    switch_pics();
+};
+
+
+function term_setup(lang) {
+
+    if (lang == 'sk') {
+        active_lang = 'sk';
+        inactive_lang = 'en';
+    } else {
+        active_lang = 'en';
+        inactive_lang = 'sk';
+    }
+
+    // unroll menu
+    menuroll();
+
+    // switch lang
+    switch_lang(lang, true, 0);
 
     // setup image sources
     switch_pics();

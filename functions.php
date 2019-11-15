@@ -43,11 +43,13 @@ function term_has_children( $term_id = '', $taxonomy = 'category' )
 /*
     This takes raw input from additional post fields for persons (via PODS) and returns formated links
 */
-function process_persons($persons) {
+function process_persons($persons, $linkable=false) {
     foreach ($persons as $person) {
-        // activate this once persons pages up
-        //$links[] = '<a class="video_info" href="/' . $person["slug"] . '">' . $person["name"] . '</a>';
-        $links[] = '<a class="video_info" href="#">' . $person["name"] . '</a>';
+        if ($linkable) {
+            $links[] = '<a class="video_info" href="/people/' . $person["slug"] . '">' . $person["name"] . '</a>';
+        } else {
+            $links[] = '<a class="video_info" href="#">' . $person["name"] . '</a>';
+        }
     }
     return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
 }
@@ -59,8 +61,8 @@ function process_persons($persons) {
 function process_places($places) {
     foreach ($places as $place) {
         // activate this once persons pages up
-        //$links[] = '<a class="video_info" href="/' . $place["slug"] . '">' . $place["name"] . '</a>';
-        $links[] = '<a class="video_info" href="#">' . $place["name"] . '</a>';
+        $links[] = '<a class="video_info" href="/place/' . $place["slug"] . '">' . $place["name"] . '</a>';
+        //$links[] = '<a class="video_info" href="#">' . $place["name"] . '</a>';
     }
     return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
 }
@@ -75,8 +77,8 @@ function process_artists($artists, $max_length) {
     foreach ($artists as $artist) {
         if (($length + strlen($artist["name"])) <= $max_length) {
             // activate this once we have a template for persons
-            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
+            $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/people/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
+            //$links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="#">' . $artist["name"] . '</a>';
             $length += strlen($artist["name"]);
         } else {
             $links[] = "\n\t\t\t\t\t\t\t" .' ai.';

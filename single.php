@@ -37,8 +37,8 @@
  // Process $artists
  foreach ($artists as $artist) {
      // activate this once we have a template for persons
-     //$links[] = '<a class="video_artist_name" href="/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-     $links[] = '<a class="video_artist_name" href="#">' . $artist["name"] . '</a>';
+     $links[] = '<a class="video_artist_name" href="/people/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
+     //$links[] = '<a class="video_artist_name" href="#">' . $artist["name"] . '</a>';
  }
  $artist_links = implode(", ", $links);
 
@@ -48,11 +48,11 @@ $content_en = str_replace("<a href=", "<a class='text_link' href=", $content_en)
 
 // Process the post's additional fields
 $curators = get_post_meta($current_id, 'curators');
-$curator_links = process_persons($curators);
+$curator_links = process_persons($curators, true);
 $gallery = get_post_meta($current_id, 'gallery');
 $gallery_links = process_places($gallery);
 $performers = get_post_meta($current_id, 'performers');
-$performer_links = process_persons($performers);
+$performer_links = process_persons($performers, true);
 $camera = get_post_meta($current_id, 'camera');
 $camera_links = process_persons($camera);
 $sound = get_post_meta($current_id, 'sound');

@@ -79,12 +79,24 @@ $q = sanitize_text_field(get_search_query());
             $q = get_search_query();
             $params = array('where'=> "t.name like '%$q%'");
             $people = pods( 'osoby', $params );
+            $people_string = "";
+            while ( $people->fetch() ) {
+                $slug = get_term_by('id', $people->field('ID'), 'osoby')->slug;
+                $name = get_term_by('id', $people->field('ID'), 'osoby')->name;
+                $people_string .= "<span class=\"found_term\"><a class=\"video_info\" href=\"/people/$slug\">$name</a> </span>";
+            }
             /*
             * PODS search via places
             */
             $q = get_search_query();
             $params = array('where'=> "t.name like '%$q%'");
             $places = pods( 'priestory', $params );
+            $places_string = "";
+            while ( $places->fetch() ) {
+                $slug = get_term_by('id', $places->field('ID'), 'priestory')->slug;
+                $name = get_term_by('id', $places->field('ID'), 'priestory')->name;
+                $places_string .= "<span class=\"found_term\"><a class=\"video_info\" href=\"/place/$slug\">$name</a> </span>";
+            }
         ?>
 
         <div id="video_artists_sk">
@@ -92,21 +104,13 @@ $q = sanitize_text_field(get_search_query());
                 // Display people results
                 if ($people->total() > 0) {
                     echo '<div id="people_found">Osoby: ';
-                    while ( $people->fetch() ) {
-                        $slug = get_term_by('id', $people->field('ID'), 'osoby')->slug;
-                        $name = get_term_by('id', $people->field('ID'), 'osoby')->name;
-                        echo "<span class=\"found_term\"><a class=\"video_info\" href=\"/people/$slug\">$name</a> </span>";
-                    }
+                    echo $people_string;
                     echo "</div>";
                 }
                 // Display places results
                 if ($places->total() > 0) {
                     echo '<div id="places_found">Priestory: ';
-                    while ( $places->fetch() ) {
-                        $slug = get_term_by('id', $places->field('ID'), 'priestory')->slug;
-                        $name = get_term_by('id', $places->field('ID'), 'priestory')->name;
-                        echo "<span class=\"found_term\"><a class=\"video_info\" href=\"/place/$slug\">$name</a> </span>";
-                    }
+                    echo $places_string;
                     echo "</div>";
                 }
                 // Display post results
@@ -119,17 +123,25 @@ $q = sanitize_text_field(get_search_query());
             ?>
         </div>
         <div id="video_artists_en">
-            <?php
+            <?php //TODO make these div ids custom for the search template
+                // Display people results
+                if ($people->total() > 0) {
+                    echo '<div id="people_found">People: ';
+                    echo $people_string;
+                    echo "</div>";
+                }
+                // Display places results
+                if ($places->total() > 0) {
+                    echo '<div id="places_found">Places: ';
+                    echo $places_string;
+                    echo "</div>";
+                }
+                // Display post results
+                $num = sizeof($found);
                 if ($num == 0) {
-                    echo 'No search results were found.';
+                    echo 'No posts found.';
                 } else {
-                    echo $num;
-                    if ($num == 1) {
-                        echo ' search result found for ';
-                    } else {
-                        echo ' search results found for ';
-                    }
-                    echo '"' . get_search_query() . '"';
+                    echo 'Posts:';
                 }
             ?>
         </div>
