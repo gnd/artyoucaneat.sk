@@ -165,14 +165,6 @@ function switch_lang(lang, send, id) {
             for (var i = 0; i < hidden.length; i++) {
                 hidden[i].style.display = "none";
             }
-            /* TODO - when single template
-            if (document.getElementById("video_info_container_mobile_sk")) {
-                document.getElementById("video_info_container_mobile_sk").style.display = 'block';
-            }
-            if (document.getElementById("video_info_container_mobile_en")) {
-                document.getElementById("video_info_container_mobile_en").style.display = 'none';
-            }
-            */
         }
         // Indicate language
         document.getElementById('mobile_lang_' + active_lang + '_switch').style.fontWeight = 'bold';
@@ -241,6 +233,12 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'none';
+        }
+        if (document.getElementById("video_info_container_mobile_sk")) {
+            document.getElementById("video_info_container_mobile_sk").style.display = 'block';
+        }
+        if (document.getElementById("video_info_container_mobile_en")) {
+            document.getElementById("video_info_container_mobile_en").style.display = 'none';
         }
         if (document.getElementById("ordinary_text_info_sk")) {
             document.getElementById("ordinary_text_info_sk").style.display = 'block';
@@ -332,6 +330,12 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'block';
+        }
+        if (document.getElementById("video_info_container_mobile_sk")) {
+            document.getElementById("video_info_container_mobile_sk").style.display = 'none';
+        }
+        if (document.getElementById("video_info_container_mobile_en")) {
+            document.getElementById("video_info_container_mobile_en").style.display = 'block';
         }
         if (document.getElementById("ordinary_text_info_en")) {
             document.getElementById("ordinary_text_info_en").style.display = 'block';
@@ -533,13 +537,13 @@ function cat_unroll(id) {
 
     if (unrolled.indexOf(id) > -1) {
         if (device_type == 'phone') {
-            // TODO - dela with these shitty shits
+            // TODO - deal with these shitty shits
             if (site_location == 'index') {
                 if (document.getElementById("landing_container")) {
                     document.getElementById("landing_container").style.paddingTop = "10em";
                 }
             }
-            if (site_location == 'single') {
+            if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {
                 if (document.getElementById("center_container")) {
                     document.getElementById("center_container").style.paddingTop = "10em";
                 }
@@ -566,7 +570,7 @@ function cat_unroll(id) {
                     document.getElementById("landing_container").style.paddingTop = "13.5em";
                 }
             }
-            if (site_location == 'single') {
+            if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {
                 if (document.getElementById("center_container")) {
                     document.getElementById("center_container").style.paddingTop = "13.5em";
                 }

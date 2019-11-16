@@ -1008,3 +1008,32 @@ span.found_term {
     font-size: 0.8vw;
     padding-left: 0.4em;
 }
+
+/********************************************************
+                                                TERMS
+********************************************************/
+
+
+#term_name_sk {
+    margin-top: 1.8em;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+}
+
+#term_name_en {
+    margin-top: 1.8em;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+    display: none;
+}
+
+#term_results_sk {
+    font-size: 0.7em;
+    width: 100%;
+}
+
+#term_results_en {
+    font-size: 0.7em;
+    width: 100%;
+    display: none;
+}

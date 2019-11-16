@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Place
+/* Template Name: Editor
  *
  * All You Can template for Artyoucaneat.sk
  *
@@ -12,14 +12,14 @@
  session_start();
  require_once 'lang.php';
  if ($_SESSION["lang"] == "sk") {
-     $page_title = 'Art You Can Eat / Vyhľadávanie';
+     $page_title = 'Art You Can Eat / Strih';
  } else {
-     $page_title = 'Art You Can Eat / Search';
+     $page_title = 'Art You Can Eat / Editor';
  }
 
  $slug = sanitize_text_field($_REQUEST["p"]);
- $term = get_term_by('slug', $slug, 'priestory');
- $params = array('where'=> "gallery.name = '$term->name'");
+ $term = get_term_by('slug', $slug, 'osoby');
+ $params = array('where'=> "edit.name = '$term->name'");
  $pods = pods( 'post', $params );
 
  ?>
@@ -62,7 +62,7 @@
              <?php
                  // Display post results
                  if ($pods->total() == 0) {
-                     echo 'Priestor nieje v databáze.';
+                     echo 'Osoba nieje v databáze.';
                  } else {
                      echo "Príspevky súvisiace s $term->name: ";
                  }
@@ -71,7 +71,7 @@
          <div id="term_results_en">
              <?php
                  if ($pods->total() == 0) {
-                     echo 'Place not in database.';
+                     echo 'Person not in database.';
                  } else {
                      echo "Posts related to $term->name: ";
                  }

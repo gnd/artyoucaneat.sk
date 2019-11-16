@@ -1,5 +1,5 @@
 <?php
-/* Template Name: People
+/* Template Name: Camera
  *
  * All You Can template for Artyoucaneat.sk
  *
@@ -12,14 +12,14 @@
  session_start();
  require_once 'lang.php';
  if ($_SESSION["lang"] == "sk") {
-     $page_title = 'Art You Can Eat / Vyhľadávanie';
+     $page_title = 'Art You Can Eat / Kamera';
  } else {
-     $page_title = 'Art You Can Eat / Search';
+     $page_title = 'Art You Can Eat / Camera';
  }
 
  $slug = sanitize_text_field($_REQUEST["p"]);
  $term = get_term_by('slug', $slug, 'osoby');
- $params = array('where'=> "artists.name = '$term->name' OR curators.name = '$term->name' OR performers.name = '$term->name'");
+ $params = array('where'=> "camera.name = '$term->name'");
  $pods = pods( 'post', $params );
 
  ?>
@@ -40,7 +40,7 @@
 
  <div id="main_container">
      <div id="center_container" class="single_video">
-         <div id="video_name_sk">
+         <div id="term_name_sk">
              <?php
                 if ($pods->total() == 0) {
                     echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
@@ -49,7 +49,7 @@
                 }
              ?>
         </div>
-        <div id="video_name_en">
+        <div id="term_name_en">
              <?php
                 if ($pods->total() == 0) {
                     echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
@@ -58,8 +58,8 @@
                 }
              ?>
          </div>
-         <div id="video_artists_sk">
-             <?php //TODO make these div ids custom for the search template
+         <div id="term_results_sk">
+             <?php
                  // Display post results
                  if ($pods->total() == 0) {
                      echo 'Osoba nieje v databáze.';
@@ -68,7 +68,7 @@
                  }
              ?>
          </div>
-         <div id="video_artists_en">
+         <div id="term_results_en">
              <?php
                  if ($pods->total() == 0) {
                      echo 'Person not in database.';
@@ -164,7 +164,7 @@
     <!-- START ADDITIONAL JS SCRIPTS -->
     <script>
          // setup some globals
-         site_location = 'people';
+         site_location = 'terms';
 
          // nastav js podla typu klienta
          detect_client();

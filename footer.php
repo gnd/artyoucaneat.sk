@@ -14,7 +14,7 @@
  session_start();
 
  ?>
- <div id="footer_container">
+        <div id="footer_container">
              <div id="footer">
                  <p id="footer_text_sk">
                      2019 | Art You Can Eat | <a class="footer_link" href="/index.php/info">O nás</a> | <a class="footer_link" href="mailto:info@artyoucaneat.sk">Kontaktujte nás</a> | <a class="footer_link" href="https://artyoucaneat.us19.list-manage.com/subscribe/post?u=2079c11dddd8bc55f68c463e6&id=ff70468355">Odoberať novinky</a> | Hosting <a class="footer_link" href="https://multiplace.org">Sanchez / Multiplace.org</a> | Web gnd & mrgt
@@ -30,5 +30,5 @@
                  </p>
              </div>
          </div>
-     </div>
- </div>
+     </div> <!-- center_container -->
+ </div> <!-- main_container -->

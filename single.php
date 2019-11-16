@@ -36,11 +36,9 @@
 
  // Process $artists
  foreach ($artists as $artist) {
-     // activate this once we have a template for persons
-     $links[] = '<a class="video_artist_name" href="/people/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
-     //$links[] = '<a class="video_artist_name" href="#">' . $artist["name"] . '</a>';
+     $links[] = '<a class="video_artist_name" href="/artist/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
  }
- $artist_links = implode(", ", $links);
+ $artist_links = implode(", \n", $links);
 
 // Process content - add a CSS class to <a href
 $content_sk = str_replace("<a href=", "<a class='text_link' href=", $content_sk);
@@ -48,21 +46,21 @@ $content_en = str_replace("<a href=", "<a class='text_link' href=", $content_en)
 
 // Process the post's additional fields
 $curators = get_post_meta($current_id, 'curators');
-$curator_links = process_persons($curators, true);
+$curator_links = process_persons($curators, "curator");
 $gallery = get_post_meta($current_id, 'gallery');
 $gallery_links = process_places($gallery);
 $performers = get_post_meta($current_id, 'performers');
-$performer_links = process_persons($performers, true);
+$performer_links = process_persons($performers, "performer");
 $camera = get_post_meta($current_id, 'camera');
-$camera_links = process_persons($camera);
+$camera_links = process_persons($camera, "camera");
 $sound = get_post_meta($current_id, 'sound');
-$sound_links = process_persons($sound);
+$sound_links = process_persons($sound, "sound");
 $editing = get_post_meta($current_id, 'edit');
-$editing_links = process_persons($editing);
+$editing_links = process_persons($editing, "editor");
 $interviewer = get_post_meta($current_id, 'interviewer');
-$interviewer_links = process_persons($interviewer);
+$interviewer_links = process_persons($interviewer, "interview");
 $translation = get_post_meta($current_id, 'translation');
-$translation_links = process_persons($translation);
+$translation_links = process_persons($translation, "translation");
 
  // Proces category links
  $category_sk = "\t\t\t\t" . '<a class="video_info" href="' . $category_link . '">' . $category_name_sk . '</a>' . "\n\t\t\t";
