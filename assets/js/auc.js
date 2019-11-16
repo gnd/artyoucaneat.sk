@@ -368,21 +368,17 @@ function switch_lang(lang, send, id) {
 };
 
 function allyoucan_setup(lang) {
-
     // hide video controls
     if (document.getElementById("landing_video")) {
         document.getElementById("landing_video").removeAttribute("controls");
     }
-
     // switch lang
     switch_lang(lang, false, 0);
-
     // setup image sources
     switch_pics();
 };
 
 function category_setup(lang, parent_id, category_id) {
-
     if (lang == 'sk') {
         active_lang = 'sk';
         inactive_lang = 'en';
@@ -390,23 +386,18 @@ function category_setup(lang, parent_id, category_id) {
         active_lang = 'en';
         inactive_lang = 'sk';
     }
-
     // unroll menu
     menuroll();
-
     // unroll category
     cat_unroll(parent_id);
-
     // switch lang
     switch_lang(lang, true, category_id);
-
     // setup image sources
     switch_pics();
 };
 
 
 function search_setup(lang) {
-
     if (lang == 'sk') {
         active_lang = 'sk';
         inactive_lang = 'en';
@@ -414,20 +405,16 @@ function search_setup(lang) {
         active_lang = 'en';
         inactive_lang = 'sk';
     }
-
     // unroll menu
     menuroll();
-
     // switch lang
     switch_lang(lang, true, 0);
-
     // setup image sources
     switch_pics();
 };
 
 
 function term_setup(lang) {
-
     if (lang == 'sk') {
         active_lang = 'sk';
         inactive_lang = 'en';
@@ -435,13 +422,10 @@ function term_setup(lang) {
         active_lang = 'en';
         inactive_lang = 'sk';
     }
-
     // unroll menu
     menuroll();
-
     // switch lang
     switch_lang(lang, true, 0);
-
     // setup image sources
     switch_pics();
 };
