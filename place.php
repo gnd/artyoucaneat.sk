@@ -11,16 +11,12 @@
  */
  session_start();
  require_once 'lang.php';
- if ($_SESSION["lang"] == "sk") {
-     $page_title = 'Art You Can Eat / Vyhľadávanie';
- } else {
-     $page_title = 'Art You Can Eat / Search';
- }
 
  $slug = sanitize_text_field($_REQUEST["p"]);
  $term = get_term_by('slug', $slug, 'priestory');
  $params = array('where'=> "gallery.name = '$term->name'");
  $pods = pods( 'post', $params );
+ $page_title = 'Art You Can Eat / ' . $term->name;
 
  ?>
 
@@ -165,6 +161,8 @@
     <script>
          // setup some globals
          site_location = 'terms';
+         page_title_sk = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
+         page_title_en = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
 
          // nastav js podla typu klienta
          detect_client();
