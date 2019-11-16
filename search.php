@@ -18,7 +18,6 @@ if ($_SESSION["lang"] == "sk") {
     $page_title = 'Art You Can Eat / Search';
 }
 
-// TODO sanitize search input, disallow empty search
 global $wp_query;
 $found = Array();
 $people = Array();
@@ -100,7 +99,7 @@ $q = sanitize_text_field(get_search_query());
         ?>
 
         <div id="search_results_sk">
-            <?php //TODO make these div ids custom for the search template
+            <?php
                 // Display people results
                 if ($people->total() > 0) {
                     echo '<div id="people_found">Osoby: ';
@@ -123,7 +122,7 @@ $q = sanitize_text_field(get_search_query());
             ?>
         </div>
         <div id="search_results_en">
-            <?php //TODO make these div ids custom for the search template
+            <?php
                 // Display people results
                 if ($people->total() > 0) {
                     echo '<div id="people_found">People: ';

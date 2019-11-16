@@ -1,6 +1,6 @@
 <?php
 /* Template Name: Video Embed
- * 
+ *
  * All You Can template for Artyoucaneat.sk
  *
  * Learn more: {@link https://comms.gnd.sk}
@@ -18,12 +18,12 @@
 
  // Process video data
  $poster = get_post_meta($current_id, 'poster');
- $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
- $poster_big = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
- $slide_image = site_url() . '/assets/video/' . $video_link_txt . '.jpg'; //FIXME
+ $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+ $poster_full = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
  $video_link = $matches[1];
+ $slide_image = "/" . $video_link . ".jpg";
  $video_share_link = get_permalink($current_id);
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
@@ -48,7 +48,6 @@
              $duration = get_post_meta(get_the_ID(), 'duration', true);
 
              // prepare related videos for Nuevo
-             // TODO need to know video duration smh
              $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
              $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
              $lid += 1;
@@ -109,10 +108,8 @@
 
 </head>
 <body>
-    <!-- TODO: make poster small everywhere -->
-    <!-- TODO: how will poster replacing work ? -->
     <div id="landing_container" style="width: 100%; margin: 0; padding: 0;">
-        <video id="landing_video" class="video-js-embed initial video-js vjs-16-9" controls poster="<?php echo $poster_big; ?>" onplay="startlanding()">
+        <video id="landing_video" class="video-js-embed initial video-js vjs-16-9" controls poster="<?php echo $poster_medium; ?>" onplay="startlanding()">
         <source src="/<?php echo $video_link; ?>.mp4" type="video/mp4" res="1080" default label="1080p "/>
         <source src="/<?php echo $video_link; ?>_720p.mp4" type="video/mp4" res="720" label="720p "/>
         <source src="/<?php echo $video_link; ?>_480p.mp4" type="video/mp4" res="480" label="480p "/>
@@ -127,12 +124,33 @@
 <script src="<?php bloginfo('template_directory'); ?>/assets/js/nuevo.min.js"></script>
 <script>
     // nuevo & video.js setup
+    var device_type = 'desktop';
     var slide_image = "<?php echo $slide_image; ?>";
     var video_share_link = "<?php echo $video_share_link; ?>";
     var video_share_embed = '<?php echo $video_share_embed; ?>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
     var video_name = "<?php echo $curent_title_sk; ?>";
+    var poster_full = "<?php echo $poster_full; ?>";
 
+    // detect device type
+    const mq = window.matchMedia('screen and (min-width: 300px) and (max-width: 340px)');
+    if (mq.matches) {
+        device_type = 'phone';
+    }
+    const mq2 = window.matchMedia('screen and (min-width: 341px) and (max-width: 365px)');
+    if (mq2.matches) {
+        device_type = 'phone';
+    }
+    const mq3 = window.matchMedia('screen and (min-width: 370px) and (max-width: 380px)');
+    if (mq3.matches) {
+        device_type = 'phone';
+    }
+    const mq4 = window.matchMedia('screen and (min-width: 400px) and (max-width: 1000px)');
+    if (mq4.matches) {
+        device_type = 'phone';
+    }
+
+    // switch to english
     if ("<?php echo $_SESSION["lang"]; ?>" == "en") {
         var related_videos = <?php echo json_encode($related_videos_en); ?>;
         var video_name = "<?php echo $current_title_en; ?>";
@@ -157,6 +175,13 @@
         logourl: '//artyoucaneat.sk',
         logoposition: 'RT'
     });
+
+    // Switch posters
+    if (device_type == 'desktop') {
+        if (document.getElementById("landing_video")) {
+            player.poster(poster_full);
+        }
+    }
 </script>
 </body>
 </html>

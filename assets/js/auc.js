@@ -478,15 +478,6 @@ function term_setup(lang) {
     switch_pics();
 };
 
-/* TODO: move this into single
-if (document.getElementById("video_info_container_sk")) {
-    document.getElementById("video_info_container_sk").style.display = 'inline';
-}
-if (document.getElementById("video_info_container_en")) {
-    document.getElementById("video_info_container_en").style.display = 'none';
-}
-*/
-
 // show / hide the menu according to device_type
 function menuroll() {
     if (menu) {
@@ -569,7 +560,6 @@ function cat_unroll(id) {
 
     if (unrolled.indexOf(id) > -1) {
         if (device_type == 'phone') {
-            // TODO - deal with these shitty shits
             if (site_location == 'index') {
                 if (document.getElementById("landing_container")) {
                     document.getElementById("landing_container").style.paddingTop = "10em";
@@ -596,7 +586,6 @@ function cat_unroll(id) {
         unrolled.splice(unrolled.indexOf(id), 1);
     } else {
         if (device_type == 'phone') {
-            // TODO - deal with these shitty shits
             if (site_location == 'index') {
                 if (document.getElementById("landing_container")) {
                     document.getElementById("landing_container").style.paddingTop = "13.5em";

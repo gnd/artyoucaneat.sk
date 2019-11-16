@@ -41,8 +41,8 @@
  $artist_links = implode(", \n", $links);
 
 // Process content - add a CSS class to <a href
-$content_sk = str_replace("<a href=", "<a class='text_link' href=", $content_sk);
-$content_en = str_replace("<a href=", "<a class='text_link' href=", $content_en);
+$content_sk = str_replace("<a href=", "<a class='text_link' target='_blank' href=", $content_sk);
+$content_en = str_replace("<a href=", "<a class='text_link' target='_blank' href=", $content_en);
 
 // Process the post's additional fields
 $curators = get_post_meta($current_id, 'curators');

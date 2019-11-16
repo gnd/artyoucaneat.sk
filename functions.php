@@ -73,7 +73,7 @@ function process_artists($artists, $max_length) {
             $links[] = "\n\t\t\t\t\t\t\t" . '<a class="index_link" href="/artist/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
             $length += strlen($artist["name"]);
         } else {
-            $links[] = "\n\t\t\t\t\t\t\t" .' ai.';
+            $links[] = "\n\t\t\t\t\t\t\t" . ' ai.';
             break;
         }
     }

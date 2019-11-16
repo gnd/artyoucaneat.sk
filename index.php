@@ -111,7 +111,6 @@ require_once 'lang.php';
                             show_index_post($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
 
                             // prepare related videos for Nuevo
-                            // TODO need to know video duration smh
                             $related_videos_sk[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_sk, 'duration' => $duration);
                             $related_videos_en[] = array('thumb' => $poster_small, 'url' => $link, 'title' => $title_en, 'duration' => $duration);
                             $lid += 1;
