@@ -234,6 +234,30 @@ function switch_lang(lang, send, id) {
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'none';
         }
+        if (document.getElementById("search_results_sk")) {
+            document.getElementById("search_results_sk").style.display = 'block';
+        }
+        if (document.getElementById("search_results_en")) {
+            document.getElementById("search_results_en").style.display = 'none';
+        }
+        if (document.getElementById("search_container_sk")) {
+            document.getElementById("search_container_sk").style.display = 'block';
+        }
+        if (document.getElementById("search_container_en")) {
+            document.getElementById("search_container_en").style.display = 'none';
+        }
+        if (document.getElementById("term_name_sk")) {
+            document.getElementById("term_name_sk").style.display = 'block';
+        }
+        if (document.getElementById("term_name_en")) {
+            document.getElementById("term_name_en").style.display = 'none';
+        }
+        if (document.getElementById("term_results_sk")) {
+            document.getElementById("term_results_sk").style.display = 'block';
+        }
+        if (document.getElementById("term_results_en")) {
+           document.getElementById("term_results_en").style.display = 'none';
+        }
         if (document.getElementById("video_info_container_mobile_sk")) {
             document.getElementById("video_info_container_mobile_sk").style.display = 'block';
         }
@@ -330,6 +354,30 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'block';
+        }
+        if (document.getElementById("search_results_sk")) {
+            document.getElementById("search_results_sk").style.display = 'none';
+        }
+        if (document.getElementById("search_results_en")) {
+            document.getElementById("search_results_en").style.display = 'block';
+        }
+        if (document.getElementById("search_container_sk")) {
+            document.getElementById("search_container_sk").style.display = 'none';
+        }
+        if (document.getElementById("search_container_en")) {
+            document.getElementById("search_container_en").style.display = 'block';
+        }
+        if (document.getElementById("term_name_sk")) {
+            document.getElementById("term_name_sk").style.display = 'none';
+        }
+        if (document.getElementById("term_name_en")) {
+            document.getElementById("term_name_en").style.display = 'block';
+        }
+        if (document.getElementById("term_results_sk")) {
+            document.getElementById("term_results_sk").style.display = 'none';
+        }
+        if (document.getElementById("term_results_en")) {
+            document.getElementById("term_results_en").style.display = 'block';
         }
         if (document.getElementById("video_info_container_mobile_sk")) {
             document.getElementById("video_info_container_mobile_sk").style.display = 'none';
