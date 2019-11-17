@@ -490,6 +490,24 @@ function menuroll() {
                 var child_class = 'mobile_childof_' + String(unrolled[i]) + '_' + active_lang;
                 $('.' + child_class).fadeOut(hide_time);
             }
+            // make content jump up a bit when we close the whole menu with unrolled categories
+            if (unrolled.length > 0) {
+                if (site_location == 'index') {
+                    if (document.getElementById("landing_container")) {
+                        document.getElementById("landing_container").style.paddingTop = "10em";
+                    }
+                }
+                if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {
+                    if (document.getElementById("center_container")) {
+                        document.getElementById("center_container").style.paddingTop = "10em";
+                    }
+                }
+                if ((site_location == 'profiles') || (site_location == 'reports')) {
+                    if (document.getElementById("content_container")) {
+                        document.getElementById("content_container").style.marginTop = "6em";
+                    }
+                }
+            }
         }
         if (device_type == 'desktop') {
             $('.menu_entry_top').hide( "clip", {direction: "horizontal"}, hide_time );
@@ -521,6 +539,24 @@ function menuroll() {
                 var children = document.getElementsByClassName(child_class);
                 for (var j = 0; j < children.length; ++j) {
                     children[j].style.visibility = "visible";
+                }
+            }
+            // make sure the content jumps lower in case we formerly put it back up on menu closeure with unrolled categories
+            if (unrolled.length > 0) {
+                if (site_location == 'index') {
+                    if (document.getElementById("landing_container")) {
+                        document.getElementById("landing_container").style.paddingTop = "13.5em";
+                    }
+                }
+                if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {
+                    if (document.getElementById("center_container")) {
+                        document.getElementById("center_container").style.paddingTop = "13.5em";
+                    }
+                }
+                if ((site_location == 'profiles') || (site_location == 'reports')) {
+                    if (document.getElementById("content_container")) {
+                        document.getElementById("content_container").style.marginTop = "9.5em";
+                    }
                 }
             }
         }
