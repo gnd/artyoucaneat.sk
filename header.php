@@ -17,10 +17,9 @@
  $cwd = getcwd() . str_replace(site_url(), "", get_bloginfo('template_directory'));
 
  ?>
-
-    <title>
+ <title>
          <?php echo $page_title . "\n"; ?>
-    </title>
+     </title>
 
      <meta charset="UTF-8">
      <meta name="description" content="Art You Can Eat je videoportál, ktorý mapuje slovenské súčasné umenie. Art You Can Eat is a new video portal maping the Slovak contemporary art scene." />

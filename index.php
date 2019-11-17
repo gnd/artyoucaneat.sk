@@ -26,6 +26,7 @@ require_once 'lang.php';
         require_once 'header.php';
     ?>
 </head>
+
 <body>
     <!-- START LANDING VIDEO -->
     <?php
@@ -85,11 +86,11 @@ require_once 'lang.php';
                 <div id="title_container_en">
                     <span id="index_title_en">NEW VIDEOS</span>
                 </div>
-                <!-- get most recent videos and display them
-                TODO: add paging in the future
-                -->
-                <?php
+
+                <!-- RELATED VIDEOS START -->
+<?php
                 // start showing past videos
+                //TODO: add paging in the future
                 $query = new WP_Query( array( 'category_name' => 'video' ) );
                 $lid = 0;
                     if ( $query->have_posts() ) {
@@ -119,13 +120,12 @@ require_once 'lang.php';
                         wp_reset_postdata();
                     }
                 ?>
-             </div>
+            </div> <!-- CONTENT CONTAINER -->
 
-    <!-- START FOOTER -->
-    <?php require_once 'footer.php'; ?>
+            <!-- START FOOTER -->
+            <?php require_once 'footer.php'; ?>
 
     <!-- START ADDITIONAL JS SCRIPTS -->
     <?php require_once 'footer-index-scripts.php'; ?>
-
 </body>
 </html>
