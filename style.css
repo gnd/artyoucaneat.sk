@@ -993,6 +993,7 @@ img.embed_icon {
 
 #content_container.search {
     padding-top: 1em;
+    margin-bottom: 5em;
 }
 
 #people_found {
@@ -1012,7 +1013,6 @@ span.found_term {
 /********************************************************
                                                 TERMS
 ********************************************************/
-
 
 #term_name_sk {
     margin-top: 1.8em;
