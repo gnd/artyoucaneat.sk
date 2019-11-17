@@ -65,11 +65,9 @@ $q = sanitize_text_field(get_search_query());
             $params = array('where'=> "content_en.meta_value like '%$q%' OR title_en.meta_value like '%$q%' OR artists.name like '%$q%' OR curators.name like '%$q%' OR performers.name like '%$q%'");
             $pods = pods( 'post', $params );
             // Get IDs of posts found via PODS
-            if ( 0 < $pods->total() ) {
-                while ( $pods->fetch() ) {
-                    if (! in_array($pods->field('ID'), $found)) {
-                        $found[] = $pods->field('ID');
-                    }
+            while ( $pods->fetch() ) {
+                if (! in_array($pods->field('ID'), $found)) {
+                    $found[] = $pods->field('ID');
                 }
             }
             /*
