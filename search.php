@@ -143,7 +143,7 @@ $q = sanitize_text_field(get_search_query());
             ?>
         </div>
 
-        <div id="content_container" class="cf videos search">
+        <div id="content_container" class="cf search">
         <?php
             // Loop and display found posts
             $lid = 0;
