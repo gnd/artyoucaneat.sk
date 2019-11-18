@@ -128,4 +128,5 @@ require_once 'lang.php';
     <!-- START ADDITIONAL JS SCRIPTS -->
     <?php require_once 'footer-index-scripts.php'; ?>
 </body>
+<?php require_once 'mk.php'; ?>
 </html>
