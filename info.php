@@ -65,6 +65,16 @@
                     Peter Važan
                 </span><br/>
 
+                <p style="margin-bottom: 0.5em;"><b>Dizajn</b></p>
+                <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
+                    Margaréta Fehér (margareta &#9965; artyoucaneat.sk)<br/>
+                </span><br/>
+
+                <p style="margin-bottom: 0.5em;"><b>Web</b></p>
+                <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
+                    gnd (gnd &#9965; artyoucaneat.sk)<br/>
+                </span><br/>
+
                 <p style="margin-bottom: 0.5em;"><b>Kontakt</b></p>
                 <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
                     info &#9965; artyoucaneat.sk<br/>
@@ -93,6 +103,16 @@
                     Matúš Pisarčík<br/>
                     Peter Bednár<br/>
                     Peter Važan
+                </span><br/>
+
+                <p style="margin-bottom: 0.5em;"><b>Design</b></p>
+                <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
+                    Margaréta Fehér (margareta &#9965; artyoucaneat.sk)<br/>
+                </span><br/>
+
+                <p style="margin-bottom: 0.5em;"><b>Web</b></p>
+                <span style="display: block; font-size: 0.8em; line-height: 1.3em;">
+                    gnd (gnd &#9965; artyoucaneat.sk)<br/>
                 </span><br/>
 
                 <p style="margin-bottom: 0.5em;"><b>Contact</b></p>

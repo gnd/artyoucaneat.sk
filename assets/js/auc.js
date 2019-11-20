@@ -169,6 +169,13 @@ function switch_lang(lang, send, id) {
         // Indicate language
         document.getElementById('mobile_lang_' + active_lang + '_switch').style.fontWeight = 'bold';
         document.getElementById('mobile_lang_' + inactive_lang + '_switch').style.fontWeight = 'normal';
+        // Show or hide video info data
+        if (document.getElementById("video_info_container_mobile_" + active_lang)) {
+            document.getElementById("video_info_container_mobile_" + active_lang).style.display = 'block';
+        }
+        if (document.getElementById("video_info_container_mobile_" + inactive_lang)) {
+            document.getElementById("video_info_container_mobile_" + inactive_lang).style.display = 'none';
+        }
     }
     // TODO - make sk / eng one
     if (lang == 'sk') {
@@ -257,12 +264,6 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("term_results_en")) {
            document.getElementById("term_results_en").style.display = 'none';
-        }
-        if (document.getElementById("video_info_container_mobile_sk")) {
-            document.getElementById("video_info_container_mobile_sk").style.display = 'block';
-        }
-        if (document.getElementById("video_info_container_mobile_en")) {
-            document.getElementById("video_info_container_mobile_en").style.display = 'none';
         }
         if (document.getElementById("ordinary_text_info_sk")) {
             document.getElementById("ordinary_text_info_sk").style.display = 'block';
@@ -378,12 +379,6 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("term_results_en")) {
             document.getElementById("term_results_en").style.display = 'block';
-        }
-        if (document.getElementById("video_info_container_mobile_sk")) {
-            document.getElementById("video_info_container_mobile_sk").style.display = 'none';
-        }
-        if (document.getElementById("video_info_container_mobile_en")) {
-            document.getElementById("video_info_container_mobile_en").style.display = 'block';
         }
         if (document.getElementById("ordinary_text_info_en")) {
             document.getElementById("ordinary_text_info_en").style.display = 'block';
