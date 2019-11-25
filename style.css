@@ -662,12 +662,12 @@ a.footer_link:hover {
 
 #video_artists_sk {
     font-size: 0.7em;
-    width: 100%;
+    width: 80%;
 }
 
 #video_artists_en {
     font-size: 0.7em;
-    width: 100%;
+    width: 80%;
     display: none;
 }
 

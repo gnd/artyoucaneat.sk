@@ -585,16 +585,18 @@ a.footer_link:hover {
 }
 
 #video_artists_sk {
-    width: 100%;
+    width: 96%;
     font-size: 2em;
     margin-left: 2%;
+    margin-right: 2%;
 }
 
 #video_artists_en {
-    width: 100%;
+    width: 96%;
     font-size: 2em;
     display: none;
     margin-left: 2%;
+    margin-right: 2%;
 }
 
 a.video_artist_name {
