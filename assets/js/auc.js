@@ -241,6 +241,12 @@ function switch_lang(lang, send, id) {
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'none';
         }
+        if (document.getElementById("video_info_container_sk")) {
+            document.getElementById("video_info_container_sk").style.display = 'block';
+        }
+        if (document.getElementById("video_info_container_en")) {
+            document.getElementById("video_info_container_en").style.display = 'none';
+        }
         if (document.getElementById("search_results_sk")) {
             document.getElementById("search_results_sk").style.display = 'block';
         }
@@ -355,6 +361,12 @@ function switch_lang(lang, send, id) {
         }
         if (document.getElementById("video_artists_en")) {
             document.getElementById("video_artists_en").style.display = 'block';
+        }
+        if (document.getElementById("video_info_container_sk")) {
+            document.getElementById("video_info_container_sk").style.display = 'none';
+        }
+        if (document.getElementById("video_info_container_en")) {
+            document.getElementById("video_info_container_en").style.display = 'block';
         }
         if (document.getElementById("search_results_sk")) {
             document.getElementById("search_results_sk").style.display = 'none';
