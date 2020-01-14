@@ -19,7 +19,6 @@
  $page_title = 'Art You Can Eat / ' . $term->name;
 
  ?>
-
  <html>
  <head>
      <!-- START HEADER -->
@@ -32,127 +31,10 @@
  </head>
  <body>
 
- <?php include "nav.php"; ?>
+<?php include "nav.php"; ?>
 
- <div id="main_container">
-     <div id="center_container" class="single_video">
-         <div id="term_name_sk">
-             <?php
-                if ($pods->total() == 0) {
-                    echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
-                } else {
-                    echo $term->name;
-                }
-             ?>
-        </div>
-        <div id="term_name_en">
-             <?php
-                if ($pods->total() == 0) {
-                    echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
-                } else {
-                    echo $term->name;
-                }
-             ?>
-         </div>
-         <div id="term_results_sk">
-             <?php
-                 // Display post results
-                 if ($pods->total() == 0) {
-                     echo 'Osoba nieje v databáze.';
-                 } else {
-                     echo "Príspevky súvisiace s $term->name: ";
-                 }
-             ?>
-         </div>
-         <div id="term_results_en">
-             <?php
-                 if ($pods->total() == 0) {
-                     echo 'Person not in database.';
-                 } else {
-                     echo "Posts related to $term->name: ";
-                 }
-             ?>
-         </div>
-
-         <div id="content_container" class="cf videos search">
-         <?php
-             // Loop and display found posts
-             $lid = 0;
-             while ( $pods->fetch() ) {
-                 $id = $pods->field('ID');
-                 if (get_post_type($id) == 'post') {
-                     $link = wp_make_link_relative(get_permalink($id, false));
-                     $poster = get_post_meta($id, 'poster');
-                     $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
-                     $category_link = get_category_link(get_the_category($id)[0]->cat_ID);
-                     $category_name_sk = get_the_category($id)[0]->name;
-                     $category_name_en = get_the_category($id)[0]->description;
-                     $title_sk = get_the_title($id);
-                     $title_en = get_post_meta($id, 'title_en', true);
-                     $artists = get_post_meta($id, 'artists');
-                     show_related_in_single($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
-                     $lid += 1;
-                 }
-             }
-
-             ?>
-                 <!-- RELATED VIDEOS -->
-                 <div id="title_container_sk" class="single_video">
-                     <span id="index_title">
-                         <?php
-                             if ($pods->total == 0) {
-                                 echo "INÉ PRÍSPEVKY";
-                             } else {
-                                 echo "POZRITE SI TIEŽ";
-                             }
-                         ?>
-                     </span>
-                 </div>
-                 <div id="title_container_en" class="single_video">
-                     <span id="index_title">
-                         <?php
-                             if ($pods->total == 0) {
-                                 echo "OTHER VIDEOS";
-                             } else {
-                                 echo "WATCH ALSO";
-                             }
-                         ?>
-                     </span>
-                 </div>
-             <?php
-                 if ($pods->total == 0) {
-                     $posts_per_page = 9;
-                 } else {
-                     $posts_per_page = 6;
-                 }
-                 $query = new WP_Query( array( 'category_name' => 'video', 'posts_per_page' => $posts_per_page, 'no_found_rows' => true ) );
-                 $lid = 0;
-                 if ( $query->have_posts() ) {
-                     while ( $query->have_posts() ) {
-                         $query->the_post();
-                         if ($current_id != get_the_ID() && $lid < 9) {
-                             $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                             $poster = get_post_meta(get_the_ID(), 'poster');
-                             $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
-                             $category_link = get_category_link(get_the_category()[0]->cat_ID);
-                             $category_name_sk = get_the_category()[0]->name;
-                             $category_name_en = get_the_category()[0]->description;
-                             $title_sk = get_the_title();
-                             $title_en = get_post_meta(get_the_ID(), 'title_en', true);
-                             $artists = get_post_meta(get_the_ID(), 'artists');
-                             $duration = get_post_meta(get_the_ID(), 'duration', true);
-
-                             // show past videos
-                             show_related_in_single($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
-                             $lid += 1;
-                         }
-                     }
-                     /* Restore original Post Data */
-                     wp_reset_postdata();
-                 }
-
-         ?>
-         </div>
+<!-- START GENERIC PART OF PEOPLE RESULTS -->
+<?php require_once 'people_generic.php'; ?>
 
     <!-- START FOOTER -->
     <?php require_once 'footer.php'; ?>

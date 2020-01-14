@@ -76,6 +76,9 @@
 
          <div id="content_container" class="cf videos search">
          <?php
+            // Keep track of posts that were shown, so as not to include them in related posts
+            $shown_posts = Array();
+
              // Loop and display found posts
              $lid = 0;
              while ( $pods->fetch() ) {
@@ -91,6 +94,7 @@
                      $title_en = get_post_meta($id, 'title_en', true);
                      $artists = get_post_meta($id, 'artists');
                      show_related_in_single($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                     $shown_posts[] = $id;
                      $lid += 1;
                  }
              }
@@ -121,16 +125,18 @@
                  </div>
              <?php
                  if ($pods->total == 0) {
+                     $show_max = 9;
                      $posts_per_page = 9;
                  } else {
-                     $posts_per_page = 6;
+                     $show_max = 6;
+                     $posts_per_page = 9; // This should be 6, but ask for more because some vids might get excluded
                  }
                  $query = new WP_Query( array( 'category_name' => 'video', 'posts_per_page' => $posts_per_page, 'no_found_rows' => true ) );
-                 $lid = 0;
+                 $shown = 0;
                  if ( $query->have_posts() ) {
                      while ( $query->have_posts() ) {
                          $query->the_post();
-                         if ($current_id != get_the_ID() && $lid < 9) {
+                         if (!in_array(get_the_ID(), $shown_posts) && $shown < $show_max) {
                              $link = wp_make_link_relative(get_permalink($query->theID(), false));
                              $poster = get_post_meta(get_the_ID(), 'poster');
                              $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
@@ -143,8 +149,8 @@
                              $duration = get_post_meta(get_the_ID(), 'duration', true);
 
                              // show past videos
-                             show_related_in_single($lid, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
-                             $lid += 1;
+                             show_related_in_single($shown, $link, $poster_medium, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists);
+                             $shown += 1;
                          }
                      }
                      /* Restore original Post Data */
@@ -152,7 +158,7 @@
                  }
 
          ?>
-         </div>
+    </div> <!-- END CONTENT CONTAINER -->
 
     <!-- START FOOTER -->
     <?php require_once 'footer.php'; ?>

@@ -30,5 +30,5 @@
                     </p>
                 </div>
             </div>
-        </div> <!-- CENTER CONTAINER -->
-    </div> <!-- MAIN CONTAINER -->
+        </div> <!-- END CENTER CONTAINER -->
+    </div> <!-- END MAIN CONTAINER -->
