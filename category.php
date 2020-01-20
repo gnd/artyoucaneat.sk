@@ -52,6 +52,7 @@ if ($_SESSION["lang"] == "sk") {
                     'cat' => $category_id,
                     'orderby' => 'date',
                     'order'   => 'DESC',
+                    'posts_per_page' => 9,
                 );
                 $query = new WP_Query($args);
                 // if category has some posts
