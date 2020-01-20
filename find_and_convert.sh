@@ -37,7 +37,7 @@ else
 		sendemail -o tls=yes -s $SERVER:$PORT -xu $USER -xp $PASS -f $FROM -t $TO -u "New video to be converted: $RAWNAME" -m "No further text."
 
 		cd $DIR
-		$WEB_ROOT/wp-content/themes/allyoucan/sprites.sh -i $FILE -o $RAWNAME".jpg"
+		$WEB_ROOT/wp-content/themes/allyoucan/sprites.sh -i $FILE -o $RAWNAME"_sprite.jpg"
 		$WEB_ROOT/wp-content/themes/allyoucan/convert.sh $FILE
 
 		# Report conversion
