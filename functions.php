@@ -1,7 +1,6 @@
 <?php
 add_action( 'after_setup_theme', 'theme_setup' );
 
-
 /*
     Add a wpfts filter hook to search also metafields
 */
@@ -10,6 +9,20 @@ add_filter('wpfts_index_post', function($index, $post) {
     $index['pods_fields'] = get_post_meta($post->ID, '_product_content', true);
     return $index;
 }, 3, 2);
+
+/*
+    Add a pre_get_posts filter to change paging in categories
+*/
+add_filter('pre_get_posts', function ($query) {
+    if ($query->is_category) {
+        if (is_category('profile')) {
+            $query->set('posts_per_archive_page', 9);
+        }
+        if (is_category('report')) {
+            $query->set('posts_per_archive_page', 9);
+        }
+    }
+});
 
 /*
     This registers custom sizes of thumbnails

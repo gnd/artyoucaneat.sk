@@ -42,17 +42,19 @@ if ($_SESSION["lang"] == "sk") {
 <div id="main_container">
     <div id="center_container" class="videos">
         <div id="content_container" class="cf videos">
-
-            <!-- get most recent videos and display them
-            TODO: add paging in the future
-            -->
+            <!-- get most recent videos and display them -->
             <?php
+                if ( get_query_var( 'paged' ) ) { $paged = get_query_var( 'paged' ); }
+            //    elseif ( get_query_var( 'page' ) ) { $paged = get_query_var( 'page' ); }
+                else { $paged = 1; }
+
                 // retrieve posts in category
                 $args = array(
                     'cat' => $category_id,
                     'orderby' => 'date',
                     'order'   => 'DESC',
-                    'posts_per_page' => 9,
+                    //'posts_per_page' => 6,
+                    'paged' => $paged,
                 );
                 $query = new WP_Query($args);
                 // if category has some posts
@@ -86,6 +88,9 @@ if ($_SESSION["lang"] == "sk") {
                 }
                 ?>
         </div>
+
+   <!-- START PAGINATION -->
+   <?php require_once 'pagination.php'; ?>
 
    <!-- START FOOTER -->
    <?php require_once 'footer.php'; ?>

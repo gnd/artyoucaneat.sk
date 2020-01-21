@@ -583,15 +583,15 @@ a.index_link:hover {
 }
 
 #footer_container {
-    position: relative;
+    //position: relative;
     width: 100%;
-    z-index: 666;
+    //z-index: 666;
 }
 
 #footer {
-    z-index: 1;
-    position: absolute;
-    bottom: 0;
+    //z-index: 1;
+    //position: absolute;
+    //bottom: 0;
     width: 94%;
     font-size: 0.8vw;
     padding-bottom: 1%;
@@ -789,9 +789,30 @@ a.text_link {
 ********************************************************/
 
 #content_container.videos {
-    margin-bottom: 15%; /* change this once we have more videos */
+    min-height: 80%;
 }
 
+#pagination_container {
+    text-transform: uppercase;
+    margin-bottom: 5%;
+}
+
+nav.navigation {
+    display: inline;
+}
+
+h2.screen-reader-text {
+    display: none;
+}
+
+div.nav-links {
+    display: inline;
+}
+
+a.page-numbers {
+    color: #000000;
+    text-decoration: underline;
+}
 /********************************************************
                                         page - info.php
 ********************************************************/
@@ -854,7 +875,7 @@ a.text_link {
 }
 
 /********************************************************
-                                    videos - embed poppu
+                                    videos - embed popup
 ********************************************************/
 
 #embed_container_bg {
