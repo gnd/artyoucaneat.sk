@@ -689,14 +689,14 @@ div.video_info_container_data {
 }
 
 #video_info_container_mobile_sk {
-    margin-top: 6em;
+    //margin-top: 6em;
     margin-left: 2%;
     float: left;
     width: 96%;
 }
 
 #video_info_container_mobile_en {
-    margin-top: 6em;
+    //margin-top: 6em;
     margin-left: 2%;
     float: left;
     display: none;
