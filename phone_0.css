@@ -683,6 +683,11 @@ a.text_link {
     display: none;
 }
 
+div.video_info_container_data {
+    margin-left: 1em;
+    display: none;
+}
+
 #video_info_container_mobile_sk {
     margin-top: 6em;
     margin-left: 2%;
