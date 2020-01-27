@@ -62,7 +62,7 @@
             ?>
         </div>
 
-        <div id="content_container" class="cf videos search">
+        <div id="content_container" class="cf search">
         <?php
             // Keep track of posts that were shown, so as not to include them in related posts
             $shown_posts = Array();
