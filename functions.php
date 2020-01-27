@@ -29,6 +29,7 @@ add_filter('pre_get_posts', function ($query) {
 */
 function theme_setup() {
     add_image_size('400px', 400, 9999);
+    add_image_size('mobile_small_300px', 300, 168);
 }
 
 
