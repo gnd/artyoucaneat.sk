@@ -41,11 +41,10 @@ if ($_SESSION["lang"] == "sk") {
 
 <div id="main_container">
     <div id="center_container" class="videos">
-        <div id="content_container" class="cf videos">
+        <div id="content_container" class="cf videos <?php if ($category->name == 'Profily') {echo "profiles";} ?>">
             <!-- get most recent videos and display them -->
             <?php
                 if ( get_query_var( 'paged' ) ) { $paged = get_query_var( 'paged' ); }
-            //    elseif ( get_query_var( 'page' ) ) { $paged = get_query_var( 'page' ); }
                 else { $paged = 1; }
 
                 // retrieve posts in category
@@ -53,7 +52,6 @@ if ($_SESSION["lang"] == "sk") {
                     'cat' => $category_id,
                     'orderby' => 'date',
                     'order'   => 'DESC',
-                    //'posts_per_page' => 6,
                     'paged' => $paged,
                 );
                 $query = new WP_Query($args);

@@ -1,4 +1,6 @@
 <?php
+require_once 'Mobile_Detect.php';
+
 add_action( 'after_setup_theme', 'theme_setup' );
 
 /*
@@ -15,11 +17,13 @@ add_filter('wpfts_index_post', function($index, $post) {
 */
 add_filter('pre_get_posts', function ($query) {
     if ($query->is_category) {
-        if (is_category('profile')) {
-            $query->set('posts_per_archive_page', 9);
-        }
-        if (is_category('report')) {
-            $query->set('posts_per_archive_page', 9);
+        if (is_category('profile') || is_category('report')) {
+            $detect = new Mobile_Detect;
+            if ($detect->isMobile()) {
+                $query->set('posts_per_archive_page', 14);
+            } else {
+                $query->set('posts_per_archive_page', 9);
+            }
         }
     }
 });
