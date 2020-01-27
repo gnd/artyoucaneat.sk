@@ -607,6 +607,10 @@ function cat_unroll(id) {
                 if (document.getElementById("landing_container")) {
                     document.getElementById("landing_container").style.paddingTop = "10em";
                 }
+                var children = document.getElementsByClassName("index_first");
+                if (typeof children[0] != "undefined") {
+                    children[0].style.marginTop = "6em";
+                }
             }
             if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {
                 if (document.getElementById("center_container")) {
@@ -632,6 +636,10 @@ function cat_unroll(id) {
             if (site_location == 'index') {
                 if (document.getElementById("landing_container")) {
                     document.getElementById("landing_container").style.paddingTop = "13.5em";
+                }
+                var children = document.getElementsByClassName("index_first");
+                if (typeof children[0] != "undefined") {
+                    children[0].style.marginTop = "9.5em";
                 }
             }
             if ((site_location == 'single') || (site_location == 'terms') || (site_location == 'search')) {

@@ -25,6 +25,9 @@ add_filter('pre_get_posts', function ($query) {
                 $query->set('posts_per_archive_page', 9);
             }
         }
+        if (is_front_page()) {
+            $query->set('posts_per_page', 10);
+        }
     }
 });
 
@@ -102,11 +105,19 @@ function process_artists($artists, $max_length) {
 /*
     This shows the individual post in the section "New videos" on the index page
 */
-function show_index_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists) {
+function show_index_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists, $first, $last) {
+    // makes the first video on page behave as if landing_container
+    if ($first) {
+        $additional_class = "index_first";
+    }
+    // makes the last video have other margins
+    if ($last) {
+        $additional_class = "index_last";
+    }
     if ($id % 2 == 0) {
-        echo "\t\t\t\t" .'<div class="index_video_left" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
+        echo "\t\t\t\t" .'<div class="index_video_left ' . $additional_class . '" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     } else {
-        echo "\t\t\t\t" .'<div class="index_video_right" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
+        echo "\t\t\t\t" .'<div class="index_video_right ' . $additional_class . '" id="' . $id . '" onclick="nav(\'' . $link . '\');">' . "\n";
     }
     echo "\t\t\t\t\t" . '<img id="thumb_' . $id . '" class="index_video_thumb" src="' . $poster . '">' . "\n";
     echo "\t\t\t\t\t" . '<img class="play" src="' . get_stylesheet_directory_uri() . '/assets/images/play.png">' . "\n";

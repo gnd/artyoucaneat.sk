@@ -301,6 +301,17 @@ div.index_video_right {
     margin-bottom: 10%;
 }
 
+div.index_first {
+    margin-top: 6em;
+    transition-property: margin-top;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+}
+
+div.index_last {
+    margin-bottom: 5%;
+}
+
 img.index_video_thumb {
     width: 100%;
     position: relative;
@@ -760,6 +771,13 @@ a.video_info:hover {
     font-size: 5em;
     text-transform: uppercase;
     margin-bottom: 5%;
+}
+
+#index_pagination_container {
+    padding-left: 3%;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin-bottom: 20%;
 }
 
 nav.navigation {

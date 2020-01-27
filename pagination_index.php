@@ -14,6 +14,6 @@
 // pagination
 $pagination_string = get_the_posts_pagination(array('screen_reader_text' => ' ','next_text' => '>>','prev_text' => '<<'));
 ?>
-<div id="pagination_container">
+<div id="index_pagination_container">
     <?php echo $pagination_string; ?>
 </div>
