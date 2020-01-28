@@ -74,7 +74,7 @@
                 if (get_post_type($id) == 'post') {
                     $link = wp_make_link_relative(get_permalink($id, false));
                     $poster = get_post_meta($id, 'poster');
-                    $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+                    $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'mobile_small_300px' )[0];
                     $category_link = get_category_link(get_the_category($id)[0]->cat_ID);
                     $category_name_sk = get_the_category($id)[0]->name;
                     $category_name_en = get_the_category($id)[0]->description;

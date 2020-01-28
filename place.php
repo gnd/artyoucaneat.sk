@@ -139,7 +139,7 @@
                          if (!in_array(get_the_ID(), $shown_posts) && $shown < $show_max) {
                              $link = wp_make_link_relative(get_permalink($query->theID(), false));
                              $poster = get_post_meta(get_the_ID(), 'poster');
-                             $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+                             $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'mobile_small_300px' )[0];
                              $category_link = get_category_link(get_the_category()[0]->cat_ID);
                              $category_name_sk = get_the_category()[0]->name;
                              $category_name_en = get_the_category()[0]->description;
