@@ -766,9 +766,9 @@ a.video_info:hover {
 }
 
 #pagination_container {
-    padding-left: 0.1em;
+    padding-left: 1%;
     margin-top: 0.2em;
-    font-size: 5em;
+    font-size: 3em;
     text-transform: uppercase;
     margin-bottom: 5%;
 }
