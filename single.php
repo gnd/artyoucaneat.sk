@@ -88,7 +88,7 @@ $translation_links = process_persons($translation, "translation");
      <?php
          $og_desc = get_post_meta($current_id, 'short_statement_sk')[0];
          $og_url = get_permalink();
-         $og_poster = $poster_medium;
+         $og_poster = $poster_full;
          require_once 'header.php';
      ?>
  </head>
