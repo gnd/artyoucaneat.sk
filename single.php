@@ -69,6 +69,7 @@ $translation_links = process_persons($translation, "translation");
  // Process video data
  $poster = get_post_meta($current_id, 'poster');
  $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+ $poster_large = wp_get_attachment_image_src( $poster[0]["ID"], 'large' )[0];
  $poster_full = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
  $matches = array();
  preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
@@ -88,7 +89,7 @@ $translation_links = process_persons($translation, "translation");
      <?php
          $og_desc = get_post_meta($current_id, 'short_statement_sk')[0];
          $og_url = get_permalink();
-         $og_poster = $poster_full;
+         $og_poster = $poster_large;
          require_once 'header.php';
      ?>
  </head>
