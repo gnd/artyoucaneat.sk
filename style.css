@@ -309,7 +309,7 @@ a.menu_entry:hover {
 }
 
 #content_container.index {
-    margin-bottom: 2%;
+    margin-bottom: 0%;
 }
 
 /*video-zmena* display added */
@@ -790,6 +790,11 @@ a.text_link {
 
 #content_container.videos {
     min-height: 80%;
+}
+
+#index_pagination_container {
+    text-transform: uppercase;
+    margin-bottom: 2%;
 }
 
 #pagination_container {
