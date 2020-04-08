@@ -62,7 +62,8 @@ $q = sanitize_text_field(get_search_query());
             * PODS search through english content + title
             */
             $q = get_search_query();
-            $params = array('where'=> "content_en.meta_value like '%$q%' OR title_en.meta_value like '%$q%' OR artists.name like '%$q%' OR curators.name like '%$q%' OR performers.name like '%$q%'");
+            $params = array('where'=> "content_en.meta_value like '%$q%' OR title_en.meta_value like '%$q%' OR artists.name like '%$q%' OR curators.name like '%$q%' OR performers.name like '%$q%'",
+                            'limit'   => -1);
             $pods = pods( 'post', $params );
             // Get IDs of posts found via PODS
             while ( $pods->fetch() ) {
@@ -74,7 +75,8 @@ $q = sanitize_text_field(get_search_query());
             * PODS search via people
             */
             $q = get_search_query();
-            $params = array('where'=> "t.name like '%$q%'");
+            $params = array('where'=> "t.name like '%$q%'",
+                            'limit'   => -1 );
             $people = pods( 'osoby', $params );
             $people_string = "";
             while ( $people->fetch() ) {
@@ -86,7 +88,8 @@ $q = sanitize_text_field(get_search_query());
             * PODS search via places
             */
             $q = get_search_query();
-            $params = array('where'=> "t.name like '%$q%'");
+            $params = array('where'=> "t.name like '%$q%'",
+                            'limit'   => -1);
             $places = pods( 'priestory', $params );
             $places_string = "";
             while ( $places->fetch() ) {
