@@ -199,6 +199,8 @@ $q = sanitize_text_field(get_search_query());
                     wp_reset_postdata();
                 }
             }
+        } else {
+            echo "<div id=\"content_container\" class=\"cf search\">";
         }
         ?>
         </div>
