@@ -56,7 +56,8 @@
                 <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
                 <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
                 <br/>
-                <a class="menu_entry_top" id="fb_link" href="https://www.facebook.com/artyoucaneat.sk/"><img style="width: 0.9vw; margin-left: -0.1vw; margin-top: 0.5vw;" src="<?php bloginfo('template_directory'); ?>/assets/images/fb.svg" /></a>
+                <a class="menu_entry_top" id="fb_link" href="https://www.facebook.com/artyoucaneat.sk/"><img id="fb_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/fb.svg" /></a>
+                <a class="menu_entry_top" id="ig_link" href="https://www.instagram.com/artyoucaneat.sk/"><img id="ig_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/ig.svg" /></a>
             </div>
         </div>
     </div>
