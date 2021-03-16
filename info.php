@@ -99,9 +99,12 @@
                     Peter Barényi (peter &#9965; artyoucaneat.sk)<br/>
                     <!--- RIP Kata Mach, nezabudame --->
                     Tomáš Storkie Kmeť (tomas &#9965; artyoucaneat.sk)<br/>
-                    Nikolas Bernáth<br/>
-                    Matúš Pisarčík<br/>
+                    <!-- Nikolas Bernáth<br/> -->
                     Peter Bednár<br/>
+                    Juraj Ondráš<br/>
+                    Matúš Pisarčík<br/>
+                    Boris Sirka<br/>
+                    Alexander Šípka<br/>
                     Peter Važan
                 </span><br/>
 
