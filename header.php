@@ -56,12 +56,9 @@
      <script src="<?php bloginfo('template_directory'); ?>/assets/js/auc.js?v=<?php echo filemtime($cwd . '/assets/js/auc.js'); ?>"></script>
 
      <!-- MOBILE & DESKTOP STYLES -->
-     <link rel="stylesheet" media='screen and (min-width: 300px) and (max-width: 340px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
-     <link rel="stylesheet" media='screen and (min-width: 341px) and (max-width: 365px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
-     <link rel="stylesheet" media='screen and (min-width: 370px) and (max-width: 380px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
-     <link rel="stylesheet" media='screen and (min-width: 400px) and (max-width: 1000px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
-     <link rel="stylesheet" media='screen and (min-width: 1001px) and (max-width: 1300px)' href="<?php bloginfo('template_directory'); ?>/style.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
-     <link rel="stylesheet" media='screen and (min-width: 1301px) and (max-width: 1599px)' href="<?php bloginfo('template_directory'); ?>/style.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
+     <link rel="stylesheet" media='screen and (min-width: 300px) and (max-width: 1000px)' href="<?php bloginfo('template_directory'); ?>/phone_0.css?v=<?php echo filemtime($cwd . '/phone_0.css'); ?>"/>
+     <link rel="stylesheet" media='screen and (min-width: 1001px) and (max-width: 1300px)' href="<?php bloginfo('template_directory'); ?>/style.css?v=<?php echo filemtime($cwd . '/style.css'); ?>"/>
+     <link rel="stylesheet" media='screen and (min-width: 1301px) and (max-width: 1599px)' href="<?php bloginfo('template_directory'); ?>/style.css?v=<?php echo filemtime($cwd . '/style.css'); ?>"/>
      <link rel="stylesheet" media='screen and (min-width: 1600px)' href="<?php bloginfo('template_directory'); ?>/style.css?v=<?php echo filemtime($cwd . '/style.css'); ?>"/>
 
      <!-- VIDEOJS (using a nuevo version of video-js.css )-->
