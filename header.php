@@ -51,8 +51,8 @@
      <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 
      <!-- JQUERY & SITE JS -->
-     <script src="<?php bloginfo('template_directory'); ?>/assets/js/jquery.js?v=<?php echo filemtime($cwd . '/assets/js/jquery.js'); ?>"></script>
-     <script src="<?php bloginfo('template_directory'); ?>/assets/js/jquery-ui.min.js?v=<?php echo filemtime($cwd . '/assets/js/jquery-ui.min.js'); ?>"></script>
+     <script src="<?php bloginfo('template_directory'); ?>/assets/js/jquery-3.7.1.min.js?v=<?php echo filemtime($cwd . '/assets/js/jquery-3.7.1.min.js'); ?>"></script>
+     <script src="<?php bloginfo('template_directory'); ?>/assets/js/jquery-ui-1.13.2.min.js?v=<?php echo filemtime($cwd . '/assets/js/jquery-ui-1.13.2.min.js'); ?>"></script>
      <script src="<?php bloginfo('template_directory'); ?>/assets/js/auc.js?v=<?php echo filemtime($cwd . '/assets/js/auc.js'); ?>"></script>
 
      <!-- MOBILE & DESKTOP STYLES -->
@@ -65,7 +65,7 @@
      <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
      <link href="<?php bloginfo('template_directory'); ?>/assets/css/video-js.css?v=<?php echo filemtime($cwd . '/assets/css/video-js.css'); ?>" rel="stylesheet">
 
-     <!-- MATOMO -->
+     <!-- MATOMO DISABLED 12 / 2023
      <script type="text/javascript">
        var _paq = _paq || [];
        _paq.push(['trackPageView']);
@@ -77,4 +77,4 @@
          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
        })();
-     </script>
+     </script> -->
