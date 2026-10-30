@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
  include "lang.php";
 
  // Fetch and process data
@@ -35,7 +34,11 @@
  }
 
  // Process $artists
+ $links = array();
  foreach ($artists as $artist) {
+     if (!is_array($artist)) {
+         continue;
+     }
      $links[] = '<a class="video_artist_name" href="/artist/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
  }
  $artist_links = implode(", \n", $links);
@@ -67,17 +70,12 @@ $translation_links = process_persons($translation, "translation");
  $category_en = "\t\t\t\t" . '<a class="video_info" href="' . $category_link . '">' . $category_name_en . '</a>' . "\n\t\t\t";
 
  // Process video data
- $poster = get_post_meta($current_id, 'poster');
- $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
- $poster_large = wp_get_attachment_image_src( $poster[0]["ID"], 'large' )[0];
- $poster_full = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
- $matches = array();
- preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
- $video_link = $matches[1];
- preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta($current_id, 'subtitles_sk')[0]["ID"]), $matches);
- $subtitles_sk = $matches[1];
- preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta($current_id, 'subtitles_en')[0]["ID"]), $matches);
- $subtitles_en = $matches[1];
+ $poster_medium = get_poster_src($current_id, 'medium');
+ $poster_large = get_poster_src($current_id, 'large');
+ $poster_full = get_poster_src($current_id, 'full');
+ $video_link = get_media_path($current_id, 'video', 'mp4');
+ $subtitles_sk = get_media_path($current_id, 'subtitles_sk', 'vtt');
+ $subtitles_en = get_media_path($current_id, 'subtitles_en', 'vtt');
  $slide_image = "/" . $video_link . ".jpg";
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
 
@@ -87,7 +85,7 @@ $translation_links = process_persons($translation, "translation");
  <head>
      <!-- START HEADER -->
      <?php
-         $og_desc = get_post_meta($current_id, 'short_statement_sk')[0];
+         $og_desc = get_post_meta($current_id, 'short_statement_sk', true);
          $og_url = get_permalink();
          $og_poster = $poster_large;
          require_once 'header.php';
@@ -153,7 +151,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">kategória: <?php echo "\n" . $category_sk; ?></span>
                 <span class="video_info">
                     <?php
-                        if ($curators[0]) {
+                        if (!empty($curators[0])) {
                             if (sizeof($curators) > 1) {
                                 echo "kurátori/ky: \n" . $curator_links;
                             } else {
@@ -164,14 +162,14 @@ $translation_links = process_persons($translation, "translation");
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($gallery[0]) {
+                        if (!empty($gallery[0])) {
                             echo "galéria: \n" . $gallery_links;
                         }
                     ?>
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($performers[0]) {
+                        if (!empty($performers[0])) {
                             if (sizeof($performers) > 1) {
                                 echo "účinkujú: \n" . $performer_links;
                             } else {
@@ -186,7 +184,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
                 <span class="video_info outstanding">
                     <?php
-                        if ($translation[0]) {
+                        if (!empty($translation[0])) {
                             echo "preklad: \n" . $translation_links;
                         }
                     ?>
@@ -208,7 +206,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">category: <?php echo "\n" . $category_en; ?></span>
                 <span class="video_info">
                     <?php
-                        if ($curators[0]) {
+                        if (!empty($curators[0])) {
                             if (sizeof($curators) > 1) {
                                 echo "curators: \n" . $curator_links;
                             } else {
@@ -219,7 +217,7 @@ $translation_links = process_persons($translation, "translation");
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($gallery[0]) {
+                        if (!empty($gallery[0])) {
                             echo "gallery: \n" . $gallery_links;
                         }
                     ?>
@@ -231,7 +229,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">interview: <?php echo "\n" . $interviewer_links; ?></span>
                 <span class="video_info outstanding">
                     <?php
-                        if ($translation[0]) {
+                        if (!empty($translation[0])) {
                             echo "translation: \n" . $translation_links;
                         }
                     ?>
@@ -265,7 +263,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">kategória: <?php echo "\n\t" . $category_sk . "\t"; ?></span>
                 <span class="video_info">
                     <?php
-                        if ($curators[0]) {
+                        if (!empty($curators[0])) {
                             if (sizeof($curators) > 1) {
                                 echo "kurátori/ky: \n" . $curator_links;
                             } else {
@@ -276,14 +274,14 @@ $translation_links = process_persons($translation, "translation");
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($gallery[0]) {
+                        if (!empty($gallery[0])) {
                             echo "galéria: \n" . $gallery_links;
                         }
                     ?>
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($performers[0]) {
+                        if (!empty($performers[0])) {
                             if (sizeof($performers) > 1) {
                                 echo "účinkujú: \n" . $performer_links;
                             } else {
@@ -298,7 +296,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
                 <span class="video_info outstanding">
                     <?php
-                        if ($translation[0]) {
+                        if (!empty($translation[0])) {
                             echo "preklad: \n" . $translation_links . "\t";
                         }
                     ?>
@@ -318,7 +316,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">category: <?php echo "\n\t" . $category_en . "\t"; ?></span>
                 <span class="video_info">
                     <?php
-                        if ($curators[0]) {
+                        if (!empty($curators[0])) {
                             if (sizeof($curators) > 1) {
                                 echo "curators: \n" . $curator_links;
                             } else {
@@ -329,7 +327,7 @@ $translation_links = process_persons($translation, "translation");
                 </span>
                 <span class="video_info">
                     <?php
-                        if ($gallery[0]) {
+                        if (!empty($gallery[0])) {
                             echo "gallery: \n" . $gallery_links;
                         }
                     ?>
@@ -341,7 +339,7 @@ $translation_links = process_persons($translation, "translation");
                 <span class="video_info">interview: <?php echo "\n\t" . $interviewer_links . "\t"; ?></span>
                 <span class="video_info outstanding">
                     <?php
-                        if ($translation[0]) {
+                        if (!empty($translation[0])) {
                             echo "translation: \n" . $translation_links . "\t";
                         }
                     ?>
@@ -379,9 +377,8 @@ $translation_links = process_persons($translation, "translation");
                        If it isnt, we would show 7 posts, so we have to limit this to 6 using lid.
                     */
                     if ($current_id != get_the_ID() && $lid < 6) {
-                        $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                        $poster = get_post_meta(get_the_ID(), 'poster');
-                        $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'mobile_small_300px' )[0];
+                        $link = wp_make_link_relative(get_permalink(get_the_ID(), false));
+                        $poster_small = get_poster_src(get_the_ID(), 'mobile_small_300px');
                         $category_link = get_category_link(get_the_category()[0]->cat_ID);
                         $category_name_sk = get_the_category()[0]->name;
                         $category_name_en = get_the_category()[0]->description;

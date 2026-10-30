@@ -11,7 +11,6 @@
  * @since 2018
  */
 
-session_start();
 require_once 'lang.php';
 ?>
 
@@ -34,6 +33,8 @@ require_once 'lang.php';
         $paged = get_query_var( 'paged' );
     } else {
         $paged = 1;
+        // defaults for index-nuevo-scripts.php in case no landing video gets picked
+        $slide_image = $video_share_link = $video_share_embed = $current_title_sk = $current_title_en = "";
         $args = array(
             'category_name' => 'video',
         	'orderby' => 'date',
@@ -47,17 +48,12 @@ require_once 'lang.php';
             while ($query->have_posts()) {
                 $query->the_post();
                 if ($i == $rnd) {
-                    $poster = get_post_meta(get_the_ID(), 'poster');
-                    $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
-                    $matches = array();
-                    preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta(get_the_ID(), 'video')[0]["ID"]), $matches);
-                    $video_link_txt = $matches[1];
-                    preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta(get_the_ID(), 'subtitles_sk')[0]["ID"]), $matches);
-                    $subtitles_sk = $matches[1];
-                    preg_match('~(wp-content.*)\.vtt~', get_attached_file(get_post_meta(get_the_ID(), 'subtitles_en')[0]["ID"]), $matches);
-                    $subtitles_en = $matches[1];
+                    $poster_medium = get_poster_src(get_the_ID(), 'medium');
+                    $video_link_txt = get_media_path(get_the_ID(), 'video', 'mp4');
+                    $subtitles_sk = get_media_path(get_the_ID(), 'subtitles_sk', 'vtt');
+                    $subtitles_en = get_media_path(get_the_ID(), 'subtitles_en', 'vtt');
                     $slide_image = "/" . $video_link_txt . ".jpg";
-                    $link_txt = wp_make_link_relative(get_permalink($query->theID(), false));
+                    $link_txt = wp_make_link_relative(get_permalink(get_the_ID(), false));
                     $video_share_link = get_permalink(get_the_ID(), false);
                     $category_link = get_category_link(get_the_category()[0]->cat_ID);
                     $category_name_sk = get_the_category()[0]->name;
@@ -101,13 +97,14 @@ require_once 'lang.php';
                 // start showing past videos
                 $query = new WP_Query( array( 'category_name' => 'video', 'paged' => $paged ) );
                 $lid = 0;
+                $related_videos_sk = array();
+                $related_videos_en = array();
                 if ( $query->have_posts() ) {
                     while ( $query->have_posts() ) {
                         $query->the_post();
-                        $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                        $poster = get_post_meta(get_the_ID(), 'poster');
-                        $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
-                        $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'thumb' )[0];
+                        $link = wp_make_link_relative(get_permalink(get_the_ID(), false));
+                        $poster_medium = get_poster_src(get_the_ID(), 'medium');
+                        $poster_small = get_poster_src(get_the_ID(), 'thumb');
                         $category_link = get_category_link(get_the_category()[0]->cat_ID);
                         $category_name_sk = get_the_category()[0]->name;
                         $category_name_en = get_the_category()[0]->description;

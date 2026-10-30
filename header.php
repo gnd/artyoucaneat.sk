@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
 
  // get template directory path from root
  $cwd = getcwd() . str_replace(site_url(), "", get_bloginfo('template_directory'));
@@ -31,10 +30,10 @@
      <meta property="og:locale" content="sk_SK" />
      <meta property="og:type" content="article" />
      <meta property="og:title" content="<?php echo $page_title; ?>" />
-     <meta property="og:description" content="<?php echo $og_desc; ?>" />
-     <meta property="og:url" content="<?php echo $og_url; ?>" />
-     <meta property="og:image" content="<?php echo $og_poster; ?>" />
-     <meta property="og:image:secure_url" content="<?php echo $og_poster; ?>" />
+     <meta property="og:description" content="<?php echo $og_desc ?? ''; ?>" />
+     <meta property="og:url" content="<?php echo $og_url ?? ''; ?>" />
+     <meta property="og:image" content="<?php echo $og_poster ?? ''; ?>" />
+     <meta property="og:image:secure_url" content="<?php echo $og_poster ?? ''; ?>" />
 
      <!--- ICONS -->
      <link rel="apple-touch-icon" sizes="180x180" href="<?php bloginfo('template_directory'); ?>/assets/images/favicon/apple-touch-icon.png">

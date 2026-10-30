@@ -5,10 +5,10 @@
     */
 if ( isset($_POST["lang"]) ) {
     $lang = $_POST["lang"];
-    if (strcmp('sk', $lang) == 0) {
+    if ($lang === 'sk') {
         $_SESSION["lang"] = 'sk';
     }
-    if (strcmp('en', $lang) == 0) {
+    if ($lang === 'en') {
         $_SESSION["lang"] = 'en';
     }
 }

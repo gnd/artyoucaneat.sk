@@ -4,6 +4,16 @@ require_once 'Mobile_Detect.php';
 add_action( 'after_setup_theme', 'theme_setup' );
 
 /*
+    Start the PHP session (used for language persistence) once, before any output
+    Templates no longer call session_start() themselves, as repeated calls raise notices
+*/
+add_action('template_redirect', function () {
+    if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+        session_start();
+    }
+});
+
+/*
     Add a wpfts filter hook to search also metafields
 */
 add_filter('wpfts_index_post', function($index, $post) {
@@ -51,7 +61,7 @@ function term_has_children( $term_id = '', $taxonomy = 'category' )
         return false;
 
     // Get term children
-    $term_children = get_term_children( filter_var( $term_id, FILTER_VALIDATE_INT ), filter_var( $taxonomy, FILTER_SANITIZE_STRING ) );
+    $term_children = get_term_children( filter_var( $term_id, FILTER_VALIDATE_INT ), sanitize_key( $taxonomy ) );
 
     // Return false if we have an empty array or WP_Error object
     if ( empty( $term_children ) || is_wp_error( $term_children ) )
@@ -62,10 +72,62 @@ function term_has_children( $term_id = '', $taxonomy = 'category' )
 
 
 /*
+    PODS does not escape raw "where" clauses, so every value put into one must go through these
+    Both return a value safe to place inside a single-quoted SQL string, eg. "name = '" . escape_sql_value($name) . "'"
+*/
+function escape_sql_value($value) {
+    return esc_sql((string) $value);
+}
+
+/*
+    Same as above, but for LIKE comparisons: escapes the LIKE wildcards (% and _) in the value
+    and wraps it in % wildcards, eg. "name LIKE '" . escape_sql_like($q) . "'"
+*/
+function escape_sql_like($value) {
+    global $wpdb;
+    return '%' . esc_sql($wpdb->esc_like((string) $value)) . '%';
+}
+
+
+/*
+    This returns the URL of the post's poster (PODS field "poster") in the given size, or null if there is none
+*/
+function get_poster_src($post_id, $size) {
+    $poster = get_post_meta($post_id, 'poster', true);
+    if (!is_array($poster) || empty($poster["ID"])) {
+        return null;
+    }
+    $src = wp_get_attachment_image_src($poster["ID"], $size);
+    return $src ? $src[0] : null;
+}
+
+
+/*
+    This returns the path (starting with wp-content, without extension) of a media file
+    attached via a PODS field (eg. "video", "subtitles_sk"), or null if there is none
+*/
+function get_media_path($post_id, $field, $extension) {
+    $media = get_post_meta($post_id, $field, true);
+    if (!is_array($media) || empty($media["ID"])) {
+        return null;
+    }
+    $file = get_attached_file($media["ID"]);
+    if ($file && preg_match('~(wp-content.*)\.' . $extension . '~', $file, $matches)) {
+        return $matches[1];
+    }
+    return null;
+}
+
+
+/*
     This takes raw input from additional post fields for persons (via PODS) and returns formated links
 */
 function process_persons($persons, $term) {
+    $links = array();
     foreach ($persons as $person) {
+        if (!is_array($person)) {
+            continue;
+        }
         $links[] = "<a class=\"video_info\" href=\"/$term/" . $person["slug"] . '">' . $person["name"] . '</a>';
     }
     return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
@@ -76,7 +138,11 @@ function process_persons($persons, $term) {
     This takes raw input from additional post fields for galleries (via PODS) and returns formated links
 */
 function process_places($places) {
+    $links = array();
     foreach ($places as $place) {
+        if (!is_array($place)) {
+            continue;
+        }
         $links[] = '<a class="video_info" href="/place/' . $place["slug"] . '">' . $place["name"] . '</a>';
     }
     return "\t\t\t\t" . implode(", \n\t\t\t\t", $links) . "\n\t\t\t";
@@ -89,7 +155,11 @@ function process_places($places) {
 */
 function process_artists($artists, $max_length) {
     $length = 0;
+    $links = array();
     foreach ($artists as $artist) {
+        if (!is_array($artist)) {
+            continue;
+        }
         if (($length + strlen($artist["name"])) <= $max_length) {
             $links[] = "\n\t\t\t\t\t\t\t\t" . '<a class="index_link" href="/artist/' . $artist["slug"] . '">' . $artist["name"] . '</a>';
             $length += strlen($artist["name"]);
@@ -106,6 +176,7 @@ function process_artists($artists, $max_length) {
     This shows the individual post in the section "New videos" on the index page
 */
 function show_index_post($id, $link, $poster, $category_link, $category_name_sk, $category_name_en, $title_sk, $title_en, $artists, $first, $last) {
+    $additional_class = "";
     // makes the first video on page behave as if landing_container
     if ($first) {
         $additional_class = "index_first";

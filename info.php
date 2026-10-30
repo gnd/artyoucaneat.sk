@@ -10,7 +10,6 @@
  * @since 2018
  */
 
- session_start();
  include "lang.php";
 
  // Fetch and process data
@@ -18,6 +17,7 @@
  $date = date("d.m.Y",strtotime($post->post_date));
  $current_title_sk = $post->post_title;
  $content_sk = $post->post_content;
+ $content_en = '';
  $current_title_en = get_post_meta(get_the_ID(), 'title_en', true);
 
  // Proces page title

@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
 
  ?>
 <div id="footer_container">

@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
  ?>
 
 <script>
@@ -19,7 +18,7 @@
     page_title_sk = '<?php echo 'Art You Can Eat / ' . $category->name; ?>';
     page_title_en = '<?php echo 'Art You Can Eat / ' . $category->description; ?>';
     site_location = '<?php echo strtolower($category->description); ?>';
-    <?php echo ($category_parent_id == $video_id) ? "video_menu = true;" : ""; ?>
+    <?php echo ($category_parent_id == 0) ? "video_menu = true;" : ""; ?>
 
     // nastav js podla typu klienta
     detect_client();

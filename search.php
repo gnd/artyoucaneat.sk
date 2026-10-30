@@ -10,7 +10,6 @@
  * @since 2018
  */
 
-session_start();
 require_once 'lang.php';
 if ($_SESSION["lang"] == "sk") {
     $page_title = 'Art You Can Eat / Vyhľadávanie';
@@ -23,7 +22,10 @@ $found = Array();
 $people = Array();
 $places = Array();
 $num = 0;
-$q = sanitize_text_field(get_search_query());
+$current_id = 0;
+$q = sanitize_text_field(wp_unslash(get_search_query(false)));
+// escaped LIKE pattern for the raw PODS where clauses below - never put $q itself into SQL
+$q_like = escape_sql_like($q);
 
 ?>
 
@@ -61,8 +63,7 @@ $q = sanitize_text_field(get_search_query());
             /*
             * PODS search through english content + title
             */
-            $q = get_search_query();
-            $params = array('where'=> "content_en.meta_value like '%$q%' OR title_en.meta_value like '%$q%' OR artists.name like '%$q%' OR curators.name like '%$q%' OR performers.name like '%$q%'",
+            $params = array('where'=> "content_en.meta_value like '$q_like' OR title_en.meta_value like '$q_like' OR artists.name like '$q_like' OR curators.name like '$q_like' OR performers.name like '$q_like'",
                             'limit'   => -1);
             $pods = pods( 'post', $params );
             // Get IDs of posts found via PODS
@@ -74,8 +75,7 @@ $q = sanitize_text_field(get_search_query());
             /*
             * PODS search via people
             */
-            $q = get_search_query();
-            $params = array('where'=> "t.name like '%$q%'",
+            $params = array('where'=> "t.name like '$q_like'",
                             'limit'   => -1 );
             $people = pods( 'osoby', $params );
             $people_string = "";
@@ -87,8 +87,7 @@ $q = sanitize_text_field(get_search_query());
             /*
             * PODS search via places
             */
-            $q = get_search_query();
-            $params = array('where'=> "t.name like '%$q%'",
+            $params = array('where'=> "t.name like '$q_like'",
                             'limit'   => -1);
             $places = pods( 'priestory', $params );
             $places_string = "";
@@ -153,8 +152,7 @@ $q = sanitize_text_field(get_search_query());
             foreach ($found as $id) {
                 if (get_post_type($id) == 'post') {
                     $link = wp_make_link_relative(get_permalink($id, false));
-                    $poster = get_post_meta($id, 'poster');
-                    $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+                    $poster_medium = get_poster_src($id, 'medium');
                     $category_link = get_category_link(get_the_category($id)[0]->cat_ID);
                     $category_name_sk = get_the_category($id)[0]->name;
                     $category_name_en = get_the_category($id)[0]->description;
@@ -182,9 +180,8 @@ $q = sanitize_text_field(get_search_query());
                     while ( $query->have_posts() ) {
                         $query->the_post();
                         if ($current_id != get_the_ID() && $lid < 9) {
-                            $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                            $poster = get_post_meta(get_the_ID(), 'poster');
-                            $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+                            $link = wp_make_link_relative(get_permalink(get_the_ID(), false));
+                            $poster_small = get_poster_src(get_the_ID(), 'medium');
                             $category_link = get_category_link(get_the_category()[0]->cat_ID);
                             $category_name_sk = get_the_category()[0]->name;
                             $category_name_en = get_the_category()[0]->description;

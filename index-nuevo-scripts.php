@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
 
  ?>
 <script src="<?php bloginfo('template_directory'); ?>/assets/js/nuevo.min.js"></script>

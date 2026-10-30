@@ -9,14 +9,15 @@
  * @subpackage All You Can
  * @since 2018
  */
- session_start();
  require_once 'lang.php';
 
- $slug = sanitize_text_field($_REQUEST["p"]);
+ $slug = sanitize_text_field($_REQUEST["p"] ?? '');
  $term = get_term_by('slug', $slug, 'osoby');
- $params = array('where'=> "curators.name = '$term->name'");
+ $term_name = $term ? $term->name : '';
+ $term_name_sql = escape_sql_value($term_name);
+ $params = array('where'=> "curators.name = '$term_name_sql'");
  $pods = pods( 'post', $params );
- $page_title = 'Art You Can Eat / ' . $term->name;
+ $page_title = 'Art You Can Eat / ' . $term_name;
 
  ?>
 
@@ -44,8 +45,8 @@
     <script>
          // setup some globals
          site_location = 'terms';
-         page_title_sk = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
-         page_title_en = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
+         page_title_sk = '<?php echo 'Art You Can Eat / ' . $term_name; ?>';
+         page_title_en = '<?php echo 'Art You Can Eat / ' . $term_name; ?>';
 
          // nastav js podla typu klienta
          detect_client();

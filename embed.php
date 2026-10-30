@@ -10,19 +10,15 @@
  * @since 2018
  */
 
- session_start();
- $current_id = filter_var($_REQUEST["id"], FILTER_SANITIZE_NUMBER_INT);
+ $current_id = filter_var($_REQUEST["id"] ?? '', FILTER_SANITIZE_NUMBER_INT);
  $post = get_post($current_id);
- $current_title_sk = $post->post_title;
+ $current_title_sk = $post->post_title ?? '';
  $current_title_en = get_post_meta($current_id, 'title_en', true);
 
  // Process video data
- $poster = get_post_meta($current_id, 'poster');
- $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
- $poster_full = wp_get_attachment_image_src( $poster[0]["ID"], 'full' )[0];
- $matches = array();
- preg_match('~(wp-content.*)\.mp4~', get_attached_file(get_post_meta($current_id, 'video')[0]["ID"]), $matches);
- $video_link = $matches[1];
+ $poster_medium = get_poster_src($current_id, 'medium');
+ $poster_full = get_poster_src($current_id, 'full');
+ $video_link = get_media_path($current_id, 'video', 'mp4');
  $slide_image = "/" . $video_link . ".jpg";
  $video_share_link = get_permalink($current_id);
  $video_share_embed = '<iframe width="100%" height="100%" src="' . site_url() . '/index.php/v/?id=' . $current_id . '" frameborder="0" allowfullscreen></iframe>';
@@ -40,9 +36,8 @@
             If it isnt, we would show 7 posts, so we have to limit this to 6 using lid.
          */
          if ($current_id != get_the_ID() && $lid < 7) {
-             $link = wp_make_link_relative(get_permalink($query->theID(), false));
-             $poster = get_post_meta(get_the_ID(), 'poster');
-             $poster_small = wp_get_attachment_image_src( $poster[0]["ID"], 'thumb' )[0];
+             $link = wp_make_link_relative(get_permalink(get_the_ID(), false));
+             $poster_small = get_poster_src(get_the_ID(), 'thumb');
              $title_sk = get_the_title();
              $title_en = get_post_meta(get_the_ID(), 'title_en', true);
              $duration = get_post_meta(get_the_ID(), 'duration', true);
@@ -129,7 +124,7 @@
     var video_share_link = "<?php echo $video_share_link; ?>";
     var video_share_embed = '<?php echo $video_share_embed; ?>';
     var related_videos = <?php echo json_encode($related_videos_sk); ?>;
-    var video_name = "<?php echo $curent_title_sk; ?>";
+    var video_name = "<?php echo $current_title_sk; ?>";
     var poster_full = "<?php echo $poster_full; ?>";
 
     // detect device type
@@ -151,7 +146,7 @@
     }
 
     // switch to english
-    if ("<?php echo $_SESSION["lang"]; ?>" == "en") {
+    if ("<?php echo $_SESSION["lang"] ?? 'sk'; ?>" == "en") {
         var related_videos = <?php echo json_encode($related_videos_en); ?>;
         var video_name = "<?php echo $current_title_en; ?>";
     }

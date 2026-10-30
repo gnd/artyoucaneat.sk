@@ -11,7 +11,6 @@
  * @since 2018
  */
 
- session_start();
 
  ?>
 <!-- NAVIGATION PANEL DESKTOP -->
@@ -53,8 +52,8 @@
                 }
 ?>
                 <img class="menu_entry menu_entry_top" id="menu_entry_search" onclick="nav(/search/)" src="<?php bloginfo('template_directory'); ?>/assets/images/lupa_icon_bk.png">
-                <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
-                <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
+                <a class="menu_entry menu_entry_top" id="lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id ?? ''; ?>);">SK</a>
+                <a class="menu_entry menu_entry_top" id="lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id ?? ''; ?>);">EN</a>
                 <br/>
                 <a class="menu_entry_top" id="fb_link" href="https://www.facebook.com/artyoucaneat.sk/"><img id="fb_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/fb.svg" /></a>
                 <a class="menu_entry_top" id="ig_link" href="https://www.instagram.com/artyoucaneat.sk/"><img id="ig_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/ig.svg" /></a>
@@ -94,8 +93,8 @@
             }
 ?>
             <img class="mobile_menu_entry_top" id="mobile_menu_entry_search" onclick="nav(/search/)" src="<?php bloginfo('template_directory'); ?>/assets/images/lupa_icon_bk.png">
-            <a class="mobile_menu_entry_top" id="mobile_lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id; ?>);">SK</a>
-            <a class="mobile_menu_entry_top" id="mobile_lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id; ?>);">EN</a>
+            <a class="mobile_menu_entry_top" id="mobile_lang_sk_switch" onclick="switch_lang('sk', true, <?php echo $category_id ?? ''; ?>);">SK</a>
+            <a class="mobile_menu_entry_top" id="mobile_lang_en_switch" onclick="switch_lang('en', true, <?php echo $category_id ?? ''; ?>);">EN</a>
         </div>
         <div id="mobile_logo_container">
             <a href="/"><img id="mobile_logo_icon" src="<?php bloginfo('template_directory'); ?>/assets/images/logo/5.png"></a>

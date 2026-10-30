@@ -9,14 +9,15 @@
  * @subpackage All You Can
  * @since 2018
  */
- session_start();
  require_once 'lang.php';
 
- $slug = sanitize_text_field($_REQUEST["p"]);
+ $slug = sanitize_text_field($_REQUEST["p"] ?? '');
  $term = get_term_by('slug', $slug, 'priestory');
- $params = array('where'=> "gallery.name = '$term->name'");
+ $term_name = $term ? $term->name : '';
+ $term_name_sql = escape_sql_value($term_name);
+ $params = array('where'=> "gallery.name = '$term_name_sql'");
  $pods = pods( 'post', $params );
- $page_title = 'Art You Can Eat / ' . $term->name;
+ $page_title = 'Art You Can Eat / ' . $term_name;
 
  ?>
 
@@ -41,7 +42,7 @@
                 if ($pods->total() == 0) {
                     echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
                 } else {
-                    echo $term->name;
+                    echo $term_name;
                 }
              ?>
         </div>
@@ -50,7 +51,7 @@
                 if ($pods->total() == 0) {
                     echo esc_html(str_replace("-"," ",rtrim($slug, '/')));
                 } else {
-                    echo $term->name;
+                    echo $term_name;
                 }
              ?>
          </div>
@@ -60,7 +61,7 @@
                  if ($pods->total() == 0) {
                      echo 'Priestor nieje v databáze.';
                  } else {
-                     echo "Príspevky súvisiace s $term->name: ";
+                     echo "Príspevky súvisiace s $term_name: ";
                  }
              ?>
          </div>
@@ -69,7 +70,7 @@
                  if ($pods->total() == 0) {
                      echo 'Place not in database.';
                  } else {
-                     echo "Posts related to $term->name: ";
+                     echo "Posts related to $term_name: ";
                  }
              ?>
          </div>
@@ -85,8 +86,7 @@
                  $id = $pods->field('ID');
                  if (get_post_type($id) == 'post') {
                      $link = wp_make_link_relative(get_permalink($id, false));
-                     $poster = get_post_meta($id, 'poster');
-                     $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'medium' )[0];
+                     $poster_medium = get_poster_src($id, 'medium');
                      $category_link = get_category_link(get_the_category($id)[0]->cat_ID);
                      $category_name_sk = get_the_category($id)[0]->name;
                      $category_name_en = get_the_category($id)[0]->description;
@@ -137,9 +137,8 @@
                      while ( $query->have_posts() ) {
                          $query->the_post();
                          if (!in_array(get_the_ID(), $shown_posts) && $shown < $show_max) {
-                             $link = wp_make_link_relative(get_permalink($query->theID(), false));
-                             $poster = get_post_meta(get_the_ID(), 'poster');
-                             $poster_medium = wp_get_attachment_image_src( $poster[0]["ID"], 'mobile_small_300px' )[0];
+                             $link = wp_make_link_relative(get_permalink(get_the_ID(), false));
+                             $poster_medium = get_poster_src(get_the_ID(), 'mobile_small_300px');
                              $category_link = get_category_link(get_the_category()[0]->cat_ID);
                              $category_name_sk = get_the_category()[0]->name;
                              $category_name_en = get_the_category()[0]->description;
@@ -167,8 +166,8 @@
     <script>
          // setup some globals
          site_location = 'terms';
-         page_title_sk = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
-         page_title_en = '<?php echo 'Art You Can Eat / ' . $term->name; ?>';
+         page_title_sk = '<?php echo 'Art You Can Eat / ' . $term_name; ?>';
+         page_title_en = '<?php echo 'Art You Can Eat / ' . $term_name; ?>';
 
          // nastav js podla typu klienta
          detect_client();

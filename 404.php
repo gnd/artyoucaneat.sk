@@ -11,7 +11,6 @@
  * @since 2018
  */
 
-session_start();
 require_once 'lang.php';
 $page_title = 'Art You Can Eat / 404';
 
